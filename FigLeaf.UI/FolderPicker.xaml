@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <DockPanel>
-        <Button Margin="0" Padding="0" DockPanel.Dock="Right" Width="25" Click="BrowseFolder">...</Button>
-        <TextBox Height="Auto" HorizontalAlignment="Stretch" DockPanel.Dock="Right" 
-           Text="{Binding Text, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+             d:DesignHeight="300" d:DesignWidth="300"
+             Name="ControlSelfReference">
+    <DockPanel LastChildFill="True" Height="{Binding ActualHeight, ElementName=ControlSelfReference}">
+        <Button DockPanel.Dock="Right" Width="25" Click="BrowseFolder">...</Button>
+        <TextBox Text="{Binding Text, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
     </DockPanel>
 </UserControl>
