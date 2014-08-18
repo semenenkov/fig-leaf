@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using FigLeaf.Core;
 
 namespace FigLeaf.Console
 {
@@ -9,6 +7,21 @@ namespace FigLeaf.Console
 	{
 		static void Main(string[] args)
 		{
+			var logger = new Logger(false);
+			try
+			{
+				var fileProcessor = new BatchFileProcessor(new AppConfigSettings(), logger);
+				fileProcessor.Pack();
+				//fileProcessor.Unpack(@"d:\Patrick\FigLeaf\trunk\!_test\source2");
+			}
+			catch (Exception e)
+			{
+				logger.Log(false, "Error: " + e.Message);
+			}
+
+#if DEBUG
+			System.Console.Read();
+#endif
 		}
 	}
 }

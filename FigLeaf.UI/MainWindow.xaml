@@ -159,7 +159,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Column="0"  Margin="0,9,9,0">
-                        <Button Content="Update target" HorizontalAlignment="Stretch" Height="24"/>
+                        <Button Content="Update target" HorizontalAlignment="Stretch" Height="24" Click="UpdateTarget"/>
                         <Button Content="Restore target to .." HorizontalAlignment="Stretch" Height="24"/>
                     </StackPanel>
 
@@ -171,7 +171,7 @@
                             </StackPanel>
                         </GroupBox.Header>
 
-                        <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+                        <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" Name="txtLog"/>
                     </GroupBox>
 
 

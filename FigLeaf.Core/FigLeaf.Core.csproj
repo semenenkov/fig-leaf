@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AppConfigSettings.cs" />
     <Compile Include="BatchFileProcessor.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="PasswordRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

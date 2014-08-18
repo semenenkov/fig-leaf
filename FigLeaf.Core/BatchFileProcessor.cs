@@ -11,6 +11,7 @@ namespace FigLeaf.Core
 		private readonly string _targetDirPath;
 		private readonly Zip _zip;
 		private readonly Thumbnail _thumbnail;
+		private readonly ILogger _logger;
 
 		public int CreatedDirCount { get; private set; }
 		public int CreatedFileCount { get; private set; }
@@ -20,45 +21,64 @@ namespace FigLeaf.Core
 		public int RemovedTargetWithoutSourceFileCount { get; private set; }
 		public int RemovedTargetWithoutSourceDirCount { get; private set; }
 
-		public BatchFileProcessor(ISettings settings)
+		public BatchFileProcessor(ISettings settings, ILogger logger)
 		{
 			_sourceDirPath = settings.SourceDir;
 			_targetDirPath = settings.TargetDir;
 			_zip = new Zip(settings.MasterPassword);
 			_thumbnail = new Thumbnail(settings, Console.WriteLine);
+			_logger = logger;
 		}
 
 		public void Pack()
 		{
-			var sourceDir = new DirectoryInfo(_sourceDirPath);
-			var targetDir = new DirectoryInfo(_targetDirPath);
+			try
+			{
+				var sourceDir = new DirectoryInfo(_sourceDirPath);
+				var targetDir = new DirectoryInfo(_targetDirPath);
 
-			if (!sourceDir.Exists)
-				throw new ApplicationException("Source folder does not exist");
+				if (!sourceDir.Exists)
+					throw new ApplicationException("Source folder does not exist");
 
-			if (!targetDir.Exists) targetDir.Create();
+				if (!targetDir.Exists) targetDir.Create();
 
-			ProcessDir(sourceDir, targetDir, true, PackFile);
+				ProcessDir(sourceDir, targetDir, true, PackFile);
+
+				_logger.Log(false, string.Format("Created folders: {0}", CreatedDirCount));
+				_logger.Log(false, string.Format("Created files: {0}", CreatedFileCount));
+				_logger.Log(false, string.Format("Created thumbnails: {0}", CreatedThumbnailCount));
+				_logger.Log(false, string.Format("Removed obsolete files: {0}", RemovedObsoleteFileCount));
+				_logger.Log(false, string.Format("Removed obsolete thumbnails: {0}", RemovedObsoleteThumbnailCount));
+				_logger.Log(false, string.Format("Removed target files without source: {0}", RemovedTargetWithoutSourceFileCount));
+				_logger.Log(false, string.Format("Removed target folders without source: {0}", RemovedTargetWithoutSourceDirCount));
+			}
+			catch (Exception e)
+			{
+				_logger.Log(false, "Error: " + e.Message);
+			}
 		}
 
 		public void Unpack(string targetPath)
 		{
-			var sourceDir = new DirectoryInfo(_targetDirPath);
-			var targetDir = new DirectoryInfo(targetPath);
-
-			if (!sourceDir.Exists)
-				throw new ApplicationException("Source folder does not exist");
-
-			if (!targetDir.Exists)
+			try
 			{
-				targetDir.Create();
-			}
-			else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
-			{
-				throw new ApplicationException("Target dir must be empty");
-			}
+				var sourceDir = new DirectoryInfo(_targetDirPath);
+				var targetDir = new DirectoryInfo(targetPath);
 
-			ProcessDir(sourceDir, targetDir, false, UnpackFile);
+				if (!sourceDir.Exists)
+					throw new ApplicationException("Source folder does not exist");
+
+				if (!targetDir.Exists)
+					targetDir.Create();
+				else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
+					throw new ApplicationException("Target dir must be empty");
+
+				ProcessDir(sourceDir, targetDir, false, UnpackFile);
+			}
+			catch (Exception e)
+			{
+				_logger.Log(false, "Error: " + e.Message);
+			}
 		}
 
 		private void ProcessDir(
