@@ -30,6 +30,8 @@ namespace FigLeaf.Core
 			_zip = new Zip(settings.MasterPassword);
 			_thumbnail = new Thumbnail(settings, Console.WriteLine);
 			_logger = logger;
+
+			_logger.Log(false, "Start file processing..");
 		}
 
 		public void Pack()
@@ -42,7 +44,12 @@ namespace FigLeaf.Core
 				if (!sourceDir.Exists)
 					throw new ApplicationException("Source folder does not exist");
 
-				if (!targetDir.Exists) targetDir.Create();
+				if (!targetDir.Exists)
+				{
+					_logger.Log(true, "Created folder " + _targetDirPath);
+					targetDir.Create();
+					_createdDirCount++;
+				}
 
 				ProcessDir(sourceDir, targetDir, true, PackFile);
 				LogSummary();
@@ -114,6 +121,7 @@ namespace FigLeaf.Core
 				{
 					if (!targetValidFileNames.Contains(targetFile.Name))
 					{
+						_logger.Log(true, "Deleting target file without source " + targetFile.Name);
 						targetFile.Delete();
 						_removedTargetWithoutSourceFileCount++;
 					}
@@ -127,6 +135,7 @@ namespace FigLeaf.Core
 				var targetSubDir = new DirectoryInfo(Path.Combine(targetDir.FullName, sourceSubDir.Name));
 				if (!targetSubDir.Exists)
 				{
+					_logger.Log(true, "Creating target folder " + targetSubDir.FullName);
 					targetSubDir.Create();
 					_createdDirCount++;
 				}
@@ -143,6 +152,9 @@ namespace FigLeaf.Core
 					{
 						int filesToRemove = targetSubDir.GetFiles(".", SearchOption.AllDirectories).Length;
 						int dirsToRemove = targetSubDir.GetDirectories("*.*", SearchOption.AllDirectories).Length;
+						_logger.Log(true, string.Format(
+							"Deleting target folder without source {0} (with {1} sub-folders and {2} files)", 
+							targetSubDir, dirsToRemove, filesToRemove));
 						targetSubDir.Delete(true);
 						_removedTargetWithoutSourceFileCount = _removedTargetWithoutSourceFileCount + filesToRemove;
 						_removedTargetWithoutSourceDirCount = _removedTargetWithoutSourceDirCount + 1 + dirsToRemove;
@@ -170,6 +182,7 @@ namespace FigLeaf.Core
 				}
 				else
 				{
+					_logger.Log(true, "Deleting obsolete target file " + targetFilePath);
 					File.Delete(targetFilePath);
 					_removedObsoleteFileCount++;
 				}
@@ -177,6 +190,7 @@ namespace FigLeaf.Core
 
 			if (!skipExisting)
 			{
+				_logger.Log(true, string.Format("Packing file {0} to {1}", sourceFile.FullName, targetFilePath));
 				_zip.Pack(sourceFile, targetFilePath);
 				File.SetLastWriteTime(targetFilePath, sourceFileTime);
 				_createdFileCount++;
@@ -201,6 +215,7 @@ namespace FigLeaf.Core
 				}
 				else
 				{
+					_logger.Log(true, "Deleting obsolete thumbnail file " + thumbnailFilePath);
 					File.Delete(thumbnailFilePath);
 					_removedObsoleteThumbnailCount++;
 				}
@@ -208,6 +223,7 @@ namespace FigLeaf.Core
 
 			if (!skipExisting)
 			{
+				_logger.Log(true, "Creating thumbnail file " + thumbnailFilePath);
 				if (isVideo)
 					_thumbnail.MakeForVideo(sourceFile.FullName, thumbnailFilePath);
 				else
@@ -227,6 +243,7 @@ namespace FigLeaf.Core
 			if (!_zip.Unpack(sourceFile.FullName, new FileInfo(targetFilePath))) 
 				return;
 
+			_logger.Log(true, string.Format("Unpacking file {0} to {1}", sourceFile.FullName, targetFilePath));
 			File.SetLastWriteTime(targetFilePath, sourceFileTime);
 			_createdFileCount++;
 		}

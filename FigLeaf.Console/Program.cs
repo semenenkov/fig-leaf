@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 using FigLeaf.Core;
 
 namespace FigLeaf.Console
@@ -7,15 +9,28 @@ namespace FigLeaf.Console
 	{
 		static void Main(string[] args)
 		{
-			var logger = new Logger(false);
+			string[] detailedLoggingArgs = new[] {"-l", "/l", "-log", "/log"};
+
+			bool argDetailedLogging = false;
+			string argUnpackFolder = null;
+
+			foreach (var arg in args)
+			{
+				if (detailedLoggingArgs.Any(a => string.Equals(a, arg, StringComparison.OrdinalIgnoreCase)))
+					argDetailedLogging = true;
+				else
+					argUnpackFolder = arg;
+			}
+
+			var logger = new Logger(argDetailedLogging);
 			try
 			{
 				var fileProcessor = new BatchFileProcessor(new AppConfigSettings(), logger);
 
-				if (args == null || args.Length == 0)
+				if (argUnpackFolder == null)
 					fileProcessor.Pack();
 				else
-					fileProcessor.Unpack(args[0]);
+					fileProcessor.Unpack(argUnpackFolder);
 			}
 			catch (Exception e)
 			{
