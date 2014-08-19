@@ -13,15 +13,15 @@ namespace FigLeaf.Core
 		private readonly Thumbnail _thumbnail;
 		private readonly ILogger _logger;
 
-		public int ProcessedDirCount { get; private set; }
-		public int ProcessedFileCount { get; private set; }
-		public int CreatedDirCount { get; private set; }
-		public int CreatedFileCount { get; private set; }
-		public int CreatedThumbnailCount { get; private set; }
-		public int RemovedObsoleteFileCount { get; private set; }
-		public int RemovedObsoleteThumbnailCount { get; private set; }
-		public int RemovedTargetWithoutSourceFileCount { get; private set; }
-		public int RemovedTargetWithoutSourceDirCount { get; private set; }
+		private int _processedDirCount;
+		private int _processedFileCount;
+		private int _createdDirCount;
+		private int _createdFileCount;
+		private int _createdThumbnailCount;
+		private int _removedObsoleteFileCount;
+		private int _removedObsoleteThumbnailCount;
+		private int _removedTargetWithoutSourceFileCount;
+		private int _removedTargetWithoutSourceDirCount;
 
 		public BatchFileProcessor(ISettings settings, ILogger logger)
 		{
@@ -46,15 +46,15 @@ namespace FigLeaf.Core
 
 				ProcessDir(sourceDir, targetDir, true, PackFile);
 
-				_logger.Log(false, string.Format("Processed source folders: {0}", ProcessedDirCount));
-				_logger.Log(false, string.Format("Processed source files: {0}", ProcessedFileCount));
-				_logger.Log(false, string.Format("Created target folders: {0}", CreatedDirCount));
-				_logger.Log(false, string.Format("Created target files: {0}", CreatedFileCount));
-				_logger.Log(false, string.Format("Created target thumbnails: {0}", CreatedThumbnailCount));
-				_logger.Log(false, string.Format("Removed obsolete target files: {0}", RemovedObsoleteFileCount));
-				_logger.Log(false, string.Format("Removed obsolete target thumbnails: {0}", RemovedObsoleteThumbnailCount));
-				_logger.Log(false, string.Format("Removed target files without source: {0}", RemovedTargetWithoutSourceFileCount));
-				_logger.Log(false, string.Format("Removed target folders without source: {0}", RemovedTargetWithoutSourceDirCount));
+				_logger.Log(false, string.Format("Processed source folders: {0}", _processedDirCount));
+				_logger.Log(false, string.Format("Processed source files: {0}", _processedFileCount));
+				_logger.Log(false, string.Format("Created target folders: {0}", _createdDirCount));
+				_logger.Log(false, string.Format("Created target files: {0}", _createdFileCount));
+				_logger.Log(false, string.Format("Created target thumbnails: {0}", _createdThumbnailCount));
+				_logger.Log(false, string.Format("Removed obsolete target files: {0}", _removedObsoleteFileCount));
+				_logger.Log(false, string.Format("Removed obsolete target thumbnails: {0}", _removedObsoleteThumbnailCount));
+				_logger.Log(false, string.Format("Removed target files without source: {0}", _removedTargetWithoutSourceFileCount));
+				_logger.Log(false, string.Format("Removed target folders without source: {0}", _removedTargetWithoutSourceDirCount));
 			}
 			catch (Exception e)
 			{
@@ -91,14 +91,14 @@ namespace FigLeaf.Core
 			bool cleanTarget,
 			Action<FileInfo, DirectoryInfo, HashSet<string>> processFile)
 		{
-			ProcessedDirCount++;
+			_processedDirCount++;
 
 			// 1. process own files
 			IEnumerable<FileInfo> sourceFiles = sourceDir.GetFiles();
 			var targetValidFileNames = new HashSet<string>();
 			foreach (var file in sourceFiles)
 			{
-				ProcessedFileCount++;
+				_processedFileCount++;
 				processFile(file, targetDir, targetValidFileNames);
 			}
 
@@ -110,7 +110,7 @@ namespace FigLeaf.Core
 					if (!targetValidFileNames.Contains(targetFile.Name))
 					{
 						targetFile.Delete();
-						RemovedTargetWithoutSourceFileCount++;
+						_removedTargetWithoutSourceFileCount++;
 					}
 				}
 			}
@@ -123,7 +123,7 @@ namespace FigLeaf.Core
 				if (!targetSubDir.Exists)
 				{
 					targetSubDir.Create();
-					CreatedDirCount++;
+					_createdDirCount++;
 				}
 				
 				ProcessDir(sourceSubDir, targetSubDir, cleanTarget, processFile);
@@ -139,8 +139,8 @@ namespace FigLeaf.Core
 						int filesToRemove = targetSubDir.GetFiles(".", SearchOption.AllDirectories).Length;
 						int dirsToRemove = targetSubDir.GetDirectories("*.*", SearchOption.AllDirectories).Length;
 						targetSubDir.Delete(true);
-						RemovedTargetWithoutSourceFileCount = RemovedTargetWithoutSourceFileCount + filesToRemove;
-						RemovedTargetWithoutSourceDirCount = RemovedTargetWithoutSourceDirCount + 1 + dirsToRemove;
+						_removedTargetWithoutSourceFileCount = _removedTargetWithoutSourceFileCount + filesToRemove;
+						_removedTargetWithoutSourceDirCount = _removedTargetWithoutSourceDirCount + 1 + dirsToRemove;
 					}
 				}
 			}
@@ -166,7 +166,7 @@ namespace FigLeaf.Core
 				else
 				{
 					File.Delete(targetFilePath);
-					RemovedObsoleteFileCount++;
+					_removedObsoleteFileCount++;
 				}
 			}
 
@@ -174,7 +174,7 @@ namespace FigLeaf.Core
 			{
 				_zip.Pack(sourceFile, targetFilePath);
 				File.SetLastWriteTime(targetFilePath, sourceFileTime);
-				CreatedFileCount++;
+				_createdFileCount++;
 			}
 
 			targetValidFileNames.Add(Path.GetFileName(targetFilePath));
@@ -197,7 +197,7 @@ namespace FigLeaf.Core
 				else
 				{
 					File.Delete(thumbnailFilePath);
-					RemovedObsoleteThumbnailCount++;
+					_removedObsoleteThumbnailCount++;
 				}
 			}
 
@@ -208,7 +208,7 @@ namespace FigLeaf.Core
 				else
 					_thumbnail.MakeForPhoto(sourceFile.FullName, thumbnailFilePath);
 				File.SetLastWriteTime(thumbnailFilePath, sourceFileTime);
-				CreatedThumbnailCount++;
+				_createdThumbnailCount++;
 			}
 
 			targetValidFileNames.Add(Path.GetFileName(thumbnailFilePath));
@@ -223,7 +223,7 @@ namespace FigLeaf.Core
 				return;
 
 			File.SetLastWriteTime(targetFilePath, sourceFileTime);
-			CreatedFileCount++;
+			_createdFileCount++;
 		}
 	}
 }
