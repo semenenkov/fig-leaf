@@ -13,6 +13,8 @@ namespace FigLeaf.Core
 		private readonly Thumbnail _thumbnail;
 		private readonly ILogger _logger;
 
+		public int ProcessedDirCount { get; private set; }
+		public int ProcessedFileCount { get; private set; }
 		public int CreatedDirCount { get; private set; }
 		public int CreatedFileCount { get; private set; }
 		public int CreatedThumbnailCount { get; private set; }
@@ -44,11 +46,13 @@ namespace FigLeaf.Core
 
 				ProcessDir(sourceDir, targetDir, true, PackFile);
 
-				_logger.Log(false, string.Format("Created folders: {0}", CreatedDirCount));
-				_logger.Log(false, string.Format("Created files: {0}", CreatedFileCount));
-				_logger.Log(false, string.Format("Created thumbnails: {0}", CreatedThumbnailCount));
-				_logger.Log(false, string.Format("Removed obsolete files: {0}", RemovedObsoleteFileCount));
-				_logger.Log(false, string.Format("Removed obsolete thumbnails: {0}", RemovedObsoleteThumbnailCount));
+				_logger.Log(false, string.Format("Processed source folders: {0}", ProcessedDirCount));
+				_logger.Log(false, string.Format("Processed source files: {0}", ProcessedFileCount));
+				_logger.Log(false, string.Format("Created target folders: {0}", CreatedDirCount));
+				_logger.Log(false, string.Format("Created target files: {0}", CreatedFileCount));
+				_logger.Log(false, string.Format("Created target thumbnails: {0}", CreatedThumbnailCount));
+				_logger.Log(false, string.Format("Removed obsolete target files: {0}", RemovedObsoleteFileCount));
+				_logger.Log(false, string.Format("Removed obsolete target thumbnails: {0}", RemovedObsoleteThumbnailCount));
 				_logger.Log(false, string.Format("Removed target files without source: {0}", RemovedTargetWithoutSourceFileCount));
 				_logger.Log(false, string.Format("Removed target folders without source: {0}", RemovedTargetWithoutSourceDirCount));
 			}
@@ -87,11 +91,14 @@ namespace FigLeaf.Core
 			bool cleanTarget,
 			Action<FileInfo, DirectoryInfo, HashSet<string>> processFile)
 		{
+			ProcessedDirCount++;
+
 			// 1. process own files
 			IEnumerable<FileInfo> sourceFiles = sourceDir.GetFiles();
 			var targetValidFileNames = new HashSet<string>();
 			foreach (var file in sourceFiles)
 			{
+				ProcessedFileCount++;
 				processFile(file, targetDir, targetValidFileNames);
 			}
 
