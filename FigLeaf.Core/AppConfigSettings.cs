@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -24,19 +25,22 @@ namespace FigLeaf.Core
 
 		public AppConfigSettings()
 		{
-			NameValueCollection appSettings = ConfigurationManager.AppSettings;
+			string exeFileName = string.IsNullOrEmpty(Console.Title)
+				? Application.ExecutablePath
+				: Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "FigLeaf.UI.exe");
+			KeyValueConfigurationCollection appSettings = ConfigurationManager.OpenExeConfiguration(exeFileName).AppSettings.Settings;
 
-			SourceDir = appSettings["SourceDir"];
-			TargetDir = appSettings["TargetDir"];
-			ExcludeFigLeafDir = bool.Parse(appSettings["ExcludeFigLeafDir"]);
-			
-			MasterPassword = appSettings["MasterPassword"];
-			PasswordRule = (PasswordRule)Enum.Parse(typeof(PasswordRule), appSettings["PasswordRule"]);
+			SourceDir = appSettings["SourceDir"].Value;
+			TargetDir = appSettings["TargetDir"].Value;
+			ExcludeFigLeafDir = bool.Parse(appSettings["ExcludeFigLeafDir"].Value);
 
-			VideoExtensions = appSettings["VideoExtensions"].Split('|').ToList();
-			ThumbnailSize = int.Parse(appSettings["ThumbnailSize"]);
+			MasterPassword = appSettings["MasterPassword"].Value;
+			PasswordRule = (PasswordRule)Enum.Parse(typeof(PasswordRule), appSettings["PasswordRule"].Value);
 
-			DetailedLogging = bool.Parse(appSettings["DetailedLogging"]);
+			VideoExtensions = appSettings["VideoExtensions"].Value.Split('|').ToList();
+			ThumbnailSize = int.Parse(appSettings["ThumbnailSize"].Value);
+
+			DetailedLogging = bool.Parse(appSettings["DetailedLogging"].Value);
 		}
 
 		public void Save()
