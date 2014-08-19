@@ -160,7 +160,7 @@
 
                     <StackPanel Grid.Column="0"  Margin="0,9,9,0">
                         <Button Content="Update target" HorizontalAlignment="Stretch" Height="24" Click="UpdateTarget"/>
-                        <Button Content="Restore target to .." HorizontalAlignment="Stretch" Height="24"/>
+                        <Button Content="Restore target to .." HorizontalAlignment="Stretch" Height="24" Click="RestoreTarget"/>
                     </StackPanel>
 
                     <GroupBox Grid.Column="1" Margin="-5,0">

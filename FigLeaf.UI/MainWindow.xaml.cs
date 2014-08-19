@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -77,6 +78,28 @@ namespace FigLeaf.UI
 			_logger.Reset();
 			var fileProcessor = new BatchFileProcessor(Settings, _logger);
 			fileProcessor.Pack();
+		}
+
+		private void RestoreTarget(object sender, RoutedEventArgs e)
+		{
+			string targetPath;
+
+			using (var dlg = new FolderBrowserDialog())
+			{
+				dlg.Description = "Specify empty folder to unpack files";
+				dlg.SelectedPath = Settings.SourceDir;
+				dlg.ShowNewFolderButton = true;
+
+				DialogResult result = dlg.ShowDialog();
+				if (result != System.Windows.Forms.DialogResult.OK)
+					return;
+
+				targetPath = dlg.SelectedPath;
+			}
+
+			_logger.Reset();
+			var fileProcessor = new BatchFileProcessor(Settings, _logger);
+			fileProcessor.Unpack(targetPath);
 		}
 	}
 }

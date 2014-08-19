@@ -11,8 +11,11 @@ namespace FigLeaf.Console
 			try
 			{
 				var fileProcessor = new BatchFileProcessor(new AppConfigSettings(), logger);
-				fileProcessor.Pack();
-				//fileProcessor.Unpack(@"d:\Patrick\FigLeaf\trunk\!_test\source2");
+
+				if (args == null || args.Length == 0)
+					fileProcessor.Pack();
+				else
+					fileProcessor.Unpack(args[0]);
 			}
 			catch (Exception e)
 			{

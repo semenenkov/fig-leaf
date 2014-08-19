@@ -45,16 +45,7 @@ namespace FigLeaf.Core
 				if (!targetDir.Exists) targetDir.Create();
 
 				ProcessDir(sourceDir, targetDir, true, PackFile);
-
-				_logger.Log(false, string.Format("Processed source folders: {0}", _processedDirCount));
-				_logger.Log(false, string.Format("Processed source files: {0}", _processedFileCount));
-				_logger.Log(false, string.Format("Created target folders: {0}", _createdDirCount));
-				_logger.Log(false, string.Format("Created target files: {0}", _createdFileCount));
-				_logger.Log(false, string.Format("Created target thumbnails: {0}", _createdThumbnailCount));
-				_logger.Log(false, string.Format("Removed obsolete target files: {0}", _removedObsoleteFileCount));
-				_logger.Log(false, string.Format("Removed obsolete target thumbnails: {0}", _removedObsoleteThumbnailCount));
-				_logger.Log(false, string.Format("Removed target files without source: {0}", _removedTargetWithoutSourceFileCount));
-				_logger.Log(false, string.Format("Removed target folders without source: {0}", _removedTargetWithoutSourceDirCount));
+				LogSummary();
 			}
 			catch (Exception e)
 			{
@@ -78,11 +69,25 @@ namespace FigLeaf.Core
 					throw new ApplicationException("Target dir must be empty");
 
 				ProcessDir(sourceDir, targetDir, false, UnpackFile);
+				LogSummary();
 			}
 			catch (Exception e)
 			{
 				_logger.Log(false, "Error: " + e.Message);
 			}
+		}
+
+		private void LogSummary()
+		{
+			_logger.Log(false, string.Format("Processed source folders: {0}", _processedDirCount));
+			_logger.Log(false, string.Format("Processed source files: {0}", _processedFileCount));
+			_logger.Log(false, string.Format("Created target folders: {0}", _createdDirCount));
+			_logger.Log(false, string.Format("Created target files: {0}", _createdFileCount));
+			_logger.Log(false, string.Format("Created target thumbnails: {0}", _createdThumbnailCount));
+			_logger.Log(false, string.Format("Removed obsolete target files: {0}", _removedObsoleteFileCount));
+			_logger.Log(false, string.Format("Removed obsolete target thumbnails: {0}", _removedObsoleteThumbnailCount));
+			_logger.Log(false, string.Format("Removed target files without source: {0}", _removedTargetWithoutSourceFileCount));
+			_logger.Log(false, string.Format("Removed target folders without source: {0}", _removedTargetWithoutSourceDirCount));
 		}
 
 		private void ProcessDir(
