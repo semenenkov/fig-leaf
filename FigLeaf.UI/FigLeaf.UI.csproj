@@ -76,6 +76,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoolToOppositeBoolConverter.cs" />
+    <Compile Include="CancelButton.cs" />
     <Compile Include="EnumerationExtension.cs" />
     <Compile Include="FolderPicker.xaml.cs">
       <DependentUpon>FolderPicker.xaml</DependentUpon>

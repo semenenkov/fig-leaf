@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using System.Threading;
 using FigLeaf.Core;
 
 namespace FigLeaf.Console
@@ -28,9 +28,9 @@ namespace FigLeaf.Console
 				var fileProcessor = new BatchFileProcessor(new AppConfigSettings(), logger);
 
 				if (argUnpackFolder == null)
-					fileProcessor.Pack();
+					fileProcessor.Pack(CancellationToken.None);
 				else
-					fileProcessor.Unpack(argUnpackFolder);
+					fileProcessor.Unpack(argUnpackFolder, CancellationToken.None);
 			}
 			catch (Exception e)
 			{

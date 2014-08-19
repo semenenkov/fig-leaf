@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace FigLeaf.Core
 {
@@ -34,7 +35,7 @@ namespace FigLeaf.Core
 			_logger.Log(false, "Start file processing..");
 		}
 
-		public void Pack()
+		public void Pack(CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -51,7 +52,7 @@ namespace FigLeaf.Core
 					_createdDirCount++;
 				}
 
-				ProcessDir(sourceDir, targetDir, true, PackFile);
+				ProcessDir(sourceDir, targetDir, true, PackFile, cancellationToken);
 				LogSummary();
 			}
 			catch (Exception e)
@@ -60,7 +61,7 @@ namespace FigLeaf.Core
 			}
 		}
 
-		public void Unpack(string targetPath)
+		public void Unpack(string targetPath, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -75,7 +76,7 @@ namespace FigLeaf.Core
 				else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
 					throw new ApplicationException("Target dir must be empty");
 
-				ProcessDir(sourceDir, targetDir, false, UnpackFile);
+				ProcessDir(sourceDir, targetDir, false, UnpackFile, cancellationToken);
 				LogSummary();
 			}
 			catch (Exception e)
@@ -101,8 +102,12 @@ namespace FigLeaf.Core
 			DirectoryInfo sourceDir, 
 			DirectoryInfo targetDir, 
 			bool cleanTarget,
-			Action<FileInfo, DirectoryInfo, HashSet<string>> processFile)
+			Action<FileInfo, DirectoryInfo, HashSet<string>, CancellationToken> processFile,
+			CancellationToken cancellationToken)
 		{
+			if (cancellationToken.IsCancellationRequested)
+				return;
+
 			_processedDirCount++;
 
 			// 1. process own files
@@ -111,7 +116,7 @@ namespace FigLeaf.Core
 			foreach (var file in sourceFiles)
 			{
 				_processedFileCount++;
-				processFile(file, targetDir, targetValidFileNames);
+				processFile(file, targetDir, targetValidFileNames, cancellationToken);
 			}
 
 			// 2. remove unexisting target files
@@ -128,6 +133,9 @@ namespace FigLeaf.Core
 				}
 			}
 
+			if (cancellationToken.IsCancellationRequested)
+				return;
+
 			// 3. process subdirs
 			IEnumerable<DirectoryInfo> subDirs = sourceDir.GetDirectories();
 			foreach (var sourceSubDir in subDirs)
@@ -139,9 +147,12 @@ namespace FigLeaf.Core
 					targetSubDir.Create();
 					_createdDirCount++;
 				}
-				
-				ProcessDir(sourceSubDir, targetSubDir, cleanTarget, processFile);
+
+				ProcessDir(sourceSubDir, targetSubDir, cleanTarget, processFile, cancellationToken);
 			}
+
+			if (cancellationToken.IsCancellationRequested)
+				return;
 
 			// 4. remove unexisting target dirs
 			if (cleanTarget)
@@ -163,8 +174,15 @@ namespace FigLeaf.Core
 			}
 		}
 
-		private void PackFile(FileInfo sourceFile, DirectoryInfo targetDir, HashSet<string> targetValidFileNames)
+		private void PackFile(
+			FileInfo sourceFile, 
+			DirectoryInfo targetDir, 
+			HashSet<string> targetValidFileNames,
+			CancellationToken cancellationToken)
 		{
+			if (cancellationToken.IsCancellationRequested)
+				return;
+
 			string targetFilePath = Path.Combine(targetDir.FullName, sourceFile.Name);
 			DateTime sourceFileTime = File.GetLastWriteTime(sourceFile.FullName);
 
@@ -235,8 +253,15 @@ namespace FigLeaf.Core
 			targetValidFileNames.Add(Path.GetFileName(thumbnailFilePath));
 		}
 
-		private void UnpackFile(FileInfo sourceFile, DirectoryInfo targetDir, HashSet<string> targetValidFileNames)
+		private void UnpackFile(
+			FileInfo sourceFile, 
+			DirectoryInfo targetDir, 
+			HashSet<string> targetValidFileNames,
+			CancellationToken cancellationToken)
 		{
+			if (cancellationToken.IsCancellationRequested)
+				return;
+
 			string targetFilePath = Path.Combine(targetDir.FullName, sourceFile.Name);
 			DateTime sourceFileTime = File.GetLastWriteTime(sourceFile.FullName);
 

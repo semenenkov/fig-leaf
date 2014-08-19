@@ -1,11 +1,13 @@
 ﻿<Window x:Class="FigLeaf.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:UI="clr-namespace:FigLeaf.UI"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:UI="clr-namespace:FigLeaf.UI"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" Title="Fig Leaf" Height="500" Width="600" Icon="FigLeaf.ico" Closing="WindowClosing">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <UI:BoolToOppositeBoolConverter x:Key="OppositeConverter" />
 
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
         <Style TargetType="{x:Type GroupBox}">
@@ -48,7 +50,7 @@
         </Style>
     </Window.Resources>
 
-    <DockPanel LastChildFill="True">
+    <DockPanel LastChildFill="True" Name="LayoutRoot">
         <DockPanel.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#447CA512" Offset="0"/>
@@ -161,6 +163,8 @@
                     <StackPanel Grid.Column="0"  Margin="0,9,9,0">
                         <Button Content="Update target" HorizontalAlignment="Stretch" Height="24" Click="UpdateTarget"/>
                         <Button Content="Restore target to .." HorizontalAlignment="Stretch" Height="24" Click="RestoreTarget"/>
+                        <UI:CancelButton Content="Cancel" HorizontalAlignment="Stretch" Height="24" Click="CancelAction" 
+                                IsEnabled="{Binding ElementName=LayoutRoot, Path=IsEnabled, Converter={StaticResource OppositeConverter}}"/>
                     </StackPanel>
 
                     <GroupBox Grid.Column="1" Margin="-5,0">

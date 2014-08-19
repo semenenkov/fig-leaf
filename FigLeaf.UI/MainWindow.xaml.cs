@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 using FigLeaf.Core;
 
 namespace FigLeaf.UI
@@ -26,6 +16,7 @@ namespace FigLeaf.UI
 		public ISettings Settings { get; set; }
 
 		private readonly ILogger _logger;
+		private CancellationTokenSource _cancellationTokenSource;
 
 		public MainWindow()
 		{
@@ -47,37 +38,33 @@ namespace FigLeaf.UI
 			if (isDetail && !Settings.DetailedLogging)
 				return;
 
-			if (!string.IsNullOrEmpty(txtLog.Text))
-				txtLog.Text = txtLog.Text + Environment.NewLine;
+			Dispatcher.Invoke(new Action(() =>
+			{
+				string text = txtLog.Text;
+				if (!string.IsNullOrEmpty(text))
+					text = text + Environment.NewLine;
 
-			txtLog.Text = txtLog.Text + message;
-
-			txtLog.CaretIndex = txtLog.Text.Length;
-			txtLog.ScrollToEnd();
+				txtLog.Text = text + message;
+				txtLog.CaretIndex = txtLog.Text.Length;
+				txtLog.ScrollToEnd();
+			}));
 		}
 		#endregion
 
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected virtual void OnPropertyChanged(string propertyName)
-		{
-			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-		#endregion
-
-		private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void WindowClosing(object sender, CancelEventArgs e)
 		{
 			Settings.Save();
 		}
 
 		private void UpdateTarget(object sender, RoutedEventArgs e)
 		{
+			LayoutRoot.IsEnabled = false;
+			_cancellationTokenSource = new CancellationTokenSource();
 			_logger.Reset();
 			var fileProcessor = new BatchFileProcessor(Settings, _logger);
-			fileProcessor.Pack();
+			Task.Factory
+				.StartNew(() => fileProcessor.Pack(_cancellationTokenSource.Token), _cancellationTokenSource.Token)
+				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
 		}
 
 		private void RestoreTarget(object sender, RoutedEventArgs e)
@@ -97,9 +84,21 @@ namespace FigLeaf.UI
 				targetPath = dlg.SelectedPath;
 			}
 
+			LayoutRoot.IsEnabled = false;
+			_cancellationTokenSource = new CancellationTokenSource();
 			_logger.Reset();
 			var fileProcessor = new BatchFileProcessor(Settings, _logger);
-			fileProcessor.Unpack(targetPath);
+			Task.Factory
+				.StartNew(() => fileProcessor.Unpack(targetPath, _cancellationTokenSource.Token), _cancellationTokenSource.Token)
+				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
+		}
+
+		private void CancelAction(object sender, RoutedEventArgs e)
+		{
+			if (_cancellationTokenSource == null)
+				return;
+			
+			_cancellationTokenSource.Cancel();
 		}
 	}
 }
