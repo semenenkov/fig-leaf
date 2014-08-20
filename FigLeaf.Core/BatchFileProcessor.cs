@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace FigLeaf.Core
 {
@@ -23,6 +24,7 @@ namespace FigLeaf.Core
 		private int _removedObsoleteThumbnailCount;
 		private int _removedTargetWithoutSourceFileCount;
 		private int _removedTargetWithoutSourceDirCount;
+		private string _excludeFolder = null;
 
 		public BatchFileProcessor(ISettings settings, ILogger logger)
 		{
@@ -31,6 +33,16 @@ namespace FigLeaf.Core
 			_zip = new Zip(settings.MasterPassword);
 			_thumbnail = new Thumbnail(settings, Console.WriteLine);
 			_logger = logger;
+
+			if (settings.ExcludeFigLeafDir)
+			{
+				string exePath = NormalizePath(Path.GetDirectoryName(Application.ExecutablePath));
+				string normalizedSourcePath = NormalizePath(_sourceDirPath);
+				if (exePath.StartsWith(normalizedSourcePath)) // is subfolder
+				{
+					_excludeFolder = exePath;
+				}
+			}
 
 			_logger.Log(false, "Start file processing..");
 		}
@@ -107,6 +119,17 @@ namespace FigLeaf.Core
 		{
 			if (cancellationToken.IsCancellationRequested)
 				return;
+
+			if (!string.IsNullOrEmpty(_excludeFolder))
+			{
+				if (_excludeFolder == NormalizePath(sourceDir.FullName))
+				{
+					_logger.Log(true, "Skip FigLeaf folder " + _excludeFolder);
+					// clear this path to skip this check for other folders
+					_excludeFolder = null;
+					return;
+				}
+			}
 
 			_processedDirCount++;
 
@@ -271,6 +294,13 @@ namespace FigLeaf.Core
 			_logger.Log(true, string.Format("Unpacking file {0} to {1}", sourceFile.FullName, targetFilePath));
 			File.SetLastWriteTime(targetFilePath, sourceFileTime);
 			_createdFileCount++;
+		}
+
+		private static string NormalizePath(string path)
+		{
+			return Path.GetFullPath(new Uri(path).LocalPath)
+				.TrimEnd(Path.DirectorySeparatorChar, Path.DirectorySeparatorChar)
+				.ToUpperInvariant();
 		}
 	}
 }
