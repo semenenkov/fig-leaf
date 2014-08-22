@@ -61,6 +61,24 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to en-US.
+        /// </summary>
+        public static string Common_Culture {
+            get {
+                return ResourceManager.GetString("Common_Culture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string Common_Language {
+            get {
+                return ResourceManager.GetString("Common_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start file processing...
         /// </summary>
         public static string Core_FileProcessor_Start {
@@ -97,20 +115,83 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en-US.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        public static string Ui_BindingTagValue {
+        public static string Ui_Actions_Cancel {
             get {
-                return ResourceManager.GetString("Ui_BindingTagValue", resourceCulture);
+                return ResourceManager.GetString("Ui_Actions_Cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change language to English and restart application?.
+        ///   Looks up a localized string similar to (detailed logging).
         /// </summary>
-        public static string Ui_Dialogs_SwitchLanguage {
+        public static string Ui_Actions_DetailedLogging {
             get {
-                return ResourceManager.GetString("Ui_Dialogs_SwitchLanguage", resourceCulture);
+                return ResourceManager.GetString("Ui_Actions_DetailedLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string Ui_Actions_Header {
+            get {
+                return ResourceManager.GetString("Ui_Actions_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log.
+        /// </summary>
+        public static string Ui_Actions_Log {
+            get {
+                return ResourceManager.GetString("Ui_Actions_Log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore target to ...
+        /// </summary>
+        public static string Ui_Actions_RestoreTargetTo {
+            get {
+                return ResourceManager.GetString("Ui_Actions_RestoreTargetTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update target.
+        /// </summary>
+        public static string Ui_Actions_UpdateTarget {
+            get {
+                return ResourceManager.GetString("Ui_Actions_UpdateTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify empty folder to unpack files.
+        /// </summary>
+        public static string Ui_Dialogs_RestoreTarget {
+            get {
+                return ResourceManager.GetString("Ui_Dialogs_RestoreTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change language to {0} and restart application?.
+        /// </summary>
+        public static string Ui_Dialogs_SwitchLanguageFormat {
+            get {
+                return ResourceManager.GetString("Ui_Dialogs_SwitchLanguageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude FigLeaf folder.
+        /// </summary>
+        public static string Ui_Folders_ExcludeFigLeafDir {
+            get {
+                return ResourceManager.GetString("Ui_Folders_ExcludeFigLeafDir", resourceCulture);
             }
         }
         
@@ -120,6 +201,78 @@ namespace FigLeaf.Core.Properties {
         public static string Ui_Folders_Header {
             get {
                 return ResourceManager.GetString("Ui_Folders_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source.
+        /// </summary>
+        public static string Ui_Folders_Source {
+            get {
+                return ResourceManager.GetString("Ui_Folders_Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target.
+        /// </summary>
+        public static string Ui_Folders_Target {
+            get {
+                return ResourceManager.GetString("Ui_Folders_Target", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security.
+        /// </summary>
+        public static string Ui_Security_Header {
+            get {
+                return ResourceManager.GetString("Ui_Security_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password.
+        /// </summary>
+        public static string Ui_Security_MasterPassword {
+            get {
+                return ResourceManager.GetString("Ui_Security_MasterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password rule.
+        /// </summary>
+        public static string Ui_Security_PasswordRule {
+            get {
+                return ResourceManager.GetString("Ui_Security_PasswordRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show password.
+        /// </summary>
+        public static string Ui_Security_ShowPassword {
+            get {
+                return ResourceManager.GetString("Ui_Security_ShowPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thumbnails.
+        /// </summary>
+        public static string Ui_Thumbnails_Header {
+            get {
+                return ResourceManager.GetString("Ui_Thumbnails_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size in pixels.
+        /// </summary>
+        public static string Ui_Thumbnails_Size {
+            get {
+                return ResourceManager.GetString("Ui_Thumbnails_Size", resourceCulture);
             }
         }
     }

@@ -11,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using WinForms = System.Windows.Forms;
 
 using FigLeaf.Core;
+using CoreResources = FigLeaf.Core.Properties.Resources;
 
 namespace FigLeaf.UI
 {
@@ -27,7 +28,7 @@ namespace FigLeaf.UI
 		public MainWindow()
 		{
 			Settings = new AppConfigSettings();
-			Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+			CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
 
 			InitializeComponent();
 
@@ -82,7 +83,7 @@ namespace FigLeaf.UI
 
 			using (var dlg = new WinForms.FolderBrowserDialog())
 			{
-				dlg.Description = "Specify empty folder to unpack files";
+				dlg.Description = CoreResources.Ui_Dialogs_RestoreTarget;
 				dlg.SelectedPath = Settings.SourceDir;
 				dlg.ShowNewFolderButton = true;
 
@@ -118,18 +119,23 @@ namespace FigLeaf.UI
 
 		private bool ChangeCulture(string cultureCode)
 		{
-			if (cultureCode == Core.Properties.Resources.Culture.Name)
+			if (cultureCode == CoreResources.Culture.Name)
 				return true;
 
 			try
 			{
-				var question = new StringBuilder();
-				question.Append(Core.Properties.Resources.Ui_Dialogs_SwitchLanguage);
-				question.Append(Environment.NewLine);
-				Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(cultureCode);
-				question.Append(Core.Properties.Resources.Ui_Dialogs_SwitchLanguage);
+				string oldFormat = CoreResources.Ui_Dialogs_SwitchLanguageFormat;
+
+				CoreResources.Culture = CultureInfo.GetCultureInfo(cultureCode);
+				string newFormat = CoreResources.Ui_Dialogs_SwitchLanguageFormat;
+				string newLanguage = CoreResources.Common_Language;
+
+				string question = 
+					string.Format(oldFormat, newLanguage) + 
+					Environment.NewLine + 
+					string.Format(newFormat, newLanguage);
 				
-				if (MessageBox.Show(question.ToString(), null, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+				if (MessageBox.Show(question, null, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
 				{
 					Settings.Culture = cultureCode;
 					Settings.Save();
@@ -138,14 +144,14 @@ namespace FigLeaf.UI
 				}
 				else
 				{
-					Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+					CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
 					return false;
 				}
 			}
 			catch (Exception e)
 			{
 				MessageBox.Show(e.Message);
-				Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+				CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
 			}
 
 			return true;

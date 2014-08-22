@@ -54,7 +54,7 @@
         <Style TargetType="ToggleButton">
             <Setter Property="IsChecked" Value="False"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Tag}" Value="{x:Static CoreProperties:Resources.Ui_BindingTagValue}">
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Tag}" Value="{x:Static CoreProperties:Resources.Common_Culture}">
                     <Setter Property="IsChecked" Value="True"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -75,7 +75,7 @@
                 <ToggleButton Click="SwitchLanguage" Tag="en-US" Background="Transparent" BorderBrush="#7CA512" ToolTip="English">
                     <Image Source="Img/en.png" Width="32"/>
                 </ToggleButton>
-                <ToggleButton Click="SwitchLanguage" Tag="ru-RU" Background="Transparent" BorderBrush="#7CA512" ToolTip="Russian">
+                <ToggleButton Click="SwitchLanguage" Tag="ru-RU" Background="Transparent" BorderBrush="#7CA512" ToolTip="Русский">
                     <Image Source="Img/ru.png" Width="32"/>
                 </ToggleButton>
             </StackPanel>
@@ -95,18 +95,18 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Source" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" />
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Source}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" />
                     <UI:FolderPicker Text="{Binding Path=Settings.SourceDir, Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
 
-                    <Label Content="Target" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Target}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
                     <UI:FolderPicker Text="{Binding Path=Settings.TargetDir, Mode=TwoWay}"  Grid.Column="1" Grid.Row="1"/>
 
-                    <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="Exclude FigLeaf folder" 
+                    <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_ExcludeFigLeafDir}" 
                         VerticalAlignment="Center" Margin="0,5" Grid.Column="1" Grid.Row="2"/>
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="Security" DockPanel.Dock="Top">
+            <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Security_Header}" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*"/>
@@ -117,7 +117,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Master password" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0"/>
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Security_MasterPassword}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0"/>
                     <PasswordBox 
                         UI:PasswordHelper.Attach="True"
                         UI:PasswordHelper.Password="{Binding Text, ElementName=txtPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -127,11 +127,11 @@
                         HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
                         Visibility="{Binding IsChecked, ElementName=btnShowPassword, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Grid.Column="1" Grid.Row="0" Panel.ZIndex="2" />
-                    <ToggleButton x:Name="btnShowPassword" Content="ABC" ToolTip="Show password" 
+                    <ToggleButton x:Name="btnShowPassword" Content="ABC" ToolTip="{x:Static CoreProperties:Resources.Ui_Security_ShowPassword}" 
                          HorizontalContentAlignment="Center" HorizontalAlignment="Right" 
                          FontSize="8" Width="25" Grid.Column="1" Grid.Row="0" Panel.ZIndex="3" />
 
-                    <Label Content="Password rule" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Security_PasswordRule}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
                     <ComboBox
                         SelectedValue="{Binding Path=Settings.PasswordRule, Mode=TwoWay}"
                         SelectedValuePath="Value"
@@ -143,7 +143,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="Thumbnails" DockPanel.Dock="Top">
+            <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Thumbnails_Header}" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*"/>
@@ -153,14 +153,14 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Size in pixels" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0"/>
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Thumbnails_Size}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0"/>
                     <xctk:IntegerUpDown 
                         Value="{Binding Path=Settings.ThumbnailSize, Mode=TwoWay}"
                         HorizontalAlignment="Left" Width="50" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" Minimum="16" Maximum="256"/>
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="Actions">
+            <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Actions_Header}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*"/>
@@ -171,17 +171,17 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Column="0"  Margin="0,9,9,0">
-                        <Button Content="Update target" HorizontalAlignment="Stretch" Height="24" Click="UpdateTarget"/>
-                        <Button Content="Restore target to .." HorizontalAlignment="Stretch" Height="24" Click="RestoreTarget"/>
-                        <UI:CancelButton Content="Cancel" HorizontalAlignment="Stretch" Height="24" Click="CancelAction" 
+                        <Button Content="{x:Static CoreProperties:Resources.Ui_Actions_UpdateTarget}" HorizontalAlignment="Stretch" Height="24" Click="UpdateTarget"/>
+                        <Button Content="{x:Static CoreProperties:Resources.Ui_Actions_RestoreTargetTo}" HorizontalAlignment="Stretch" Height="24" Click="RestoreTarget"/>
+                        <UI:CancelButton Content="{x:Static CoreProperties:Resources.Ui_Actions_Cancel}" HorizontalAlignment="Stretch" Height="24" Click="CancelAction" 
                                 IsEnabled="{Binding ElementName=LayoutRoot, Path=IsEnabled, Converter={StaticResource OppositeConverter}}"/>
                     </StackPanel>
 
                     <GroupBox Grid.Column="1" Margin="-5,0">
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
-                                <TextBlock Text="Log" Margin="0,0,5,0"/>
-                                <CheckBox IsChecked="{Binding Path=Settings.DetailedLogging, Mode=TwoWay}" Content="(detailed logging)" VerticalAlignment="Center" />
+                                <TextBlock Text="{x:Static CoreProperties:Resources.Ui_Actions_Log}" Margin="0,0,5,0"/>
+                                <CheckBox IsChecked="{Binding Path=Settings.DetailedLogging, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Actions_DetailedLogging}" VerticalAlignment="Center" />
                             </StackPanel>
                         </GroupBox.Header>
 
