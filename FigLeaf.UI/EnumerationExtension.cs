@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Markup;
 
 namespace FigLeaf.UI
@@ -57,8 +58,17 @@ namespace FigLeaf.UI
 
 
 			return descriptionAttribute != null
-			  ? descriptionAttribute.Description
+			  ? GetDescriptionFromResource(descriptionAttribute.Description)
 			  : enumValue.ToString();
+		}
+
+		private string GetDescriptionFromResource(string resourceName)
+		{
+			PropertyInfo property = typeof(Core.Properties.Resources).GetProperty(resourceName, BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic);
+			if (property == null)
+				return resourceName;
+
+            return property.GetValue(null, null).ToString();
 		}
 
 		public class EnumerationMember

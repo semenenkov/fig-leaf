@@ -120,6 +120,15 @@
   <data name="Core_FileProcessor_Start" xml:space="preserve">
     <value>Поехали!</value>
   </data>
+  <data name="Core_PasswordRule_FileNameNumbersPlusPassword" xml:space="preserve">
+    <value>Цифры из имени файла + базовый пароль</value>
+  </data>
+  <data name="Core_PasswordRule_Password" xml:space="preserve">
+    <value>Только базовый пароль</value>
+  </data>
+  <data name="Core_PasswordRule_PasswordPlusFileNameNumbers" xml:space="preserve">
+    <value>Базовый пароль + цифры из имени файла</value>
+  </data>
   <data name="Ui_BindingTagValue" xml:space="preserve">
     <value>ru-RU</value>
   </data>

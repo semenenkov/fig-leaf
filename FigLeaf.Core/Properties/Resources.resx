@@ -120,6 +120,15 @@
   <data name="Core_FileProcessor_Start" xml:space="preserve">
     <value>Start file processing..</value>
   </data>
+  <data name="Core_PasswordRule_FileNameNumbersPlusPassword" xml:space="preserve">
+    <value>File name numbers followed by master password</value>
+  </data>
+  <data name="Core_PasswordRule_Password" xml:space="preserve">
+    <value>Master password only</value>
+  </data>
+  <data name="Core_PasswordRule_PasswordPlusFileNameNumbers" xml:space="preserve">
+    <value>Master password followed by file name numbers</value>
+  </data>
   <data name="Ui_BindingTagValue" xml:space="preserve">
     <value>en-US</value>
   </data>

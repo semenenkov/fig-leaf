@@ -4,11 +4,11 @@ namespace FigLeaf.Core
 {
     public enum PasswordRule
     {
-		[Description("File name numbers followed by master password")]
+		[Description("Core_PasswordRule_FileNameNumbersPlusPassword")]
 		FileNameNumbersPlusPassword,
-		[Description("Master password only")]
+		[Description("Core_PasswordRule_Password")]
 		Password,
-		[Description("Master password followed by file name numbers")]
+		[Description("Core_PasswordRule_PasswordPlusFileNameNumbers")]
 		PasswordPlusFileNameNumbers
     }
 }

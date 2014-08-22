@@ -70,6 +70,33 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File name numbers followed by master password.
+        /// </summary>
+        public static string Core_PasswordRule_FileNameNumbersPlusPassword {
+            get {
+                return ResourceManager.GetString("Core_PasswordRule_FileNameNumbersPlusPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password only.
+        /// </summary>
+        public static string Core_PasswordRule_Password {
+            get {
+                return ResourceManager.GetString("Core_PasswordRule_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password followed by file name numbers.
+        /// </summary>
+        public static string Core_PasswordRule_PasswordPlusFileNameNumbers {
+            get {
+                return ResourceManager.GetString("Core_PasswordRule_PasswordPlusFileNameNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to en-US.
         /// </summary>
         public static string Ui_BindingTagValue {
