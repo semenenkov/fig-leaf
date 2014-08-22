@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:UI="clr-namespace:FigLeaf.UI"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" Title="Fig Leaf" Height="500" Width="600" Icon="FigLeaf.ico" Closing="WindowClosing">
+        xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" 
+        xmlns:CoreProperties="clr-namespace:FigLeaf.Core.Properties;assembly=FigLeaf.Core" 
+        Title="Fig Leaf" Height="500" Width="600" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -48,6 +50,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="ToggleButton">
+            <Setter Property="IsChecked" Value="False"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Tag}" Value="{x:Static CoreProperties:Resources.Ui_BindingTagValue}">
+                    <Setter Property="IsChecked" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <DockPanel LastChildFill="True" Name="LayoutRoot">
@@ -58,22 +69,21 @@
             </LinearGradientBrush>
         </DockPanel.Background>
 
-        <StackPanel Width="100" Background="#227CA512" Visibility="Collapsed">
-            <!--StackPanel.Background>
-                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Color="#007CA512" Offset="0"/>
-                    <GradientStop Color="#447CA512" Offset="0.2"/>
-                    <GradientStop Color="#447CA512" Offset="0.8"/>
-                    <GradientStop Color="#117CA512" Offset="1"/>
-                </LinearGradientBrush>
-            </StackPanel.Background-->
-
-            <!--Image Source="Img/Leaf80.png" Margin="10"/-->
+        <StackPanel Width="100" Visibility="Visible">
+            <Image Source="Img/Leaf80.png" Margin="10" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="5">
+                <ToggleButton Click="SwitchLanguage" Tag="en-US" Background="Transparent" BorderBrush="#7CA512" ToolTip="English">
+                    <Image Source="Img/en.png" Width="32"/>
+                </ToggleButton>
+                <ToggleButton Click="SwitchLanguage" Tag="ru-RU" Background="Transparent" BorderBrush="#7CA512" ToolTip="Russian">
+                    <Image Source="Img/ru.png" Width="32"/>
+                </ToggleButton>
+            </StackPanel>
         </StackPanel>
 
         <DockPanel LastChildFill="True">
 
-            <GroupBox Header="Folders" DockPanel.Dock="Top">
+            <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Folders_Header}" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*"/>

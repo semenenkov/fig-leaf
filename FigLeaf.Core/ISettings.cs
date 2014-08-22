@@ -16,6 +16,8 @@ namespace FigLeaf.Core
 
 		bool DetailedLogging { get; set; }
 
+		string Culture { get; set; }
+
 		void Save();
 	}
 }

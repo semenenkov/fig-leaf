@@ -23,6 +23,8 @@ namespace FigLeaf.Core
 		
 		public bool DetailedLogging { get; set; }
 
+		public string Culture { get; set; }
+
 		public AppConfigSettings()
 		{
 			string exeFileName = string.IsNullOrEmpty(Console.Title)
@@ -41,6 +43,8 @@ namespace FigLeaf.Core
 			ThumbnailSize = int.Parse(appSettings["ThumbnailSize"].Value);
 
 			DetailedLogging = bool.Parse(appSettings["DetailedLogging"].Value);
+
+			Culture = appSettings["Culture"].Value;
 		}
 
 		public void Save()
@@ -54,6 +58,7 @@ namespace FigLeaf.Core
 			config.AppSettings.Settings["PasswordRule"].Value = PasswordRule.ToString();
 			config.AppSettings.Settings["ThumbnailSize"].Value = ThumbnailSize.ToString(CultureInfo.InvariantCulture);
 			config.AppSettings.Settings["DetailedLogging"].Value = DetailedLogging.ToString();
+			config.AppSettings.Settings["Culture"].Value = Culture;
 
 			config.Save(ConfigurationSaveMode.Modified);
 		}

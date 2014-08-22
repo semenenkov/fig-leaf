@@ -1,9 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using WinForms = System.Windows.Forms;
+
 using FigLeaf.Core;
 
 namespace FigLeaf.UI
@@ -20,11 +26,14 @@ namespace FigLeaf.UI
 
 		public MainWindow()
 		{
+			Settings = new AppConfigSettings();
+			Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+
 			InitializeComponent();
 
-			Settings = new AppConfigSettings();
 			DataContext = this;
 			_logger = this;
+
 		}
 
 		#region ILogger
@@ -71,13 +80,13 @@ namespace FigLeaf.UI
 		{
 			string targetPath;
 
-			using (var dlg = new FolderBrowserDialog())
+			using (var dlg = new WinForms.FolderBrowserDialog())
 			{
 				dlg.Description = "Specify empty folder to unpack files";
 				dlg.SelectedPath = Settings.SourceDir;
 				dlg.ShowNewFolderButton = true;
 
-				DialogResult result = dlg.ShowDialog();
+				WinForms.DialogResult result = dlg.ShowDialog();
 				if (result != System.Windows.Forms.DialogResult.OK)
 					return;
 
@@ -99,6 +108,47 @@ namespace FigLeaf.UI
 				return;
 			
 			_cancellationTokenSource.Cancel();
+		}
+
+		private void SwitchLanguage(object sender, RoutedEventArgs e)
+		{
+			var button = (ToggleButton) sender;
+			button.IsChecked = ChangeCulture(button.Tag.ToString());
+		}
+
+		private bool ChangeCulture(string cultureCode)
+		{
+			if (cultureCode == Core.Properties.Resources.Culture.Name)
+				return true;
+
+			try
+			{
+				var question = new StringBuilder();
+				question.Append(Core.Properties.Resources.Ui_Dialogs_SwitchLanguage);
+				question.Append(Environment.NewLine);
+				Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(cultureCode);
+				question.Append(Core.Properties.Resources.Ui_Dialogs_SwitchLanguage);
+				
+				if (MessageBox.Show(question.ToString(), null, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+				{
+					Settings.Culture = cultureCode;
+					Settings.Save();
+					Process.Start(System.Windows.Forms.Application.ExecutablePath);
+					Application.Current.Shutdown();
+				}
+				else
+				{
+					Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+					return false;
+				}
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(e.Message);
+				Core.Properties.Resources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+			}
+
+			return true;
 		}
 	}
 }
