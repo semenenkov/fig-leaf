@@ -123,6 +123,48 @@
   <data name="Common_Language" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Core_FileProcessor_CreatedDirFormat" xml:space="preserve">
+    <value>Created folder {0}</value>
+  </data>
+  <data name="Core_FileProcessor_ErrorFormat" xml:space="preserve">
+    <value>Error: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_CreatedTargetDirsFormat" xml:space="preserve">
+    <value>Created target folders: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_CreatedTargetFilesFormat" xml:space="preserve">
+    <value>Created target files: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_CreatedTargetThumbsFormat" xml:space="preserve">
+    <value>Created target thumbnails: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_ProcessedSourceDirsFormat" xml:space="preserve">
+    <value>Processed source folders: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_ProcessedSourceFilesFormat" xml:space="preserve">
+    <value>Processed source files: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat" xml:space="preserve">
+    <value>Removed obsolete target files: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat" xml:space="preserve">
+    <value>Removed obsolete target thumbnails: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedTargetDirsWoSourceFormat" xml:space="preserve">
+    <value>Removed target folders without source: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat" xml:space="preserve">
+    <value>Removed target files without source: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_SkipFigLeafDirFormat" xml:space="preserve">
+    <value>Skip FigLeaf folder {0}</value>
+  </data>
+  <data name="Core_FileProcessor_NonEmptyTargetDirError" xml:space="preserve">
+    <value>Target dir must be empty</value>
+  </data>
+  <data name="Core_FileProcessor_NoSourceDirError" xml:space="preserve">
+    <value>Source folder does not exist</value>
+  </data>
   <data name="Core_FileProcessor_Start" xml:space="preserve">
     <value>Start file processing..</value>
   </data>

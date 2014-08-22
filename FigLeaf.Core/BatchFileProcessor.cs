@@ -44,7 +44,7 @@ namespace FigLeaf.Core
 				}
 			}
 
-			_logger.Log(false, "Start file processing..");
+			_logger.Log(false, Properties.Resources.Core_FileProcessor_Start);
 		}
 
 		public void Pack(CancellationToken cancellationToken)
@@ -55,11 +55,11 @@ namespace FigLeaf.Core
 				var targetDir = new DirectoryInfo(_targetDirPath);
 
 				if (!sourceDir.Exists)
-					throw new ApplicationException("Source folder does not exist");
+					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NoSourceDirError);
 
 				if (!targetDir.Exists)
 				{
-					_logger.Log(true, "Created folder " + _targetDirPath);
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreatedDirFormat, _targetDirPath));
 					targetDir.Create();
 					_createdDirCount++;
 				}
@@ -69,7 +69,7 @@ namespace FigLeaf.Core
 			}
 			catch (Exception e)
 			{
-				_logger.Log(false, "Error: " + e.Message);
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_ErrorFormat, e.Message));
 			}
 		}
 
@@ -81,33 +81,33 @@ namespace FigLeaf.Core
 				var targetDir = new DirectoryInfo(targetPath);
 
 				if (!sourceDir.Exists)
-					throw new ApplicationException("Source folder does not exist");
+					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NoSourceDirError);
 
 				if (!targetDir.Exists)
 					targetDir.Create();
 				else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
-					throw new ApplicationException("Target dir must be empty");
+					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NonEmptyTargetDirError);
 
 				ProcessDir(sourceDir, targetDir, false, UnpackFile, cancellationToken);
 				LogSummary();
 			}
 			catch (Exception e)
 			{
-				_logger.Log(false, "Error: " + e.Message);
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_ErrorFormat, e.Message));
 			}
 		}
 
 		private void LogSummary()
 		{
-			_logger.Log(false, string.Format("Processed source folders: {0}", _processedDirCount));
-			_logger.Log(false, string.Format("Processed source files: {0}", _processedFileCount));
-			_logger.Log(false, string.Format("Created target folders: {0}", _createdDirCount));
-			_logger.Log(false, string.Format("Created target files: {0}", _createdFileCount));
-			_logger.Log(false, string.Format("Created target thumbnails: {0}", _createdThumbnailCount));
-			_logger.Log(false, string.Format("Removed obsolete target files: {0}", _removedObsoleteFileCount));
-			_logger.Log(false, string.Format("Removed obsolete target thumbnails: {0}", _removedObsoleteThumbnailCount));
-			_logger.Log(false, string.Format("Removed target files without source: {0}", _removedTargetWithoutSourceFileCount));
-			_logger.Log(false, string.Format("Removed target folders without source: {0}", _removedTargetWithoutSourceDirCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_ProcessedSourceDirsFormat, _processedDirCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_ProcessedSourceFilesFormat, _processedFileCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetDirsFormat, _createdDirCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetFilesFormat, _createdFileCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetThumbsFormat, _createdThumbnailCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat, _removedObsoleteFileCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat, _removedObsoleteThumbnailCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat, _removedTargetWithoutSourceFileCount));
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedTargetDirsWoSourceFormat, _removedTargetWithoutSourceDirCount));
 		}
 
 		private void ProcessDir(
@@ -124,7 +124,7 @@ namespace FigLeaf.Core
 			{
 				if (_excludeFolder == NormalizePath(sourceDir.FullName))
 				{
-					_logger.Log(true, "Skip FigLeaf folder " + _excludeFolder);
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_LogSum_SkipFigLeafDirFormat, _excludeFolder));
 					// clear this path to skip this check for other folders
 					_excludeFolder = null;
 					return;

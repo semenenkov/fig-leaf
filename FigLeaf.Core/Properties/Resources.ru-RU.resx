@@ -123,6 +123,9 @@
   <data name="Common_Language" xml:space="preserve">
     <value>Русский</value>
   </data>
+  <data name="Core_FileProcessor_NoSourceDirError" xml:space="preserve">
+    <value>Source folder does not exist</value>
+  </data>
   <data name="Core_FileProcessor_Start" xml:space="preserve">
     <value>Поехали!</value>
   </data>

@@ -79,6 +79,132 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created folder {0}.
+        /// </summary>
+        public static string Core_FileProcessor_CreatedDirFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_CreatedDirFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_ErrorFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_ErrorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created target folders: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_CreatedTargetDirsFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_CreatedTargetDirsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created target files: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_CreatedTargetFilesFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_CreatedTargetFilesFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created target thumbnails: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_CreatedTargetThumbsFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_CreatedTargetThumbsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processed source folders: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_ProcessedSourceDirsFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_ProcessedSourceDirsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processed source files: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_ProcessedSourceFilesFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_ProcessedSourceFilesFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed obsolete target files: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed obsolete target thumbnails: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed target folders without source: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_RemovedTargetDirsWoSourceFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_RemovedTargetDirsWoSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed target files without source: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip FigLeaf folder {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_SkipFigLeafDirFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_SkipFigLeafDirFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target dir must be empty.
+        /// </summary>
+        public static string Core_FileProcessor_NonEmptyTargetDirError {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_NonEmptyTargetDirError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source folder does not exist.
+        /// </summary>
+        public static string Core_FileProcessor_NoSourceDirError {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_NoSourceDirError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start file processing...
         /// </summary>
         public static string Core_FileProcessor_Start {
