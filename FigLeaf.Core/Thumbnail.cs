@@ -47,7 +47,7 @@ namespace FigLeaf.Core
 			{
 				// TODO remove? (regular case for mp3, etc)
 				if (_logger != null)
-					_logger(string.Format("Failed to make thumbnail for the file {0}: {1}", source, e.Message));
+					_logger(string.Format(Properties.Resources.Core_ThumbErrorFormat, source, e.Message));
 				thumb = new Bitmap(_size, _size);
 				Graphics graphics = Graphics.FromImage(thumb);
 				int fontSize = _size / 10;

@@ -201,6 +201,9 @@
   <data name="Core_PasswordRule_PasswordPlusFileNameNumbers" xml:space="preserve">
     <value>Базовый пароль + цифры из имени файла</value>
   </data>
+  <data name="Core_ThumbErrorFormat" xml:space="preserve">
+    <value>Не удалось создать эскиз для файла {0}: {1}</value>
+  </data>
   <data name="Ui_Actions_Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>

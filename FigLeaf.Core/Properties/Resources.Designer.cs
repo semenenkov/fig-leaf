@@ -313,6 +313,15 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to make thumbnail for the file {0}: {1}.
+        /// </summary>
+        public static string Core_ThumbErrorFormat {
+            get {
+                return ResourceManager.GetString("Core_ThumbErrorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Ui_Actions_Cancel {
