@@ -24,7 +24,7 @@ namespace FigLeaf.Core
 		private int _removedObsoleteThumbnailCount;
 		private int _removedTargetWithoutSourceFileCount;
 		private int _removedTargetWithoutSourceDirCount;
-		private string _excludeFolder = null;
+		private string _excludeFolder;
 
 		public BatchFileProcessor(ISettings settings, ILogger logger)
 		{
@@ -124,7 +124,7 @@ namespace FigLeaf.Core
 			{
 				if (_excludeFolder == NormalizePath(sourceDir.FullName))
 				{
-					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_LogSum_SkipFigLeafDirFormat, _excludeFolder));
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_SkipFigLeafDirFormat, _excludeFolder));
 					// clear this path to skip this check for other folders
 					_excludeFolder = null;
 					return;
@@ -149,7 +149,7 @@ namespace FigLeaf.Core
 				{
 					if (!targetValidFileNames.Contains(targetFile.Name))
 					{
-						_logger.Log(true, "Deleting target file without source " + targetFile.Name);
+						_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_DeletingTargetFileWoSourceFormat, targetFile.Name));
 						targetFile.Delete();
 						_removedTargetWithoutSourceFileCount++;
 					}
@@ -166,7 +166,7 @@ namespace FigLeaf.Core
 				var targetSubDir = new DirectoryInfo(Path.Combine(targetDir.FullName, sourceSubDir.Name));
 				if (!targetSubDir.Exists)
 				{
-					_logger.Log(true, "Creating target folder " + targetSubDir.FullName);
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreatingTargetDirFormat, targetSubDir.FullName));
 					targetSubDir.Create();
 					_createdDirCount++;
 				}
@@ -187,7 +187,7 @@ namespace FigLeaf.Core
 						int filesToRemove = targetSubDir.GetFiles(".", SearchOption.AllDirectories).Length;
 						int dirsToRemove = targetSubDir.GetDirectories("*.*", SearchOption.AllDirectories).Length;
 						_logger.Log(true, string.Format(
-							"Deleting target folder without source {0} (with {1} sub-folders and {2} files)", 
+							Properties.Resources.Core_FileProcessor_DeletingTargetDirWoSourceFormat, 
 							targetSubDir, dirsToRemove, filesToRemove));
 						targetSubDir.Delete(true);
 						_removedTargetWithoutSourceFileCount = _removedTargetWithoutSourceFileCount + filesToRemove;
@@ -223,7 +223,7 @@ namespace FigLeaf.Core
 				}
 				else
 				{
-					_logger.Log(true, "Deleting obsolete target file " + targetFilePath);
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_DeletingObsoleteTargetFileFormat, targetFilePath));
 					File.Delete(targetFilePath);
 					_removedObsoleteFileCount++;
 				}
@@ -231,7 +231,7 @@ namespace FigLeaf.Core
 
 			if (!skipExisting)
 			{
-				_logger.Log(true, string.Format("Packing file {0} to {1}", sourceFile.FullName, targetFilePath));
+				_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_PackingFileFormat, sourceFile.FullName, targetFilePath));
 				_zip.Pack(sourceFile, targetFilePath);
 				File.SetLastWriteTime(targetFilePath, sourceFileTime);
 				_createdFileCount++;
@@ -256,7 +256,7 @@ namespace FigLeaf.Core
 				}
 				else
 				{
-					_logger.Log(true, "Deleting obsolete thumbnail file " + thumbnailFilePath);
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_DeletingObsoleteThumbFormat, thumbnailFilePath));
 					File.Delete(thumbnailFilePath);
 					_removedObsoleteThumbnailCount++;
 				}
@@ -264,7 +264,7 @@ namespace FigLeaf.Core
 
 			if (!skipExisting)
 			{
-				_logger.Log(true, "Creating thumbnail file " + thumbnailFilePath);
+				_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreatingThumbFormat, thumbnailFilePath));
 				if (isVideo)
 					_thumbnail.MakeForVideo(sourceFile.FullName, thumbnailFilePath);
 				else
@@ -291,7 +291,7 @@ namespace FigLeaf.Core
 			if (!_zip.Unpack(sourceFile.FullName, new FileInfo(targetFilePath))) 
 				return;
 
-			_logger.Log(true, string.Format("Unpacking file {0} to {1}", sourceFile.FullName, targetFilePath));
+			_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_UnpackingFileFormat, sourceFile.FullName, targetFilePath));
 			File.SetLastWriteTime(targetFilePath, sourceFileTime);
 			_createdFileCount++;
 		}

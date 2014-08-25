@@ -123,11 +123,74 @@
   <data name="Common_Language" xml:space="preserve">
     <value>Русский</value>
   </data>
+  <data name="Core_FileProcessor_CreatedDirFormat" xml:space="preserve">
+    <value>Создана папка {0}</value>
+  </data>
+  <data name="Core_FileProcessor_CreatingTargetDirFormat" xml:space="preserve">
+    <value>Создадим архивную папку {0}</value>
+  </data>
+  <data name="Core_FileProcessor_CreatingThumbFormat" xml:space="preserve">
+    <value>Создадим эскиз {0}</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingObsoleteTargetFileFormat" xml:space="preserve">
+    <value>Удалим устаревший архивный файл {0}</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingObsoleteThumbFormat" xml:space="preserve">
+    <value>Удалим устаревший эскиз {0}</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingTargetDirWoSourceFormat" xml:space="preserve">
+    <value>Удалим архивную папку отсутствующую в источнике {0} (с {1} подпапками and {2} файлами)</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingTargetFileWoSourceFormat" xml:space="preserve">
+    <value>Удалим архивный файл отсутствующий в источнике {0}</value>
+  </data>
+  <data name="Core_FileProcessor_ErrorFormat" xml:space="preserve">
+    <value>Ошибка: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_CreatedTargetDirsFormat" xml:space="preserve">
+    <value>Создано архивных папок: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_CreatedTargetFilesFormat" xml:space="preserve">
+    <value>Создано архивных фалов: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_CreatedTargetThumbsFormat" xml:space="preserve">
+    <value>Создано эскизов: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_ProcessedSourceDirsFormat" xml:space="preserve">
+    <value>Обработано исходных папок: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_ProcessedSourceFilesFormat" xml:space="preserve">
+    <value>Обработано исходных файлов: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat" xml:space="preserve">
+    <value>Удалено устаревших архивных файлов: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat" xml:space="preserve">
+    <value>Удалено устаревших эскизов: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedTargetDirsWoSourceFormat" xml:space="preserve">
+    <value>Удалено архивных каталогов отсутствующих в источнике: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat" xml:space="preserve">
+    <value>Удалено архивных файлов отсутствующих в источнике: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_NonEmptyTargetDirError" xml:space="preserve">
+    <value>Целевая папка должна быть пустой</value>
+  </data>
   <data name="Core_FileProcessor_NoSourceDirError" xml:space="preserve">
     <value>Source folder does not exist</value>
   </data>
+  <data name="Core_FileProcessor_PackingFileFormat" xml:space="preserve">
+    <value>Архивируем файл {0} в {1}</value>
+  </data>
+  <data name="Core_FileProcessor_SkipFigLeafDirFormat" xml:space="preserve">
+    <value>Пропускаем каталог программы {0}</value>
+  </data>
   <data name="Core_FileProcessor_Start" xml:space="preserve">
     <value>Поехали!</value>
+  </data>
+  <data name="Core_FileProcessor_UnpackingFileFormat" xml:space="preserve">
+    <value>Распаковываем файл {0} в {1}</value>
   </data>
   <data name="Core_PasswordRule_FileNameNumbersPlusPassword" xml:space="preserve">
     <value>Цифры из имени файла + базовый пароль</value>

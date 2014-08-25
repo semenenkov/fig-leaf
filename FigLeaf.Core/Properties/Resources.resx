@@ -156,7 +156,7 @@
   <data name="Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat" xml:space="preserve">
     <value>Removed target files without source: {0}</value>
   </data>
-  <data name="Core_FileProcessor_LogSum_SkipFigLeafDirFormat" xml:space="preserve">
+  <data name="Core_FileProcessor_SkipFigLeafDirFormat" xml:space="preserve">
     <value>Skip FigLeaf folder {0}</value>
   </data>
   <data name="Core_FileProcessor_NonEmptyTargetDirError" xml:space="preserve">
@@ -230,5 +230,29 @@
   </data>
   <data name="Ui_Thumbnails_Size" xml:space="preserve">
     <value>Size in pixels</value>
+  </data>
+  <data name="Core_FileProcessor_CreatingTargetDirFormat" xml:space="preserve">
+    <value>Creating target folder {0}</value>
+  </data>
+  <data name="Core_FileProcessor_CreatingThumbFormat" xml:space="preserve">
+    <value>Creating thumbnail file {0}</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingObsoleteTargetFileFormat" xml:space="preserve">
+    <value>Deleting obsolete target file {0}</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingObsoleteThumbFormat" xml:space="preserve">
+    <value>Deleting obsolete thumbnail file {0}</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingTargetDirWoSourceFormat" xml:space="preserve">
+    <value>Deleting target folder without source {0} (with {1} sub-folders and {2} files)</value>
+  </data>
+  <data name="Core_FileProcessor_DeletingTargetFileWoSourceFormat" xml:space="preserve">
+    <value>Deleting target file without source {0}</value>
+  </data>
+  <data name="Core_FileProcessor_PackingFileFormat" xml:space="preserve">
+    <value>Packing file {0} to {1}</value>
+  </data>
+  <data name="Core_FileProcessor_UnpackingFileFormat" xml:space="preserve">
+    <value>Unpacking file {0} to {1}</value>
   </data>
 </root>

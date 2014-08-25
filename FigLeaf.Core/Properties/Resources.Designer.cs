@@ -88,6 +88,60 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creating target folder {0}.
+        /// </summary>
+        public static string Core_FileProcessor_CreatingTargetDirFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_CreatingTargetDirFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating thumbnail file {0}.
+        /// </summary>
+        public static string Core_FileProcessor_CreatingThumbFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_CreatingThumbFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting obsolete target file {0}.
+        /// </summary>
+        public static string Core_FileProcessor_DeletingObsoleteTargetFileFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_DeletingObsoleteTargetFileFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting obsolete thumbnail file {0}.
+        /// </summary>
+        public static string Core_FileProcessor_DeletingObsoleteThumbFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_DeletingObsoleteThumbFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting target folder without source {0} (with {1} sub-folders and {2} files).
+        /// </summary>
+        public static string Core_FileProcessor_DeletingTargetDirWoSourceFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_DeletingTargetDirWoSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting target file without source {0}.
+        /// </summary>
+        public static string Core_FileProcessor_DeletingTargetFileWoSourceFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_DeletingTargetFileWoSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: {0}.
         /// </summary>
         public static string Core_FileProcessor_ErrorFormat {
@@ -178,15 +232,6 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Skip FigLeaf folder {0}.
-        /// </summary>
-        public static string Core_FileProcessor_LogSum_SkipFigLeafDirFormat {
-            get {
-                return ResourceManager.GetString("Core_FileProcessor_LogSum_SkipFigLeafDirFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Target dir must be empty.
         /// </summary>
         public static string Core_FileProcessor_NonEmptyTargetDirError {
@@ -205,11 +250,38 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Packing file {0} to {1}.
+        /// </summary>
+        public static string Core_FileProcessor_PackingFileFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_PackingFileFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip FigLeaf folder {0}.
+        /// </summary>
+        public static string Core_FileProcessor_SkipFigLeafDirFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_SkipFigLeafDirFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start file processing...
         /// </summary>
         public static string Core_FileProcessor_Start {
             get {
                 return ResourceManager.GetString("Core_FileProcessor_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unpacking file {0} to {1}.
+        /// </summary>
+        public static string Core_FileProcessor_UnpackingFileFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_UnpackingFileFormat", resourceCulture);
             }
         }
         
