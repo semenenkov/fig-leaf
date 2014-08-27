@@ -271,6 +271,6 @@
     <value>Restore</value>
   </data>
   <data name="Ui_Thumbnails_Enable" xml:space="preserve">
-    <value>Enable thumbnails</value>
+    <value>Generate thumbnails</value>
   </data>
 </root>

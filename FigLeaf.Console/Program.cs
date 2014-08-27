@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using FigLeaf.Core;
@@ -27,6 +26,7 @@ namespace FigLeaf.Console
 			try
 			{
 				var settings = Settings.ReadFromFile(false);
+				Utils.SetupCulture(settings);
 				if (settings == null)
 				{
 					logger.Log(false, string.Format(Core.Properties.Resources.Common_ErrorFormat, Core.Properties.Resources.Console_NoSettings));
@@ -49,6 +49,7 @@ namespace FigLeaf.Console
 			}
 
 #if DEBUG
+			System.Console.WriteLine("Press any key to close..");
 			System.Console.Read();
 #endif
 		}

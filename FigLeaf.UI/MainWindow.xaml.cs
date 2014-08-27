@@ -28,16 +28,7 @@ namespace FigLeaf.UI
 		public MainWindow()
 		{
 			Settings = Settings.ReadFromFile(true);
-			
-			try
-			{
-				CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
-			}
-			catch
-			{
-				Settings.Culture = CoreResources.Common_Culture;
-				CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
-			}
+			Utils.SetupCulture(Settings);
 
 			InitializeComponent();
 

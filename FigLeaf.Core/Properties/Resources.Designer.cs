@@ -502,7 +502,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable thumbnails.
+        ///   Looks up a localized string similar to Generate thumbnails.
         /// </summary>
         public static string Ui_Thumbnails_Enable {
             get {
