@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigLeaf.UI", "FigLeaf.UI\FigLeaf.UI.csproj", "{4BFF3960-0F64-4D83-92EB-AC54218706F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D4BA8856-B532-4940-8F46-300A06958532} = {D4BA8856-B532-4940-8F46-300A06958532}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigLeaf.Core", "FigLeaf.Core\FigLeaf.Core.csproj", "{07718E8E-3120-4C83-8E27-50E31DD45AB2}"
 EndProject
