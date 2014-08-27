@@ -9,20 +9,9 @@ namespace FigLeaf.Console
 	{
 		static void Main(string[] args)
 		{
-			string[] detailedLoggingArgs = new[] {"-l", "/l", "-log", "/log"};
+			var cmd = new CommandLineArgs(args);
+			var logger = new Logger(cmd.DetailedLogging);
 
-			bool argDetailedLogging = false;
-			string argUnpackFolder = null;
-
-			foreach (var arg in args)
-			{
-				if (detailedLoggingArgs.Any(a => string.Equals(a, arg, StringComparison.OrdinalIgnoreCase)))
-					argDetailedLogging = true;
-				else
-					argUnpackFolder = arg;
-			}
-
-			var logger = new Logger(argDetailedLogging);
 			try
 			{
 				var settings = Settings.ReadFromFile(false);
@@ -33,13 +22,36 @@ namespace FigLeaf.Console
 				}
 				else
 				{
-					foreach (DirPair dirPair in settings.Dirs)
+					if (string.IsNullOrEmpty(cmd.UnpackTarget))
 					{
-						var fileProcessor = new DirPairProcessor(dirPair, settings, logger);
-						if (argUnpackFolder == null)
+						foreach (DirPair dirPair in settings.Dirs)
+						{
+							var fileProcessor = new DirPairProcessor(dirPair, settings, logger);
 							fileProcessor.Pack(CancellationToken.None);
+						}
+					}
+					else
+					{
+						DirPair dirPair = null;
+						if (!string.IsNullOrEmpty(cmd.UnpackSource))
+						{
+							dirPair = settings.Dirs.FirstOrDefault(d => 
+								string.Equals(d.Target, cmd.UnpackSource, StringComparison.InvariantCultureIgnoreCase));
+						}
+						else if (settings.Dirs.Count == 1 || !settings.HasMultipleDirs)
+						{
+							dirPair = settings.Dirs[0];
+						}
+
+						if (dirPair == null)
+						{
+							logger.Log(false, Core.Properties.Resources.Console_RestoreSourceNotDefined);
+						}
 						else
-							fileProcessor.Unpack(argUnpackFolder, CancellationToken.None);
+						{
+							var fileProcessor = new DirPairProcessor(dirPair, settings, logger);
+							fileProcessor.Unpack(cmd.UnpackTarget, CancellationToken.None);
+						}
 					}
 				}
 			}

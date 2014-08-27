@@ -97,6 +97,15 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to define restore source.
+        /// </summary>
+        public static string Console_RestoreSourceNotDefined {
+            get {
+                return ResourceManager.GetString("Console_RestoreSourceNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created folder {0}.
         /// </summary>
         public static string Core_FileProcessor_CreatedDirFormat {
