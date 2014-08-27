@@ -9,9 +9,12 @@ namespace FigLeaf.Core
 {
 	public class DirPairProcessor
 	{
+		private const string ZipExt = ".zip";
+
 		private readonly string _sourceDirPath;
 		private readonly string _targetDirPath;
 		private readonly Zip _zip;
+		private readonly ArchiveNameRule _archiveNameRule;
 		private readonly Thumbnail _thumbnail;
 		private readonly ILogger _logger;
 
@@ -35,6 +38,8 @@ namespace FigLeaf.Core
 				_sourceDirPath = dirPair.Source;
 				_targetDirPath = dirPair.Target;
 				_zip = new Zip(settings.MasterPassword);
+				_archiveNameRule = settings.ArchiveNameRule;
+
 				if (settings.EnableThumbnails)
 					_thumbnail = new Thumbnail(settings, Console.WriteLine);
 
@@ -216,6 +221,8 @@ namespace FigLeaf.Core
 				return;
 
 			string targetFilePath = Path.Combine(targetDir.FullName, sourceFile.Name);
+			if (_archiveNameRule == ArchiveNameRule.AddZipExtension)
+				targetFilePath += ZipExt;
 			DateTime sourceFileTime = File.GetLastWriteTime(sourceFile.FullName);
 
 			// 1. If the same name exists 
@@ -297,13 +304,20 @@ namespace FigLeaf.Core
 			if (cancellationToken.IsCancellationRequested)
 				return;
 
+			if ((_archiveNameRule == ArchiveNameRule.AddZipExtension) && 
+				!sourceFile.Name.EndsWith(ZipExt, StringComparison.InvariantCultureIgnoreCase))
+				return;
+
 			string targetFilePath = Path.Combine(targetDir.FullName, sourceFile.Name);
-			DateTime sourceFileTime = File.GetLastWriteTime(sourceFile.FullName);
+			if (_archiveNameRule == ArchiveNameRule.AddZipExtension)
+				targetFilePath = targetFilePath.Substring(0, targetFilePath.Length - ZipExt.Length);
 
 			if (!_zip.Unpack(sourceFile.FullName, new FileInfo(targetFilePath))) 
 				return;
 
 			_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_UnpackingFileFormat, sourceFile.FullName, targetFilePath));
+			
+			DateTime sourceFileTime = File.GetLastWriteTime(sourceFile.FullName);
 			File.SetLastWriteTime(targetFilePath, sourceFileTime);
 			_createdFileCount++;
 		}

@@ -214,7 +214,7 @@
     <value>Target</value>
   </data>
   <data name="Ui_Security_Header" xml:space="preserve">
-    <value>Security</value>
+    <value>Archive</value>
   </data>
   <data name="Ui_Security_MasterPassword" xml:space="preserve">
     <value>Master password</value>
@@ -253,7 +253,7 @@
     <value>Packing file {0} to {1}</value>
   </data>
   <data name="Core_FileProcessor_UnpackingFileFormat" xml:space="preserve">
-    <value>Unpacking file {0} to {1}</value>
+    <value>Unpacked file {0} to {1}</value>
   </data>
   <data name="Core_ThumbErrorFormat" xml:space="preserve">
     <value>Failed to make thumbnail for the file {0}: {1}</value>
@@ -272,6 +272,15 @@
   </data>
   <data name="Console_RestoreSourceNotDefined" xml:space="preserve">
     <value>Failed to define restore source</value>
+  </data>
+  <data name="Core_ArchiveNameRule_AddZipExtension" xml:space="preserve">
+    <value>Add '.zip' extension to file name</value>
+  </data>
+  <data name="Core_ArchiveNameRule_KeepOriginal" xml:space="preserve">
+    <value>Keep original file name</value>
+  </data>
+  <data name="Ui_Security_ArchiveNameRule" xml:space="preserve">
+    <value>File name</value>
   </data>
   <data name="Ui_Thumbnails_Enable" xml:space="preserve">
     <value>Generate thumbnails</value>

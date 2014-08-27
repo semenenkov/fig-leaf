@@ -53,6 +53,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ArchiveNameRule.cs" />
     <Compile Include="DirPairProcessor.cs" />
     <Compile Include="DirPair.cs" />
     <Compile Include="ILogger.cs" />

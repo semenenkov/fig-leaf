@@ -106,6 +106,24 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add &apos;.zip&apos; extension to file name.
+        /// </summary>
+        public static string Core_ArchiveNameRule_AddZipExtension {
+            get {
+                return ResourceManager.GetString("Core_ArchiveNameRule_AddZipExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep original file name.
+        /// </summary>
+        public static string Core_ArchiveNameRule_KeepOriginal {
+            get {
+                return ResourceManager.GetString("Core_ArchiveNameRule_KeepOriginal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created folder {0}.
         /// </summary>
         public static string Core_FileProcessor_CreatedDirFormat {
@@ -295,7 +313,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unpacking file {0} to {1}.
+        ///   Looks up a localized string similar to Unpacked file {0} to {1}.
         /// </summary>
         public static string Core_FileProcessor_UnpackingFileFormat {
             get {
@@ -475,7 +493,16 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Security.
+        ///   Looks up a localized string similar to File name.
+        /// </summary>
+        public static string Ui_Security_ArchiveNameRule {
+            get {
+                return ResourceManager.GetString("Ui_Security_ArchiveNameRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive.
         /// </summary>
         public static string Ui_Security_Header {
             get {

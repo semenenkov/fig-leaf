@@ -170,6 +170,7 @@
                     <Grid.RowDefinitions >
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <Label Content="{x:Static CoreProperties:Resources.Ui_Security_MasterPassword}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0"/>
@@ -194,6 +195,16 @@
                         DisplayMemberPath="Description" 
                         HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
                         Grid.Column="1" Grid.Row="1">
+                    </ComboBox>
+
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Security_ArchiveNameRule}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"/>
+                    <ComboBox
+                        SelectedValue="{Binding Path=Settings.ArchiveNameRule, Mode=TwoWay}"
+                        SelectedValuePath="Value"
+                        ItemsSource="{Binding Source={UI:Enumeration {x:Type Core:ArchiveNameRule}}}"
+                        DisplayMemberPath="Description" 
+                        HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
+                        Grid.Column="1" Grid.Row="2">
                     </ComboBox>
                 </Grid>
             </GroupBox>

@@ -25,6 +25,8 @@ namespace FigLeaf.Core
 		public string MasterPassword { get; set; }
 		[DataMember]
 		public PasswordRule PasswordRule { get; set; }
+		[DataMember]
+		public ArchiveNameRule ArchiveNameRule { get; set; }
 
 		[DataMember]
 		public List<string> VideoExtensions { get; set; }
@@ -44,6 +46,7 @@ namespace FigLeaf.Core
 			HasMultipleDirs = false;
 			ExcludeFigLeafDir = true;
 			PasswordRule = PasswordRule.FileNameNumbersPlusPassword;
+			ArchiveNameRule = ArchiveNameRule.KeepOriginal;
 			EnableThumbnails = true;
 			ThumbnailSize = 128;
 			DetailedLogging = false;
