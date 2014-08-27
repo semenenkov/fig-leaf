@@ -104,9 +104,9 @@
 
                     <Button Content="{x:Static CoreProperties:Resources.Ui_Folders_Add}" HorizontalAlignment="Stretch" Height="24" Click="AddDir" Margin="0,0,9,0" 
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                    
-                    <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_HasMultiple}" 
-                        VerticalAlignment="Center" Margin="0,5" Grid.Column="1" Grid.Row="0" Name="chbMultipleFolders"/>
+
+                    <CheckBox IsChecked="{Binding Path=Settings.HasMultipleDirs, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_HasMultiple}" 
+                        VerticalAlignment="Center" Margin="0,5" Grid.Column="1" Grid.Row="0" Name="chbMultipleFolders" HorizontalAlignment="Right" Width="550"/>
 
                     <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Source}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
