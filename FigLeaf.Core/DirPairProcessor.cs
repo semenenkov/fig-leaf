@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace FigLeaf.Core
 {
-	public class BatchFileProcessor
+	public class DirPairProcessor
 	{
 		private readonly string _sourceDirPath;
 		private readonly string _targetDirPath;
@@ -26,25 +26,32 @@ namespace FigLeaf.Core
 		private int _removedTargetWithoutSourceDirCount;
 		private string _excludeFolder;
 
-		public BatchFileProcessor(ISettings settings, ILogger logger)
+		public DirPairProcessor(DirPair dirPair, Settings settings, ILogger logger)
 		{
-			_sourceDirPath = settings.SourceDir;
-			_targetDirPath = settings.TargetDir;
-			_zip = new Zip(settings.MasterPassword);
-			_thumbnail = new Thumbnail(settings, Console.WriteLine);
-			_logger = logger;
-
-			if (settings.ExcludeFigLeafDir)
+			try
 			{
-				string exePath = NormalizePath(Path.GetDirectoryName(Application.ExecutablePath));
-				string normalizedSourcePath = NormalizePath(_sourceDirPath);
-				if (exePath.StartsWith(normalizedSourcePath)) // is subfolder
-				{
-					_excludeFolder = exePath;
-				}
-			}
+				_sourceDirPath = dirPair.Source;
+				_targetDirPath = dirPair.Target;
+				_zip = new Zip(settings.MasterPassword);
+				_thumbnail = new Thumbnail(settings, Console.WriteLine);
+				_logger = logger;
 
-			_logger.Log(false, Properties.Resources.Core_FileProcessor_Start);
+				if (settings.ExcludeFigLeafDir)
+				{
+					string exePath = NormalizePath(Path.GetDirectoryName(Application.ExecutablePath));
+					string normalizedSourcePath = NormalizePath(_sourceDirPath);
+					if (exePath.StartsWith(normalizedSourcePath)) // is subfolder
+					{
+						_excludeFolder = exePath;
+					}
+				}
+
+				_logger.Log(false, Properties.Resources.Core_FileProcessor_Start);
+			}
+			catch (Exception e)
+			{
+				_logger.Log(false, string.Format(Properties.Resources.Common_ErrorFormat, e.Message));
+			}
 		}
 
 		public void Pack(CancellationToken cancellationToken)
@@ -69,7 +76,7 @@ namespace FigLeaf.Core
 			}
 			catch (Exception e)
 			{
-				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_ErrorFormat, e.Message));
+				_logger.Log(false, string.Format(Properties.Resources.Common_ErrorFormat, e.Message));
 			}
 		}
 
@@ -93,7 +100,7 @@ namespace FigLeaf.Core
 			}
 			catch (Exception e)
 			{
-				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_ErrorFormat, e.Message));
+				_logger.Log(false, string.Format(Properties.Resources.Common_ErrorFormat, e.Message));
 			}
 		}
 

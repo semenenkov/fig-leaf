@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using FigLeaf.Core;
@@ -25,16 +26,26 @@ namespace FigLeaf.Console
 			var logger = new Logger(argDetailedLogging);
 			try
 			{
-				var fileProcessor = new BatchFileProcessor(new AppConfigSettings(), logger);
-
-				if (argUnpackFolder == null)
-					fileProcessor.Pack(CancellationToken.None);
+				var settings = Settings.ReadFromFile(false);
+				if (settings == null)
+				{
+					logger.Log(false, string.Format(Core.Properties.Resources.Common_ErrorFormat, Core.Properties.Resources.Console_NoSettings));
+				}
 				else
-					fileProcessor.Unpack(argUnpackFolder, CancellationToken.None);
+				{
+					foreach (DirPair dirPair in settings.Dirs)
+					{
+						var fileProcessor = new DirPairProcessor(dirPair, settings, logger);
+						if (argUnpackFolder == null)
+							fileProcessor.Pack(CancellationToken.None);
+						else
+							fileProcessor.Unpack(argUnpackFolder, CancellationToken.None);
+					}
+				}
 			}
 			catch (Exception e)
 			{
-				logger.Log(false, "Error: " + e.Message);
+				logger.Log(false, string.Format(Core.Properties.Resources.Common_ErrorFormat, e.Message));
 			}
 
 #if DEBUG

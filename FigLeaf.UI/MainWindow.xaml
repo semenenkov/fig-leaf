@@ -5,15 +5,17 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" 
         xmlns:CoreProperties="clr-namespace:FigLeaf.Core.Properties;assembly=FigLeaf.Core" 
-        Title="Fig Leaf" Height="500" Width="600" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
+        Title="Fig Leaf" Height="500" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <UI:BoolToOppositeBoolConverter x:Key="OppositeConverter" />
+        <UI:OppositeBooleanValueConverter x:Key="OppositeBooleanValueConverter" />
+        <UI:OppositeBooleanToVisibilityConverter x:Key="OppositeBooleanToVisibilityConverter" />
+        <SolidColorBrush x:Key="BorderBrush" Color="#7CA512"/>
 
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
         <Style TargetType="{x:Type GroupBox}">
-            <Setter Property="BorderBrush" Value="#7CA512" />
+            <Setter Property="BorderBrush" Value="{StaticResource ResourceKey=BorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -59,6 +61,10 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
     </Window.Resources>
 
     <DockPanel LastChildFill="True" Name="LayoutRoot">
@@ -72,10 +78,10 @@
         <StackPanel Width="100" Visibility="Visible">
             <Image Source="Img/Leaf80.png" Margin="10" VerticalAlignment="Top" DockPanel.Dock="Top"/>
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="5">
-                <ToggleButton Click="SwitchLanguage" Tag="en-US" Background="Transparent" BorderBrush="#7CA512" ToolTip="English">
+                <ToggleButton Click="SwitchLanguage" Tag="en-US" Background="Transparent" BorderBrush="{StaticResource ResourceKey=BorderBrush}" ToolTip="English">
                     <Image Source="Img/en.png" Width="32"/>
                 </ToggleButton>
-                <ToggleButton Click="SwitchLanguage" Tag="ru-RU" Background="Transparent" BorderBrush="#7CA512" ToolTip="Русский">
+                <ToggleButton Click="SwitchLanguage" Tag="ru-RU" Background="Transparent" BorderBrush="{StaticResource ResourceKey=BorderBrush}" ToolTip="Русский">
                     <Image Source="Img/ru.png" Width="32"/>
                 </ToggleButton>
             </StackPanel>
@@ -86,31 +92,80 @@
             <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Folders_Header}" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition MinHeight="25"/>
+                        <RowDefinition MinHeight="25"/>
+                        <RowDefinition MinHeight="25"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Source}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" />
-                    <UI:FolderPicker Text="{Binding Path=Settings.SourceDir, Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
+                    <Button Content="{x:Static CoreProperties:Resources.Ui_Folders_Add}" HorizontalAlignment="Stretch" Height="24" Click="AddDir" Margin="0,0,9,0" 
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    
+                    <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_HasMultiple}" 
+                        VerticalAlignment="Center" Margin="0,5" Grid.Column="1" Grid.Row="0" Name="chbMultipleFolders"/>
 
-                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Target}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
-                    <UI:FolderPicker Text="{Binding Path=Settings.TargetDir, Mode=TwoWay}"  Grid.Column="1" Grid.Row="1"/>
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Source}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
+                    <UI:FolderPicker Text="{Binding Path=Settings.Dirs[0].Source, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
+
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Target}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
+                    <UI:FolderPicker Text="{Binding Path=Settings.Dirs[0].Target, Mode=TwoWay}"  Grid.Column="1" Grid.Row="2"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
 
                     <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_ExcludeFigLeafDir}" 
-                        VerticalAlignment="Center" Margin="0,5" Grid.Column="1" Grid.Row="2"/>
+                        VerticalAlignment="Center" Margin="0,5" Grid.Column="1" Grid.Row="3"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
+
+                    <DataGrid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Name="grDirs"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        ItemsSource="{Binding Settings.Dirs}" AutoGenerateColumns="False" RowHeight="26" BorderBrush="{StaticResource ResourceKey=BorderBrush}"
+                        VerticalGridLinesBrush="{StaticResource ResourceKey=BorderBrush}" HorizontalGridLinesBrush="{StaticResource ResourceKey=BorderBrush}"
+                        RowHeaderWidth="0" MaxHeight="155">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="*" Header="{x:Static CoreProperties:Resources.Ui_Folders_Source}">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <UI:FolderPicker Text="{Binding Source, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="*" Header="{x:Static CoreProperties:Resources.Ui_Folders_Target}">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <UI:FolderPicker Text="{Binding Target, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="20" Header="х">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="x" Click="DelDir"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="130" Header="{x:Static CoreProperties:Resources.Ui_Folders_RestoreHeader}">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{x:Static CoreProperties:Resources.Ui_Actions_RestoreTargetTo}" Click="RestoreTarget" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </GroupBox>
 
             <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Security_Header}" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition/>
@@ -146,8 +201,8 @@
             <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Thumbnails_Header}" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition/>
@@ -163,8 +218,8 @@
             <GroupBox Header="{x:Static CoreProperties:Resources.Ui_Actions_Header}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition/>
@@ -172,9 +227,10 @@
 
                     <StackPanel Grid.Column="0"  Margin="0,9,9,0">
                         <Button Content="{x:Static CoreProperties:Resources.Ui_Actions_UpdateTarget}" HorizontalAlignment="Stretch" Height="24" Click="UpdateTarget"/>
-                        <Button Content="{x:Static CoreProperties:Resources.Ui_Actions_RestoreTargetTo}" HorizontalAlignment="Stretch" Height="24" Click="RestoreTarget"/>
+                        <Button Content="{x:Static CoreProperties:Resources.Ui_Actions_RestoreTargetTo}" HorizontalAlignment="Stretch" Height="24" Click="RestoreTarget"
+                            Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
                         <UI:CancelButton Content="{x:Static CoreProperties:Resources.Ui_Actions_Cancel}" HorizontalAlignment="Stretch" Height="24" Click="CancelAction" 
-                                IsEnabled="{Binding ElementName=LayoutRoot, Path=IsEnabled, Converter={StaticResource OppositeConverter}}"/>
+                            IsEnabled="{Binding ElementName=LayoutRoot, Path=IsEnabled, Converter={StaticResource OppositeBooleanValueConverter}}"/>
                     </StackPanel>
 
                     <GroupBox Grid.Column="1" Margin="-5,0">
@@ -187,17 +243,8 @@
 
                         <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" Name="txtLog"/>
                     </GroupBox>
-
-
-                    <!--TextBox HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="0"/>
-                    <Button Content="..." HorizontalAlignment="Right" Width="25" Grid.Column="1" Grid.Row="0"/>
-
-                    <Label Content="Target folder" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
-                    <TextBox HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
-                    <Button Content="..." HorizontalAlignment="Right" Width="25" Grid.Column="1" Grid.Row="1"/-->
                 </Grid>
             </GroupBox>
-
         </DockPanel>
     </DockPanel>
 </Window>

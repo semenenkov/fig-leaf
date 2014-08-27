@@ -20,15 +20,24 @@ namespace FigLeaf.UI
 	/// </summary>
 	public partial class MainWindow : Window, ILogger
 	{
-		public ISettings Settings { get; set; }
+		public Settings Settings { get; set; }
 
 		private readonly ILogger _logger;
 		private CancellationTokenSource _cancellationTokenSource;
 
 		public MainWindow()
 		{
-			Settings = new AppConfigSettings();
-			CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+			Settings = Settings.ReadFromFile(true);
+			
+			try
+			{
+				CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+			}
+			catch
+			{
+				Settings.Culture = CoreResources.Common_Culture;
+				CoreResources.Culture = CultureInfo.GetCultureInfo(Settings.Culture);
+			}
 
 			InitializeComponent();
 
@@ -63,7 +72,27 @@ namespace FigLeaf.UI
 
 		private void WindowClosing(object sender, CancelEventArgs e)
 		{
-			Settings.Save();
+			Settings.SaveToFile();
+		}
+
+		private void AddDir(object sender, RoutedEventArgs e)
+		{
+			Settings.Dirs.Add(new DirPair(null, null));
+			grDirs.ItemsSource = null;
+			grDirs.ItemsSource = Settings.Dirs;
+		}
+
+		private void DelDir(object sender, RoutedEventArgs e)
+		{
+			if (Settings.Dirs.Count <= 1) return;
+
+			var dirPair = ((Button) sender).DataContext as DirPair;
+			if (dirPair == null)
+				return;
+
+			Settings.Dirs.Remove(dirPair);
+			grDirs.ItemsSource = null;
+			grDirs.ItemsSource = Settings.Dirs;
 		}
 
 		private void UpdateTarget(object sender, RoutedEventArgs e)
@@ -71,20 +100,43 @@ namespace FigLeaf.UI
 			LayoutRoot.IsEnabled = false;
 			_cancellationTokenSource = new CancellationTokenSource();
 			_logger.Reset();
-			var fileProcessor = new BatchFileProcessor(Settings, _logger);
 			Task.Factory
-				.StartNew(() => fileProcessor.Pack(_cancellationTokenSource.Token), _cancellationTokenSource.Token)
+				.StartNew(() =>
+					{
+						foreach (DirPair dirPair in Settings.Dirs)
+						{
+							var fileProcessor = new DirPairProcessor(dirPair, Settings, _logger);
+							fileProcessor.Pack(_cancellationTokenSource.Token);
+							if (_cancellationTokenSource.IsCancellationRequested)
+								break;
+						}
+					}, 
+					_cancellationTokenSource.Token
+				)
 				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
 		}
 
 		private void RestoreTarget(object sender, RoutedEventArgs e)
 		{
-			string targetPath;
+			if (Settings.Dirs.Count < 1) 
+				return;
 
+			DirPair dirPair = null;
+			if (grDirs.Visibility == Visibility.Visible)
+			{
+				dirPair = ((Button) sender).DataContext as DirPair;
+				if (dirPair == null) return;
+			}
+			else
+			{
+				dirPair = Settings.Dirs[0];
+			}
+
+			string targetPath;
 			using (var dlg = new WinForms.FolderBrowserDialog())
 			{
 				dlg.Description = CoreResources.Ui_Dialogs_RestoreTarget;
-				dlg.SelectedPath = Settings.SourceDir;
+				dlg.SelectedPath = dirPair.Source;
 				dlg.ShowNewFolderButton = true;
 
 				WinForms.DialogResult result = dlg.ShowDialog();
@@ -97,9 +149,14 @@ namespace FigLeaf.UI
 			LayoutRoot.IsEnabled = false;
 			_cancellationTokenSource = new CancellationTokenSource();
 			_logger.Reset();
-			var fileProcessor = new BatchFileProcessor(Settings, _logger);
 			Task.Factory
-				.StartNew(() => fileProcessor.Unpack(targetPath, _cancellationTokenSource.Token), _cancellationTokenSource.Token)
+				.StartNew(() =>
+					{
+						var fileProcessor = new DirPairProcessor(dirPair, Settings, _logger);
+						fileProcessor.Unpack(targetPath, _cancellationTokenSource.Token);
+					}
+					, _cancellationTokenSource.Token
+				)
 				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
 		}
 
@@ -138,7 +195,7 @@ namespace FigLeaf.UI
 				if (MessageBox.Show(question, null, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
 				{
 					Settings.Culture = cultureCode;
-					Settings.Save();
+					Settings.SaveToFile();
 					Process.Start(System.Windows.Forms.Application.ExecutablePath);
 					Application.Current.Shutdown();
 				}

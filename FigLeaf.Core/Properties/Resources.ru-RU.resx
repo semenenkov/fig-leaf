@@ -144,7 +144,7 @@
   <data name="Core_FileProcessor_DeletingTargetFileWoSourceFormat" xml:space="preserve">
     <value>Удалим архивный файл отсутствующий в источнике {0}</value>
   </data>
-  <data name="Core_FileProcessor_ErrorFormat" xml:space="preserve">
+  <data name="Common_ErrorFormat" xml:space="preserve">
     <value>Ошибка: {0}</value>
   </data>
   <data name="Core_FileProcessor_LogSum_CreatedTargetDirsFormat" xml:space="preserve">
@@ -257,5 +257,17 @@
   </data>
   <data name="Ui_Thumbnails_Size" xml:space="preserve">
     <value>Размер в пикселях</value>
+  </data>
+  <data name="Console_NoSettings" xml:space="preserve">
+    <value>Не найден файл настроек</value>
+  </data>
+  <data name="Ui_Folders_HasMultiple" xml:space="preserve">
+    <value>Задать несколько</value>
+  </data>
+  <data name="Ui_Folders_Add" xml:space="preserve">
+    <value>Добавить папку</value>
+  </data>
+  <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
+    <value>Восстановить</value>
   </data>
 </root>

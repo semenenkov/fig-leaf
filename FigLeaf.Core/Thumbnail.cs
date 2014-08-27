@@ -13,7 +13,7 @@ namespace FigLeaf.Core
 		private readonly List<string> _videoExts;
 		private readonly Action<string> _logger;
 
-		public Thumbnail(ISettings settings, Action<string> logger)
+		public Thumbnail(Settings settings, Action<string> logger)
 		{
 			_size = settings.ThumbnailSize;
 			_videoExts = settings.VideoExtensions;

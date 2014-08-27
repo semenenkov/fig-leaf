@@ -41,6 +41,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,10 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppConfigSettings.cs" />
-    <Compile Include="BatchFileProcessor.cs" />
+    <Compile Include="DirPairProcessor.cs" />
+    <Compile Include="DirPair.cs" />
     <Compile Include="ILogger.cs" />
-    <Compile Include="ISettings.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="PasswordRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

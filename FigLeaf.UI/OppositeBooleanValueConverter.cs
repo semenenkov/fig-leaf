@@ -6,7 +6,7 @@ using System.Windows.Data;
 
 namespace FigLeaf.UI
 {
-	public class BoolToOppositeBoolConverter : IValueConverter
+	public class OppositeBooleanValueConverter : IValueConverter
 	{
 		#region IValueConverter Members
 

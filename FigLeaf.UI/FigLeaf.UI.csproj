@@ -75,12 +75,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoolToOppositeBoolConverter.cs" />
+    <Compile Include="OppositeBooleanValueConverter.cs" />
     <Compile Include="CancelButton.cs" />
     <Compile Include="EnumerationExtension.cs" />
     <Compile Include="FolderPicker.xaml.cs">
       <DependentUpon>FolderPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OppositeBooleanToVisibilityConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

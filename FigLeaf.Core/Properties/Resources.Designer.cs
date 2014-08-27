@@ -70,11 +70,29 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: {0}.
+        /// </summary>
+        public static string Common_ErrorFormat {
+            get {
+                return ResourceManager.GetString("Common_ErrorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string Common_Language {
             get {
                 return ResourceManager.GetString("Common_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings file not found.
+        /// </summary>
+        public static string Console_NoSettings {
+            get {
+                return ResourceManager.GetString("Console_NoSettings", resourceCulture);
             }
         }
         
@@ -138,15 +156,6 @@ namespace FigLeaf.Core.Properties {
         public static string Core_FileProcessor_DeletingTargetFileWoSourceFormat {
             get {
                 return ResourceManager.GetString("Core_FileProcessor_DeletingTargetFileWoSourceFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error: {0}.
-        /// </summary>
-        public static string Core_FileProcessor_ErrorFormat {
-            get {
-                return ResourceManager.GetString("Core_FileProcessor_ErrorFormat", resourceCulture);
             }
         }
         
@@ -394,6 +403,15 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add folder.
+        /// </summary>
+        public static string Ui_Folders_Add {
+            get {
+                return ResourceManager.GetString("Ui_Folders_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclude FigLeaf folder.
         /// </summary>
         public static string Ui_Folders_ExcludeFigLeafDir {
@@ -403,11 +421,29 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Setup multiple folders.
+        /// </summary>
+        public static string Ui_Folders_HasMultiple {
+            get {
+                return ResourceManager.GetString("Ui_Folders_HasMultiple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Folders.
         /// </summary>
         public static string Ui_Folders_Header {
             get {
                 return ResourceManager.GetString("Ui_Folders_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        public static string Ui_Folders_RestoreHeader {
+            get {
+                return ResourceManager.GetString("Ui_Folders_RestoreHeader", resourceCulture);
             }
         }
         

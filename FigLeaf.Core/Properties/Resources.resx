@@ -126,7 +126,7 @@
   <data name="Core_FileProcessor_CreatedDirFormat" xml:space="preserve">
     <value>Created folder {0}</value>
   </data>
-  <data name="Core_FileProcessor_ErrorFormat" xml:space="preserve">
+  <data name="Common_ErrorFormat" xml:space="preserve">
     <value>Error: {0}</value>
   </data>
   <data name="Core_FileProcessor_LogSum_CreatedTargetDirsFormat" xml:space="preserve">
@@ -257,5 +257,17 @@
   </data>
   <data name="Core_ThumbErrorFormat" xml:space="preserve">
     <value>Failed to make thumbnail for the file {0}: {1}</value>
+  </data>
+  <data name="Console_NoSettings" xml:space="preserve">
+    <value>Settings file not found</value>
+  </data>
+  <data name="Ui_Folders_HasMultiple" xml:space="preserve">
+    <value>Setup multiple folders</value>
+  </data>
+  <data name="Ui_Folders_Add" xml:space="preserve">
+    <value>Add folder</value>
+  </data>
+  <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
+    <value>Restore</value>
   </data>
 </root>
