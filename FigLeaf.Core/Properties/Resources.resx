@@ -270,6 +270,9 @@
   <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
     <value>Restore</value>
   </data>
+  <data name="Common_AppTitle" xml:space="preserve">
+    <value>Fig Leaf</value>
+  </data>
   <data name="Console_RestoreSourceNotDefined" xml:space="preserve">
     <value>Failed to define restore source</value>
   </data>

@@ -5,7 +5,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" 
         xmlns:CoreProperties="clr-namespace:FigLeaf.Core.Properties;assembly=FigLeaf.Core" 
-        Title="Fig Leaf" Height="550" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
+        Title="{x:Static CoreProperties:Resources.Common_AppTitle}" Height="550" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

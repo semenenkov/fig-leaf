@@ -270,6 +270,9 @@
   <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
     <value>Восстановить</value>
   </data>
+  <data name="Common_AppTitle" xml:space="preserve">
+    <value>Фиговый лист</value>
+  </data>
   <data name="Console_RestoreSourceNotDefined" xml:space="preserve">
     <value>Не задан источник для восстановления</value>
   </data>
