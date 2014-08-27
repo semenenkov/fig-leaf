@@ -113,6 +113,7 @@ namespace FigLeaf.UI
 					}, 
 					_cancellationTokenSource.Token
 				)
+				.ContinueWith(LogErrorIfAny, TaskContinuationOptions.OnlyOnFaulted)
 				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
 		}
 
@@ -157,7 +158,13 @@ namespace FigLeaf.UI
 					}
 					, _cancellationTokenSource.Token
 				)
+				.ContinueWith(LogErrorIfAny, TaskContinuationOptions.OnlyOnFaulted)
 				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
+		}
+
+		private void LogErrorIfAny(Task o)
+		{
+			Dispatcher.Invoke(new Action(() => { if (o.Exception != null) _logger.Log(false, o.Exception.ToString()); }));
 		}
 
 		private void CancelAction(object sender, RoutedEventArgs e)
