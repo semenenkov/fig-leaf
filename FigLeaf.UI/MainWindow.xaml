@@ -118,9 +118,12 @@
                     <UI:FolderPicker Text="{Binding Path=Settings.Dirs[0].Target, Mode=TwoWay}"  Grid.Column="1" Grid.Row="2"
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
 
-                    <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_ExcludeFigLeafDir}" 
-                        VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3"
-                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}">
+                        <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_ExcludeFigLeafDir}" 
+                            VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <UI:QuestionTip VerticalAlignment="Center" Text="{x:Static CoreProperties:Resources.Ui_Folders_ExcludeFigLeafDir_Tip}"/>
+                    </StackPanel>
 
                     <DataGrid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Name="grDirs"
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -142,14 +145,19 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="20" Header="х">
+                            <DataGridTemplateColumn Width="28">
+                                <DataGridTemplateColumn.Header>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <UI:QuestionTip Text="{x:Static CoreProperties:Resources.Ui_Folders_Delete}"/>
+                                    </StackPanel>
+                                </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Content="x" Click="DelDir"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="130" Header="{x:Static CoreProperties:Resources.Ui_Folders_RestoreHeader}">
+                            <DataGridTemplateColumn Width="125" Header="{x:Static CoreProperties:Resources.Ui_Folders_RestoreHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Content="{x:Static CoreProperties:Resources.Ui_Actions_RestoreTargetTo}" Click="RestoreTarget" />

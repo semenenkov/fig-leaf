@@ -282,6 +282,13 @@
   <data name="Core_ArchiveNameRule_KeepOriginal" xml:space="preserve">
     <value>Сохранять оригинальное имя файла</value>
   </data>
+  <data name="Ui_Folders_Delete" xml:space="preserve">
+    <value>Удалить папку</value>
+  </data>
+  <data name="Ui_Folders_ExcludeFigLeafDir_Tip" xml:space="preserve">
+    <value>Вы можете раместить эту программу в одной из подпапок исходной папки.
+Если данная опция включена, данная подпапка не будет упакована.</value>
+  </data>
   <data name="Ui_Security_ArchiveNameRule" xml:space="preserve">
     <value>Имя файла</value>
   </data>

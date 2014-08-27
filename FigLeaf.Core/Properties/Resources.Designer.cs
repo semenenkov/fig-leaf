@@ -448,11 +448,30 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete folder.
+        /// </summary>
+        public static string Ui_Folders_Delete {
+            get {
+                return ResourceManager.GetString("Ui_Folders_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclude FigLeaf folder.
         /// </summary>
         public static string Ui_Folders_ExcludeFigLeafDir {
             get {
                 return ResourceManager.GetString("Ui_Folders_ExcludeFigLeafDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can store this program in some subfolder of your source folder.
+        ///With this option enabled, this subfolder will not be packed to the target..
+        /// </summary>
+        public static string Ui_Folders_ExcludeFigLeafDir_Tip {
+            get {
+                return ResourceManager.GetString("Ui_Folders_ExcludeFigLeafDir_Tip", resourceCulture);
             }
         }
         

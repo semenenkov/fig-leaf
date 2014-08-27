@@ -282,6 +282,13 @@
   <data name="Core_ArchiveNameRule_KeepOriginal" xml:space="preserve">
     <value>Keep original file name</value>
   </data>
+  <data name="Ui_Folders_Delete" xml:space="preserve">
+    <value>Delete folder</value>
+  </data>
+  <data name="Ui_Folders_ExcludeFigLeafDir_Tip" xml:space="preserve">
+    <value>You can store this program in some subfolder of your source folder.
+With this option enabled, this subfolder will not be packed to the target.</value>
+  </data>
   <data name="Ui_Security_ArchiveNameRule" xml:space="preserve">
     <value>File name</value>
   </data>
