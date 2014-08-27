@@ -270,4 +270,7 @@
   <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
     <value>Restore</value>
   </data>
+  <data name="Ui_Thumbnails_Enable" xml:space="preserve">
+    <value>Enable thumbnails</value>
+  </data>
 </root>

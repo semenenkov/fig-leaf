@@ -29,6 +29,8 @@ namespace FigLeaf.Core
 		[DataMember]
 		public List<string> VideoExtensions { get; set; }
 		[DataMember]
+		public bool EnableThumbnails { get; set; }
+		[DataMember]
 		public int ThumbnailSize { get; set; }
 
 		[DataMember]
@@ -42,6 +44,7 @@ namespace FigLeaf.Core
 			HasMultipleDirs = false;
 			ExcludeFigLeafDir = true;
 			PasswordRule = PasswordRule.FileNameNumbersPlusPassword;
+			EnableThumbnails = true;
 			ThumbnailSize = 128;
 			DetailedLogging = false;
 			Culture = "en-US";

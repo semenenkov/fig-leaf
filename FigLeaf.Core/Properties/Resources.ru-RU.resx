@@ -270,4 +270,7 @@
   <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
     <value>Восстановить</value>
   </data>
+  <data name="Ui_Thumbnails_Enable" xml:space="preserve">
+    <value>Генерировать эскизы</value>
+  </data>
 </root>

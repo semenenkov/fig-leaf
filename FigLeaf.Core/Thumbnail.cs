@@ -15,6 +15,9 @@ namespace FigLeaf.Core
 
 		public Thumbnail(Settings settings, Action<string> logger)
 		{
+			if (!settings.EnableThumbnails)
+				throw new ApplicationException("Trying to create thumbnail generator for disabled thumbnails option");
+
 			_size = settings.ThumbnailSize;
 			_videoExts = settings.VideoExtensions;
 			_logger = logger;

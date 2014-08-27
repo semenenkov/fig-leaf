@@ -28,13 +28,15 @@ namespace FigLeaf.Core
 
 		public DirPairProcessor(DirPair dirPair, Settings settings, ILogger logger)
 		{
+			_logger = logger;
+
 			try
 			{
 				_sourceDirPath = dirPair.Source;
 				_targetDirPath = dirPair.Target;
 				_zip = new Zip(settings.MasterPassword);
-				_thumbnail = new Thumbnail(settings, Console.WriteLine);
-				_logger = logger;
+				if (settings.EnableThumbnails)
+					_thumbnail = new Thumbnail(settings, Console.WriteLine);
 
 				if (settings.ExcludeFigLeafDir)
 				{
@@ -249,6 +251,9 @@ namespace FigLeaf.Core
 			// 2. target thumbnail exists
 			// - with different time - remove
 			// - with same time - skip file creation
+
+			if (_thumbnail == null)
+				return;
 
 			bool isVideo;
 			skipExisting = false;

@@ -5,7 +5,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" 
         xmlns:CoreProperties="clr-namespace:FigLeaf.Core.Properties;assembly=FigLeaf.Core" 
-        Title="Fig Leaf" Height="500" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
+        Title="Fig Leaf" Height="550" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -205,13 +205,17 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
-                        <RowDefinition/>
+                        <RowDefinition MinHeight="25"/>
+                        <RowDefinition MinHeight="25"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="{x:Static CoreProperties:Resources.Ui_Thumbnails_Size}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0"/>
+                    <CheckBox IsChecked="{Binding Path=Settings.EnableThumbnails, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Thumbnails_Enable}" 
+                        VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Name="chbEnableThumbs"/>
+
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Thumbnails_Size}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
                     <xctk:IntegerUpDown 
                         Value="{Binding Path=Settings.ThumbnailSize, Mode=TwoWay}"
-                        HorizontalAlignment="Left" Width="50" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" Minimum="16" Maximum="256"/>
+                        HorizontalAlignment="Left" Width="50" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" Minimum="16" Maximum="256"/>
                 </Grid>
             </GroupBox>
 
