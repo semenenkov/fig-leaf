@@ -46,7 +46,7 @@ namespace FigLeaf.Core
 			HasMultipleDirs = false;
 			ExcludeFigLeafDir = true;
 			PasswordRule = PasswordRule.FileNameNumbersPlusPassword;
-			ArchiveNameRule = ArchiveNameRule.KeepOriginal;
+			ArchiveNameRule = ArchiveNameRule.AddZipExtension;
 			EnableThumbnails = true;
 			ThumbnailSize = 128;
 			DetailedLogging = false;
