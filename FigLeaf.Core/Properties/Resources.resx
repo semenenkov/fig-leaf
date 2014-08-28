@@ -123,8 +123,8 @@
   <data name="Common_Language" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="Core_FileProcessor_CreatedDirFormat" xml:space="preserve">
-    <value>Created folder {0}</value>
+  <data name="Core_FileProcessor_CreateDirFormat" xml:space="preserve">
+    <value>Create folder {0}</value>
   </data>
   <data name="Common_ErrorFormat" xml:space="preserve">
     <value>Error: {0}</value>
@@ -165,8 +165,8 @@
   <data name="Core_FileProcessor_NoSourceDirError" xml:space="preserve">
     <value>Source folder does not exist</value>
   </data>
-  <data name="Core_FileProcessor_Start" xml:space="preserve">
-    <value>Start file processing..</value>
+  <data name="Core_FileProcessor_StartPackFormat" xml:space="preserve">
+    <value>Pack from {0} to {1} ..</value>
   </data>
   <data name="Core_PasswordRule_FileNameNumbersPlusPassword" xml:space="preserve">
     <value>File name numbers followed by master password</value>
@@ -190,10 +190,10 @@
     <value>Log</value>
   </data>
   <data name="Ui_Actions_RestoreTargetTo" xml:space="preserve">
-    <value>Restore target to ..</value>
+    <value>Unpack to ..</value>
   </data>
   <data name="Ui_Actions_UpdateTarget" xml:space="preserve">
-    <value>Update target</value>
+    <value>Pack</value>
   </data>
   <data name="Ui_Dialogs_RestoreTarget" xml:space="preserve">
     <value>Specify empty folder to unpack files</value>
@@ -231,29 +231,26 @@
   <data name="Ui_Thumbnails_Size" xml:space="preserve">
     <value>Size in pixels</value>
   </data>
-  <data name="Core_FileProcessor_CreatingTargetDirFormat" xml:space="preserve">
-    <value>Creating target folder {0}</value>
-  </data>
   <data name="Core_FileProcessor_CreatingThumbFormat" xml:space="preserve">
-    <value>Creating thumbnail file {0}</value>
+    <value>Create thumbnail file {0}</value>
   </data>
   <data name="Core_FileProcessor_DeletingObsoleteTargetFileFormat" xml:space="preserve">
-    <value>Deleting obsolete target file {0}</value>
+    <value>Delete obsolete target file {0}</value>
   </data>
   <data name="Core_FileProcessor_DeletingObsoleteThumbFormat" xml:space="preserve">
-    <value>Deleting obsolete thumbnail file {0}</value>
+    <value>Delete obsolete thumbnail file {0}</value>
   </data>
   <data name="Core_FileProcessor_DeletingTargetDirWoSourceFormat" xml:space="preserve">
-    <value>Deleting target folder without source {0} (with {1} sub-folders and {2} files)</value>
+    <value>Delete target folder without source {0} (with {1} sub-folders and {2} files)</value>
   </data>
   <data name="Core_FileProcessor_DeletingTargetFileWoSourceFormat" xml:space="preserve">
-    <value>Deleting target file without source {0}</value>
+    <value>Delete target file without source {0}</value>
   </data>
   <data name="Core_FileProcessor_PackingFileFormat" xml:space="preserve">
-    <value>Packing file {0} to {1}</value>
+    <value>Pack file {0} to {1}</value>
   </data>
   <data name="Core_FileProcessor_UnpackingFileFormat" xml:space="preserve">
-    <value>Unpacked file {0} to {1}</value>
+    <value>Unpack file {0} to {1}</value>
   </data>
   <data name="Core_ThumbErrorFormat" xml:space="preserve">
     <value>Failed to make thumbnail for the file {0}: {1}</value>
@@ -268,7 +265,7 @@
     <value>Add folder</value>
   </data>
   <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
-    <value>Restore</value>
+    <value>Unpack</value>
   </data>
   <data name="Common_AppTitle" xml:space="preserve">
     <value>Fig Leaf</value>
@@ -294,5 +291,8 @@ With this option enabled, this subfolder will not be packed to the target.</valu
   </data>
   <data name="Ui_Thumbnails_Enable" xml:space="preserve">
     <value>Generate thumbnails</value>
+  </data>
+  <data name="Core_FileProcessor_StartUnpackFormat" xml:space="preserve">
+    <value>Unpack from {0} to {1} ..</value>
   </data>
 </root>

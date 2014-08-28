@@ -52,8 +52,6 @@ namespace FigLeaf.Core
 						_excludeFolder = exePath;
 					}
 				}
-
-				_logger.Log(false, Properties.Resources.Core_FileProcessor_Start);
 			}
 			catch (Exception e)
 			{
@@ -63,6 +61,8 @@ namespace FigLeaf.Core
 
 		public void Pack(CancellationToken cancellationToken)
 		{
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_StartPackFormat, _sourceDirPath, _targetDirPath));
+
 			try
 			{
 				var sourceDir = new DirectoryInfo(_sourceDirPath);
@@ -73,13 +73,13 @@ namespace FigLeaf.Core
 
 				if (!targetDir.Exists)
 				{
-					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreatedDirFormat, _targetDirPath));
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreateDirFormat, _targetDirPath));
 					targetDir.Create();
 					_createdDirCount++;
 				}
 
 				ProcessDir(sourceDir, targetDir, true, PackFile, cancellationToken);
-				LogSummary();
+				LogSummary(true);
 			}
 			catch (Exception e)
 			{
@@ -89,6 +89,8 @@ namespace FigLeaf.Core
 
 		public void Unpack(string targetPath, CancellationToken cancellationToken)
 		{
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_StartUnpackFormat, _targetDirPath, targetPath));
+
 			try
 			{
 				var sourceDir = new DirectoryInfo(_targetDirPath);
@@ -103,7 +105,7 @@ namespace FigLeaf.Core
 					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NonEmptyTargetDirError);
 
 				ProcessDir(sourceDir, targetDir, false, UnpackFile, cancellationToken);
-				LogSummary();
+				LogSummary(false);
 			}
 			catch (Exception e)
 			{
@@ -111,17 +113,21 @@ namespace FigLeaf.Core
 			}
 		}
 
-		private void LogSummary()
+		private void LogSummary(bool isPack)
 		{
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_ProcessedSourceDirsFormat, _processedDirCount));
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_ProcessedSourceFilesFormat, _processedFileCount));
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetDirsFormat, _createdDirCount));
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetFilesFormat, _createdFileCount));
-			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetThumbsFormat, _createdThumbnailCount));
-			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat, _removedObsoleteFileCount));
-			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat, _removedObsoleteThumbnailCount));
-			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat, _removedTargetWithoutSourceFileCount));
-			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedTargetDirsWoSourceFormat, _removedTargetWithoutSourceDirCount));
+
+			if (isPack)
+			{
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetThumbsFormat, _createdThumbnailCount));
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat, _removedObsoleteFileCount));
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat, _removedObsoleteThumbnailCount));
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat, _removedTargetWithoutSourceFileCount));
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedTargetDirsWoSourceFormat, _removedTargetWithoutSourceDirCount));
+			}
 		}
 
 		private void ProcessDir(
@@ -180,7 +186,7 @@ namespace FigLeaf.Core
 				var targetSubDir = new DirectoryInfo(Path.Combine(targetDir.FullName, sourceSubDir.Name));
 				if (!targetSubDir.Exists)
 				{
-					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreatingTargetDirFormat, targetSubDir.FullName));
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreateDirFormat, targetSubDir.FullName));
 					targetSubDir.Create();
 					_createdDirCount++;
 				}

@@ -123,35 +123,32 @@
   <data name="Common_Language" xml:space="preserve">
     <value>Русский</value>
   </data>
-  <data name="Core_FileProcessor_CreatedDirFormat" xml:space="preserve">
-    <value>Создана папка {0}</value>
-  </data>
-  <data name="Core_FileProcessor_CreatingTargetDirFormat" xml:space="preserve">
-    <value>Создадим архивную папку {0}</value>
+  <data name="Core_FileProcessor_CreateDirFormat" xml:space="preserve">
+    <value>Создаем папку {0}</value>
   </data>
   <data name="Core_FileProcessor_CreatingThumbFormat" xml:space="preserve">
-    <value>Создадим эскиз {0}</value>
+    <value>Создаем эскиз {0}</value>
   </data>
   <data name="Core_FileProcessor_DeletingObsoleteTargetFileFormat" xml:space="preserve">
-    <value>Удалим устаревший архивный файл {0}</value>
+    <value>Удаляем устаревший архивный файл {0}</value>
   </data>
   <data name="Core_FileProcessor_DeletingObsoleteThumbFormat" xml:space="preserve">
-    <value>Удалим устаревший эскиз {0}</value>
+    <value>Удаляем устаревший эскиз {0}</value>
   </data>
   <data name="Core_FileProcessor_DeletingTargetDirWoSourceFormat" xml:space="preserve">
-    <value>Удалим архивную папку отсутствующую в источнике {0} (с {1} подпапками and {2} файлами)</value>
+    <value>Удаляем архивную папку отсутствующую в источнике {0} (с {1} подпапками and {2} файлами)</value>
   </data>
   <data name="Core_FileProcessor_DeletingTargetFileWoSourceFormat" xml:space="preserve">
-    <value>Удалим архивный файл отсутствующий в источнике {0}</value>
+    <value>Удаляем архивный файл отсутствующий в источнике {0}</value>
   </data>
   <data name="Common_ErrorFormat" xml:space="preserve">
     <value>Ошибка: {0}</value>
   </data>
   <data name="Core_FileProcessor_LogSum_CreatedTargetDirsFormat" xml:space="preserve">
-    <value>Создано архивных папок: {0}</value>
+    <value>Создано папок: {0}</value>
   </data>
   <data name="Core_FileProcessor_LogSum_CreatedTargetFilesFormat" xml:space="preserve">
-    <value>Создано архивных фалов: {0}</value>
+    <value>Создано фалов: {0}</value>
   </data>
   <data name="Core_FileProcessor_LogSum_CreatedTargetThumbsFormat" xml:space="preserve">
     <value>Создано эскизов: {0}</value>
@@ -178,19 +175,19 @@
     <value>Целевая папка должна быть пустой</value>
   </data>
   <data name="Core_FileProcessor_NoSourceDirError" xml:space="preserve">
-    <value>Source folder does not exist</value>
+    <value>Исходная папка не найдена</value>
   </data>
   <data name="Core_FileProcessor_PackingFileFormat" xml:space="preserve">
-    <value>Архивируем файл {0} в {1}</value>
+    <value>Упаковываем файл {0} в {1}</value>
   </data>
   <data name="Core_FileProcessor_SkipFigLeafDirFormat" xml:space="preserve">
     <value>Пропускаем каталог программы {0}</value>
   </data>
-  <data name="Core_FileProcessor_Start" xml:space="preserve">
-    <value>Поехали!</value>
+  <data name="Core_FileProcessor_StartPackFormat" xml:space="preserve">
+    <value>Упаковываем {0} в {1} ..</value>
   </data>
   <data name="Core_FileProcessor_UnpackingFileFormat" xml:space="preserve">
-    <value>Распакован файл {0} в {1}</value>
+    <value>Распаковываем файл {0} в {1}</value>
   </data>
   <data name="Core_PasswordRule_FileNameNumbersPlusPassword" xml:space="preserve">
     <value>Цифры из имени файла + базовый пароль</value>
@@ -217,10 +214,10 @@
     <value>Протокол</value>
   </data>
   <data name="Ui_Actions_RestoreTargetTo" xml:space="preserve">
-    <value>Восстановить ..</value>
+    <value>Распаковать в ..</value>
   </data>
   <data name="Ui_Actions_UpdateTarget" xml:space="preserve">
-    <value>Запустить</value>
+    <value>Упаковать</value>
   </data>
   <data name="Ui_Dialogs_RestoreTarget" xml:space="preserve">
     <value>Выберите пустую папку для восстановления файлов</value>
@@ -268,7 +265,7 @@
     <value>Добавить папку</value>
   </data>
   <data name="Ui_Folders_RestoreHeader" xml:space="preserve">
-    <value>Восстановить</value>
+    <value>Распаковать</value>
   </data>
   <data name="Common_AppTitle" xml:space="preserve">
     <value>Фиговый лист</value>
@@ -294,5 +291,8 @@
   </data>
   <data name="Ui_Thumbnails_Enable" xml:space="preserve">
     <value>Генерировать эскизы</value>
+  </data>
+  <data name="Core_FileProcessor_StartUnpackFormat" xml:space="preserve">
+    <value>Распаковываем {0} в {1} ..</value>
   </data>
 </root>

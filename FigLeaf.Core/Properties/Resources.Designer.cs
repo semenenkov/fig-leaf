@@ -133,25 +133,16 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created folder {0}.
+        ///   Looks up a localized string similar to Create folder {0}.
         /// </summary>
-        public static string Core_FileProcessor_CreatedDirFormat {
+        public static string Core_FileProcessor_CreateDirFormat {
             get {
-                return ResourceManager.GetString("Core_FileProcessor_CreatedDirFormat", resourceCulture);
+                return ResourceManager.GetString("Core_FileProcessor_CreateDirFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating target folder {0}.
-        /// </summary>
-        public static string Core_FileProcessor_CreatingTargetDirFormat {
-            get {
-                return ResourceManager.GetString("Core_FileProcessor_CreatingTargetDirFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Creating thumbnail file {0}.
+        ///   Looks up a localized string similar to Create thumbnail file {0}.
         /// </summary>
         public static string Core_FileProcessor_CreatingThumbFormat {
             get {
@@ -160,7 +151,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting obsolete target file {0}.
+        ///   Looks up a localized string similar to Delete obsolete target file {0}.
         /// </summary>
         public static string Core_FileProcessor_DeletingObsoleteTargetFileFormat {
             get {
@@ -169,7 +160,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting obsolete thumbnail file {0}.
+        ///   Looks up a localized string similar to Delete obsolete thumbnail file {0}.
         /// </summary>
         public static string Core_FileProcessor_DeletingObsoleteThumbFormat {
             get {
@@ -178,7 +169,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting target folder without source {0} (with {1} sub-folders and {2} files).
+        ///   Looks up a localized string similar to Delete target folder without source {0} (with {1} sub-folders and {2} files).
         /// </summary>
         public static string Core_FileProcessor_DeletingTargetDirWoSourceFormat {
             get {
@@ -187,7 +178,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting target file without source {0}.
+        ///   Looks up a localized string similar to Delete target file without source {0}.
         /// </summary>
         public static string Core_FileProcessor_DeletingTargetFileWoSourceFormat {
             get {
@@ -295,7 +286,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Packing file {0} to {1}.
+        ///   Looks up a localized string similar to Pack file {0} to {1}.
         /// </summary>
         public static string Core_FileProcessor_PackingFileFormat {
             get {
@@ -313,16 +304,25 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start file processing...
+        ///   Looks up a localized string similar to Pack from {0} to {1} ...
         /// </summary>
-        public static string Core_FileProcessor_Start {
+        public static string Core_FileProcessor_StartPackFormat {
             get {
-                return ResourceManager.GetString("Core_FileProcessor_Start", resourceCulture);
+                return ResourceManager.GetString("Core_FileProcessor_StartPackFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unpacked file {0} to {1}.
+        ///   Looks up a localized string similar to Unpack from {0} to {1} ...
+        /// </summary>
+        public static string Core_FileProcessor_StartUnpackFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_StartUnpackFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unpack file {0} to {1}.
         /// </summary>
         public static string Core_FileProcessor_UnpackingFileFormat {
             get {
@@ -403,7 +403,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restore target to ...
+        ///   Looks up a localized string similar to Unpack to ...
         /// </summary>
         public static string Ui_Actions_RestoreTargetTo {
             get {
@@ -412,7 +412,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update target.
+        ///   Looks up a localized string similar to Pack.
         /// </summary>
         public static string Ui_Actions_UpdateTarget {
             get {
@@ -494,7 +494,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restore.
+        ///   Looks up a localized string similar to Unpack.
         /// </summary>
         public static string Ui_Folders_RestoreHeader {
             get {
