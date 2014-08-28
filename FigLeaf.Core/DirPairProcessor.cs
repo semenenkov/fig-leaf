@@ -37,7 +37,7 @@ namespace FigLeaf.Core
 			{
 				_sourceDirPath = dirPair.Source;
 				_targetDirPath = dirPair.Target;
-				_zip = new Zip(settings.MasterPassword);
+				_zip = new Zip(settings.MasterPassword, settings.PasswordRule);
 				_archiveNameRule = settings.ArchiveNameRule;
 
 				if (settings.EnableThumbnails)

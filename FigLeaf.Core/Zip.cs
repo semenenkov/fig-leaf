@@ -9,10 +9,12 @@ namespace FigLeaf.Core
 	public class Zip
 	{
 		private readonly string _masterPassword;
+		private readonly PasswordRule _passwordRule;
 
-		public Zip(string masterPassword)
+		public Zip(string masterPassword, PasswordRule passwordRule)
 		{
 			_masterPassword = masterPassword;
+			_passwordRule = passwordRule;
 		}
 
 		public void Pack(FileInfo sourceFile, string targetPath)
@@ -40,16 +42,29 @@ namespace FigLeaf.Core
 
 		private string GetPassword(FileInfo file)
 		{
-			var sbPassword = new StringBuilder();
+			string fileNameNumbers = _passwordRule == PasswordRule.Password
+				? null
+				: GetFileNameNumbers(file.FullName);
 
-			string nameWithoutExt = Path.GetFileNameWithoutExtension(file.FullName);
+			switch (_passwordRule)
+			{
+				case PasswordRule.FileNameNumbersPlusPassword:
+					return fileNameNumbers + _masterPassword;
+				case PasswordRule.PasswordPlusFileNameNumbers:
+					return _masterPassword + fileNameNumbers;
+				default:
+					return _masterPassword;
+			}
+		}
+
+		private string GetFileNameNumbers(string fileName)
+		{
+			var sbResult = new StringBuilder();
+			string nameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 			foreach (char c in nameWithoutExt)
 				if (Char.IsDigit(c))
-					sbPassword.Append(c);
-
-			sbPassword.Append(_masterPassword);
-			
-			return sbPassword.ToString();
+					sbResult.Append(c);
+			return sbResult.ToString();
 		}
 	}
 }
