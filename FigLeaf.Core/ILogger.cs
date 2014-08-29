@@ -4,5 +4,6 @@
 	{
 		void Reset();
 		void Log(bool isDetail, string message);
+		void LogProgress();
 	}
 }

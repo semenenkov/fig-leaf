@@ -60,6 +60,20 @@ namespace FigLeaf.UI
 				txtLog.ScrollToEnd();
 			}));
 		}
+
+
+		public void LogProgress()
+		{
+			if (Settings.DetailedLogging)
+				return;
+
+			Dispatcher.Invoke(new Action(() =>
+			{
+				txtLog.Text = txtLog.Text + '.';
+				txtLog.CaretIndex = txtLog.Text.Length;
+				txtLog.ScrollToEnd();
+			}));
+		}
 		#endregion
 
 		private void WindowClosing(object sender, CancelEventArgs e)

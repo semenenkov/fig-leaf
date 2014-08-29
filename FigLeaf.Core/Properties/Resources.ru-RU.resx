@@ -184,7 +184,7 @@
     <value>Пропускаем каталог программы {0}</value>
   </data>
   <data name="Core_FileProcessor_StartPackFormat" xml:space="preserve">
-    <value>Упаковываем {0} в {1} ..</value>
+    <value>Упаковываем {0} в {1}</value>
   </data>
   <data name="Core_FileProcessor_UnpackingFileFormat" xml:space="preserve">
     <value>Распаковываем файл {0} в {1}</value>
@@ -293,7 +293,7 @@
     <value>Генерировать эскизы</value>
   </data>
   <data name="Core_FileProcessor_StartUnpackFormat" xml:space="preserve">
-    <value>Распаковываем {0} в {1} ..</value>
+    <value>Распаковываем {0} в {1}</value>
   </data>
   <data name="Console_ConfirmDeleteFormat" xml:space="preserve">
     <value>В целевой папке обнаружен файл или папка отсутствующие в источнике:

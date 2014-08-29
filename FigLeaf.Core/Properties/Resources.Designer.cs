@@ -324,7 +324,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pack from {0} to {1} ...
+        ///   Looks up a localized string similar to Pack from {0} to {1}.
         /// </summary>
         public static string Core_FileProcessor_StartPackFormat {
             get {
@@ -333,7 +333,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unpack from {0} to {1} ...
+        ///   Looks up a localized string similar to Unpack from {0} to {1}.
         /// </summary>
         public static string Core_FileProcessor_StartUnpackFormat {
             get {

@@ -263,6 +263,7 @@ namespace FigLeaf.Core
 				_zip.Pack(sourceFile, targetFilePath);
 				File.SetLastWriteTime(targetFilePath, sourceFileTime);
 				_createdFileCount++;
+				_logger.LogProgress();
 			}
 
 			targetValidFileNames.Add(Path.GetFileName(targetFilePath));
@@ -332,6 +333,7 @@ namespace FigLeaf.Core
 			DateTime sourceFileTime = File.GetLastWriteTime(sourceFile.FullName);
 			File.SetLastWriteTime(targetFilePath, sourceFileTime);
 			_createdFileCount++;
+			_logger.LogProgress();
 		}
 
 		private static string NormalizePath(string path)

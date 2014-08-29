@@ -166,7 +166,7 @@
     <value>Source folder does not exist</value>
   </data>
   <data name="Core_FileProcessor_StartPackFormat" xml:space="preserve">
-    <value>Pack from {0} to {1} ..</value>
+    <value>Pack from {0} to {1}</value>
   </data>
   <data name="Core_PasswordRule_FileNameNumbersPlusPassword" xml:space="preserve">
     <value>File name numbers followed by master password</value>
@@ -293,7 +293,7 @@ With this option enabled, this subfolder will not be packed to the target.</valu
     <value>Generate thumbnails</value>
   </data>
   <data name="Core_FileProcessor_StartUnpackFormat" xml:space="preserve">
-    <value>Unpack from {0} to {1} ..</value>
+    <value>Unpack from {0} to {1}</value>
   </data>
   <data name="Console_ConfirmDeleteFormat" xml:space="preserve">
     <value>There is a target file/folder that does not exist in source:

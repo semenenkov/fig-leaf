@@ -271,7 +271,7 @@
                             </StackPanel>
                         </GroupBox.Header>
 
-                        <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" Name="txtLog"/>
+                        <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" Name="txtLog" TextWrapping="Wrap"/>
                     </GroupBox>
                 </Grid>
             </GroupBox>
