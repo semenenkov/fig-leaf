@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using FigLeaf.Core;
@@ -24,10 +25,13 @@ namespace FigLeaf.Console
 				{
 					if (string.IsNullOrEmpty(cmd.UnpackTarget))
 					{
-						foreach (DirPair dirPair in settings.Dirs)
+						IEnumerable<DirPair> dirPairs = settings.HasMultipleDirs
+							? settings.Dirs
+							: settings.Dirs.Take(1);
+						foreach (DirPair dirPair in dirPairs)
 						{
 							var fileProcessor = new DirPairProcessor(dirPair, settings, logger);
-							fileProcessor.Pack(CancellationToken.None);
+							fileProcessor.Pack(CancellationToken.None, GetCleanTargetConfirm(settings.ConfirmDelete));
 						}
 					}
 					else
@@ -64,6 +68,21 @@ namespace FigLeaf.Console
 			System.Console.WriteLine("Press any key to close..");
 			System.Console.Read();
 #endif
+		}
+
+		private static Func<string, bool> GetCleanTargetConfirm(bool confirmDelete)
+		{
+			if (!confirmDelete)
+				return (s) => true;
+
+			return GetCleanTargetCosoleConfirm;
+		}
+
+		private static bool GetCleanTargetCosoleConfirm(string path)
+		{
+			System.Console.Write(Core.Properties.Resources.Console_ConfirmDeleteFormat, path);
+			string result = System.Console.ReadLine();
+			return string.Equals(result, "y", StringComparison.InvariantCultureIgnoreCase);
 		}
 	}
 }

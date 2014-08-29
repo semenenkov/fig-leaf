@@ -20,6 +20,8 @@ namespace FigLeaf.Core
 		public bool HasMultipleDirs { get; set; }
 		[DataMember]
 		public bool ExcludeFigLeafDir { get; set; }
+		[DataMember]
+		public bool ConfirmDelete { get; set; }
 
 		[DataMember]
 		public string MasterPassword { get; set; }
@@ -43,6 +45,7 @@ namespace FigLeaf.Core
 
 		public Settings()
 		{
+			ConfirmDelete = true;
 			HasMultipleDirs = false;
 			ExcludeFigLeafDir = true;
 			PasswordRule = PasswordRule.FileNameNumbersPlusPassword;

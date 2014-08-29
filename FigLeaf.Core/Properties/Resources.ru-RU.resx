@@ -295,4 +295,26 @@
   <data name="Core_FileProcessor_StartUnpackFormat" xml:space="preserve">
     <value>Распаковываем {0} в {1} ..</value>
   </data>
+  <data name="Console_ConfirmDeleteFormat" xml:space="preserve">
+    <value>В целевой папке обнаружен файл или папка отсутствующие в источнике:
+{0}
+Удалить ее и остальные такие же файлы и папки (напечатайте латинскую 'Y') или прервать операцию упаковки (напечатайте 'N')?</value>
+  </data>
+  <data name="Core_FileProcessor_Cancel" xml:space="preserve">
+    <value>Операция отменена</value>
+  </data>
+  <data name="Ui_ConfirmDeleteFormat" xml:space="preserve">
+    <value>В целевой папке обнаружен файл или папка отсутствующие в источнике:
+{0}
+Удалить ее и остальные такие же файлы и папки (Да) или прервать операцию упаковки (Нет)?</value>
+  </data>
+  <data name="Ui_Folders_ConfirmDelete" xml:space="preserve">
+    <value>Подтверждать удаление файлов и каталогов</value>
+  </data>
+  <data name="Ui_Folders_ConfirmDelete_Tip" xml:space="preserve">
+    <value>Во время упаковки структура целевой папки будет синхронизирована со структурой исходной папки.
+Если в целевой папке есть файлы/папки которые отсутствуют в исходной - они должны быть удалены.
+Включите данную опцию чтобы исключить непреднамеренное удаление файлов.
+</value>
+  </data>
 </root>

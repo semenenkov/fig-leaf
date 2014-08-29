@@ -295,4 +295,26 @@ With this option enabled, this subfolder will not be packed to the target.</valu
   <data name="Core_FileProcessor_StartUnpackFormat" xml:space="preserve">
     <value>Unpack from {0} to {1} ..</value>
   </data>
+  <data name="Console_ConfirmDeleteFormat" xml:space="preserve">
+    <value>There is a target file/folder that does not exist in source:
+{0}
+Delete it and all such files and folders (type 'Y') or cancel Pack operation (type 'N')?</value>
+  </data>
+  <data name="Core_FileProcessor_Cancel" xml:space="preserve">
+    <value>Operation cancelled</value>
+  </data>
+  <data name="Ui_ConfirmDeleteFormat" xml:space="preserve">
+    <value>There is a target file/folder that does not exist in source:
+{0}
+Delete it and all such files and folders (Yes) or cancel Pack operation (No)?</value>
+  </data>
+  <data name="Ui_Folders_ConfirmDelete" xml:space="preserve">
+    <value>Confirm target files &amp; folders deletion</value>
+  </data>
+  <data name="Ui_Folders_ConfirmDelete_Tip" xml:space="preserve">
+    <value>During the Pack target folder(s) structure will be synced with the source.
+If some files/folders does not exist in the source - they needs to be deleted.
+Enable this option to prevent unintended deletion that can be made by mistake.
+</value>
+  </data>
 </root>

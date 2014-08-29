@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -94,10 +95,13 @@ namespace FigLeaf.UI
 			Task.Factory
 				.StartNew(() =>
 					{
-						foreach (DirPair dirPair in Settings.Dirs)
+						IEnumerable<DirPair> dirPairs = Settings.HasMultipleDirs
+							? Settings.Dirs
+							: Settings.Dirs.Take(1);
+						foreach (DirPair dirPair in dirPairs)
 						{
 							var fileProcessor = new DirPairProcessor(dirPair, Settings, _logger);
-							fileProcessor.Pack(_cancellationTokenSource.Token);
+							fileProcessor.Pack(_cancellationTokenSource.Token, GetCleanTargetConfirm(Settings.ConfirmDelete));
 							if (_cancellationTokenSource.IsCancellationRequested)
 								break;
 						}
@@ -106,6 +110,21 @@ namespace FigLeaf.UI
 				)
 				.ContinueWith(LogErrorIfAny, TaskContinuationOptions.OnlyOnFaulted)
 				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
+		}
+
+		private static Func<string, bool> GetCleanTargetConfirm(bool confirmDelete)
+		{
+			if (!confirmDelete)
+				return (s) => true;
+
+			return GetCleanTargetUiConfirm;
+		}
+
+		private static bool GetCleanTargetUiConfirm(string path)
+		{
+			return MessageBox.Show(
+				string.Format(Core.Properties.Resources.Ui_ConfirmDeleteFormat, path),
+				string.Empty, MessageBoxButton.YesNo) == MessageBoxResult.Yes;
 		}
 
 		private void RestoreTarget(object sender, RoutedEventArgs e)

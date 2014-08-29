@@ -97,6 +97,17 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is a target file/folder that does not exist in source:
+        ///{0}
+        ///Delete it and all such files and folders (type &apos;Y&apos;) or cancel Pack operation (type &apos;N&apos;)?.
+        /// </summary>
+        public static string Console_ConfirmDeleteFormat {
+            get {
+                return ResourceManager.GetString("Console_ConfirmDeleteFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings file not found.
         /// </summary>
         public static string Console_NoSettings {
@@ -129,6 +140,15 @@ namespace FigLeaf.Core.Properties {
         public static string Core_ArchiveNameRule_KeepOriginal {
             get {
                 return ResourceManager.GetString("Core_ArchiveNameRule_KeepOriginal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation cancelled.
+        /// </summary>
+        public static string Core_FileProcessor_Cancel {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_Cancel", resourceCulture);
             }
         }
         
@@ -421,6 +441,17 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is a target file/folder that does not exist in source:
+        ///{0}
+        ///Delete it and all such files and folders (Yes) or cancel Pack operation (No)?.
+        /// </summary>
+        public static string Ui_ConfirmDeleteFormat {
+            get {
+                return ResourceManager.GetString("Ui_ConfirmDeleteFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify empty folder to unpack files.
         /// </summary>
         public static string Ui_Dialogs_RestoreTarget {
@@ -444,6 +475,27 @@ namespace FigLeaf.Core.Properties {
         public static string Ui_Folders_Add {
             get {
                 return ResourceManager.GetString("Ui_Folders_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm target files &amp; folders deletion.
+        /// </summary>
+        public static string Ui_Folders_ConfirmDelete {
+            get {
+                return ResourceManager.GetString("Ui_Folders_ConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to During the Pack target folder(s) structure will be synced with the source.
+        ///If some files/folders does not exist in the source - they needs to be deleted.
+        ///Enable this option to prevent unintended deletion that can be made by mistake.
+        ///.
+        /// </summary>
+        public static string Ui_Folders_ConfirmDelete_Tip {
+            get {
+                return ResourceManager.GetString("Ui_Folders_ConfirmDelete_Tip", resourceCulture);
             }
         }
         

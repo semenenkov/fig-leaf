@@ -5,7 +5,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" 
         xmlns:CoreProperties="clr-namespace:FigLeaf.Core.Properties;assembly=FigLeaf.Core" 
-        Title="{x:Static CoreProperties:Resources.Common_AppTitle}" Height="550" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
+        Title="{x:Static CoreProperties:Resources.Common_AppTitle}" Height="600" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -100,32 +100,39 @@
                         <RowDefinition MinHeight="25"/>
                         <RowDefinition MinHeight="25"/>
                         <RowDefinition MinHeight="25"/>
+                        <RowDefinition MinHeight="25"/>
                     </Grid.RowDefinitions>
 
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
+                        <CheckBox IsChecked="{Binding Path=Settings.ConfirmDelete, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_ConfirmDelete}" 
+                            VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <UI:QuestionTip VerticalAlignment="Center" Text="{x:Static CoreProperties:Resources.Ui_Folders_ConfirmDelete_Tip}"/>
+                    </StackPanel>
+
                     <Button Content="{x:Static CoreProperties:Resources.Ui_Folders_Add}" HorizontalAlignment="Stretch" Height="24" Click="AddDir" Margin="0,0,9,0" 
-                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1"/>
 
                     <CheckBox IsChecked="{Binding Path=Settings.HasMultipleDirs, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_HasMultiple}" 
-                        VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Name="chbMultipleFolders"/>
+                        VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Name="chbMultipleFolders"/>
 
-                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Source}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Source}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
-                    <UI:FolderPicker Text="{Binding Path=Settings.Dirs[0].Source, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"
-                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
-
-                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Target}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"
-                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
-                    <UI:FolderPicker Text="{Binding Path=Settings.Dirs[0].Target, Mode=TwoWay}"  Grid.Column="1" Grid.Row="2"
+                    <UI:FolderPicker Text="{Binding Path=Settings.Dirs[0].Source, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
 
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3"
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Folders_Target}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
+                    <UI:FolderPicker Text="{Binding Path=Settings.Dirs[0].Target, Mode=TwoWay}"  Grid.Column="1" Grid.Row="3"
+                        Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4"
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource OppositeBooleanToVisibilityConverter}}">
                         <CheckBox IsChecked="{Binding Path=Settings.ExcludeFigLeafDir, Mode=TwoWay}" Content="{x:Static CoreProperties:Resources.Ui_Folders_ExcludeFigLeafDir}" 
                             VerticalAlignment="Center" HorizontalAlignment="Left" />
                         <UI:QuestionTip VerticalAlignment="Center" Text="{x:Static CoreProperties:Resources.Ui_Folders_ExcludeFigLeafDir_Tip}"/>
                     </StackPanel>
 
-                    <DataGrid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Name="grDirs"
+                    <DataGrid Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Name="grDirs"
                         Visibility="{Binding IsChecked, ElementName=chbMultipleFolders, Converter={StaticResource BooleanToVisibilityConverter}}"
                         ItemsSource="{Binding Settings.Dirs}" AutoGenerateColumns="False" RowHeight="26" BorderBrush="{StaticResource ResourceKey=BorderBrush}"
                         VerticalGridLinesBrush="{StaticResource ResourceKey=BorderBrush}" HorizontalGridLinesBrush="{StaticResource ResourceKey=BorderBrush}"

@@ -59,7 +59,7 @@ namespace FigLeaf.Core
 			}
 		}
 
-		public void Pack(CancellationToken cancellationToken)
+		public void Pack(CancellationToken cancellationToken, Func<string, bool> cleanTargetConfirm)
 		{
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_StartPackFormat, _sourceDirPath, _targetDirPath));
 
@@ -78,7 +78,7 @@ namespace FigLeaf.Core
 					_createdDirCount++;
 				}
 
-				ProcessDir(sourceDir, targetDir, true, PackFile, cancellationToken);
+				ProcessDir(sourceDir, targetDir, cleanTargetConfirm, PackFile, cancellationToken);
 				LogSummary(true);
 			}
 			catch (Exception e)
@@ -104,7 +104,7 @@ namespace FigLeaf.Core
 				else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
 					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NonEmptyTargetDirError);
 
-				ProcessDir(sourceDir, targetDir, false, UnpackFile, cancellationToken);
+				ProcessDir(sourceDir, targetDir, null, UnpackFile, cancellationToken);
 				LogSummary(false);
 			}
 			catch (Exception e)
@@ -133,7 +133,7 @@ namespace FigLeaf.Core
 		private void ProcessDir(
 			DirectoryInfo sourceDir, 
 			DirectoryInfo targetDir, 
-			bool cleanTarget,
+			Func<string, bool> cleanTargetConfirm,
 			Action<FileInfo, DirectoryInfo, HashSet<string>, CancellationToken> processFile,
 			CancellationToken cancellationToken)
 		{
@@ -163,12 +163,15 @@ namespace FigLeaf.Core
 			}
 
 			// 2. remove unexisting target files
-			if (cleanTarget)
+			if (cleanTargetConfirm != null)
 			{
 				foreach (var targetFile in targetDir.GetFiles())
 				{
 					if (!targetValidFileNames.Contains(targetFile.Name))
 					{
+						if (!cleanTargetConfirm(targetFile.FullName))
+							throw new ApplicationException(Properties.Resources.Core_FileProcessor_Cancel);
+
 						_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_DeletingTargetFileWoSourceFormat, targetFile.Name));
 						targetFile.Delete();
 						_removedTargetWithoutSourceFileCount++;
@@ -191,19 +194,22 @@ namespace FigLeaf.Core
 					_createdDirCount++;
 				}
 
-				ProcessDir(sourceSubDir, targetSubDir, cleanTarget, processFile, cancellationToken);
+				ProcessDir(sourceSubDir, targetSubDir, cleanTargetConfirm, processFile, cancellationToken);
 			}
 
 			if (cancellationToken.IsCancellationRequested)
 				return;
 
 			// 4. remove unexisting target dirs
-			if (cleanTarget)
+			if (cleanTargetConfirm != null)
 			{
 				foreach (var targetSubDir in targetDir.GetDirectories())
 				{
 					if (subDirs.All(d => d.Name != targetSubDir.Name))
 					{
+						if (!cleanTargetConfirm(targetSubDir.FullName))
+							throw new ApplicationException(Properties.Resources.Core_FileProcessor_Cancel);
+
 						int filesToRemove = targetSubDir.GetFiles(".", SearchOption.AllDirectories).Length;
 						int dirsToRemove = targetSubDir.GetDirectories("*.*", SearchOption.AllDirectories).Length;
 						_logger.Log(true, string.Format(
