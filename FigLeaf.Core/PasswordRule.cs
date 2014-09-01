@@ -9,6 +9,8 @@ namespace FigLeaf.Core
 		[Description("Core_PasswordRule_Password")]
 		Password,
 		[Description("Core_PasswordRule_PasswordPlusFileNameNumbers")]
-		PasswordPlusFileNameNumbers
-    }
+		PasswordPlusFileNameNumbers,
+		[Description("Core_PasswordRule_Custom")]
+		Custom,
+	}
 }

@@ -317,4 +317,7 @@ If some files/folders does not exist in the source - they needs to be deleted.
 Enable this option to prevent unintended deletion that can be made by mistake.
 </value>
   </data>
+  <data name="Core_PasswordRule_Custom" xml:space="preserve">
+    <value>Custom rule</value>
+  </data>
 </root>

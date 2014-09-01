@@ -317,4 +317,7 @@
 Включите данную опцию чтобы исключить непреднамеренное удаление файлов.
 </value>
   </data>
+  <data name="Core_PasswordRule_Custom" xml:space="preserve">
+    <value>Задать свое правило</value>
+  </data>
 </root>

@@ -351,6 +351,15 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom rule.
+        /// </summary>
+        public static string Core_PasswordRule_Custom {
+            get {
+                return ResourceManager.GetString("Core_PasswordRule_Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File name numbers followed by master password.
         /// </summary>
         public static string Core_PasswordRule_FileNameNumbersPlusPassword {
