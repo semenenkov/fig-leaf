@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AD25DB
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigLeaf.Core.UnitTest", "FigLeaf.Core.UnitTest\FigLeaf.Core.UnitTest.csproj", "{B5605917-35C1-44CD-9913-372FE407F483}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{D4BA8856-B532-4940-8F46-300A06958532}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4BA8856-B532-4940-8F46-300A06958532}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4BA8856-B532-4940-8F46-300A06958532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5605917-35C1-44CD-9913-372FE407F483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5605917-35C1-44CD-9913-372FE407F483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5605917-35C1-44CD-9913-372FE407F483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5605917-35C1-44CD-9913-372FE407F483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
