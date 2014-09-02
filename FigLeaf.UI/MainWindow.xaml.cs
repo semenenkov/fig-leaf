@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using WinForms = System.Windows.Forms;
+
+using Ookii.Dialogs.Wpf;
 
 using FigLeaf.Core;
 using CoreResources = FigLeaf.Core.Properties.Resources;
@@ -157,19 +158,16 @@ namespace FigLeaf.UI
 				dirPair = Settings.Dirs[0];
 			}
 
-			string targetPath;
-			using (var dlg = new WinForms.FolderBrowserDialog())
-			{
-				dlg.Description = CoreResources.Ui_Dialogs_RestoreTarget;
-				dlg.SelectedPath = dirPair.Source;
-				dlg.ShowNewFolderButton = true;
+			var dlg = new VistaFolderBrowserDialog();
+			dlg.Description = CoreResources.Ui_Dialogs_RestoreTarget;
+			dlg.SelectedPath = dirPair.Source;
+			dlg.ShowNewFolderButton = true;
 
-				WinForms.DialogResult result = dlg.ShowDialog();
-				if (result != System.Windows.Forms.DialogResult.OK)
-					return;
+			bool? result = dlg.ShowDialog();
+			if (!result.HasValue || !result.Value)
+				return;
 
-				targetPath = dlg.SelectedPath;
-			}
+			string targetPath = dlg.SelectedPath;
 
 			LayoutRoot.IsEnabled = false;
 			_cancellationTokenSource = new CancellationTokenSource();

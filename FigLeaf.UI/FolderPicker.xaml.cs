@@ -1,8 +1,9 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Data;
 using System.Windows.Forms;
 using UserControl = System.Windows.Controls.UserControl;
+
+using Ookii.Dialogs.Wpf;
 
 namespace FigLeaf.UI
 {
@@ -21,20 +22,18 @@ namespace FigLeaf.UI
 
 		private void BrowseFolder(object sender, RoutedEventArgs e)
 		{
-			using (var dlg = new FolderBrowserDialog())
-			{
-				dlg.Description = Description;
-				dlg.SelectedPath = Text;
-				dlg.ShowNewFolderButton = true;
+			var dlg = new VistaFolderBrowserDialog();
+			dlg.Description = Description;
+			dlg.SelectedPath = Text;
+			dlg.ShowNewFolderButton = true;
 
-				DialogResult result = dlg.ShowDialog();
-				if (result == DialogResult.OK)
-				{
-					Text = dlg.SelectedPath;
-					BindingExpression be = GetBindingExpression(TextProperty);
-					if (be != null)
-						be.UpdateSource();
-				}
+			bool? result = dlg.ShowDialog();
+			if (result.HasValue && result.Value)
+			{
+				Text = dlg.SelectedPath;
+				BindingExpression be = GetBindingExpression(TextProperty);
+				if (be != null)
+					be.UpdateSource();
 			}
 		}
 	}

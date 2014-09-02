@@ -46,6 +46,9 @@
     <Reference Include="NReco.VideoConverter">
       <HintPath>..\packages\NReco.VideoConverter.1.0.2.0\lib\net20\NReco.VideoConverter.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
