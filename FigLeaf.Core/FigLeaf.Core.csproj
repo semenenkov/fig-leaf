@@ -65,7 +65,7 @@
     <Compile Include="output\FigLeafPasswordRuleLexer.cs" />
     <Compile Include="output\FigLeafPasswordRuleParser.cs" />
     <Compile Include="PasswordRules\Functions.cs" />
-    <Compile Include="PasswordRules\Parser.cs" />
+    <Compile Include="PasswordRules\PasswordGenerator.cs" />
     <Compile Include="PasswordRules\ParserStream.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="PasswordRule.cs" />

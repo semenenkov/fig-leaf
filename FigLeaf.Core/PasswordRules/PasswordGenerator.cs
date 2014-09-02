@@ -2,12 +2,15 @@
 
 namespace FigLeaf.Core.PasswordRules
 {
-	public class Parser
+	public class PasswordGenerator
 	{
 		private readonly ParserStream _expressionStream;
+		private readonly string _masterPassword;
 
-		public Parser(PasswordRule passwordRule, string customRuleExpression)
+		public PasswordGenerator(PasswordRule passwordRule, string customRuleExpression, string masterPassword)
 		{
+			_masterPassword = masterPassword;
+
 			string expression = null;
 			switch (passwordRule)
 			{
@@ -28,13 +31,13 @@ namespace FigLeaf.Core.PasswordRules
 			_expressionStream = new ParserStream(expression);
 		}
 
-		public string GetPasswordRule(string fileName, string password)
+		public string GetPassword(string fileName)
 		{
 			_expressionStream.Reset();
 			var lexer = new FigLeafPasswordRuleLexer(_expressionStream);
 			var tokenStream = new CommonTokenStream(lexer);
 			var parser = new FigLeafPasswordRuleParser(tokenStream);
-			return parser.functionArgument(fileName, password);
+			return parser.functionArgument(fileName, _masterPassword);
 		}
 	}
 }

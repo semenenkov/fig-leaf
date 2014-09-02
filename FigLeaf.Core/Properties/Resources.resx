@@ -320,4 +320,7 @@ Enable this option to prevent unintended deletion that can be made by mistake.
   <data name="Core_PasswordRule_Custom" xml:space="preserve">
     <value>Custom rule</value>
   </data>
+  <data name="Ui_Security_CustomPasswordRule" xml:space="preserve">
+    <value>Rule formula</value>
+  </data>
 </root>

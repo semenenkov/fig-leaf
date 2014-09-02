@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
 using ICSharpCode.SharpZipLib.Zip;
 
@@ -8,26 +6,24 @@ namespace FigLeaf.Core
 {
 	public class Zip
 	{
-		private readonly string _masterPassword;
-		private readonly PasswordRule _passwordRule;
+		private readonly PasswordRules.PasswordGenerator _passwordGenerator;
 
-		public Zip(string masterPassword, PasswordRule passwordRule)
+		public Zip(PasswordRules.PasswordGenerator passwordGenerator)
 		{
-			_masterPassword = masterPassword;
-			_passwordRule = passwordRule;
+			_passwordGenerator = passwordGenerator;
 		}
 
 		public void Pack(FileInfo sourceFile, string targetPath)
 		{
 			var zip = new FastZip();
-			zip.Password = GetPassword(sourceFile);
+			zip.Password = _passwordGenerator.GetPassword(sourceFile.Name);
 			zip.CreateZip(targetPath, sourceFile.Directory.FullName, true, sourceFile.Name);
 		}
 
 		public bool Unpack(string sourcePath, FileInfo targetFile)
 		{
 			var zip = new FastZip();
-			zip.Password = GetPassword(targetFile);
+			zip.Password = _passwordGenerator.GetPassword(targetFile.Name);
 			try
 			{
 				zip.ExtractZip(sourcePath, targetFile.Directory.FullName, FastZip.Overwrite.Prompt, name => true, "", "", true);
@@ -38,33 +34,6 @@ namespace FigLeaf.Core
 				// most likely it is a thumbnail
 				return false;
 			}
-		}
-
-		private string GetPassword(FileInfo file)
-		{
-			string fileNameNumbers = _passwordRule == PasswordRule.Password
-				? null
-				: GetFileNameNumbers(file.FullName);
-
-			switch (_passwordRule)
-			{
-				case PasswordRule.FileNameNumbersPlusPassword:
-					return fileNameNumbers + _masterPassword;
-				case PasswordRule.PasswordPlusFileNameNumbers:
-					return _masterPassword + fileNameNumbers;
-				default:
-					return _masterPassword;
-			}
-		}
-
-		private string GetFileNameNumbers(string fileName)
-		{
-			var sbResult = new StringBuilder();
-			string nameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
-			foreach (char c in nameWithoutExt)
-				if (Char.IsDigit(c))
-					sbResult.Append(c);
-			return sbResult.ToString();
 		}
 	}
 }

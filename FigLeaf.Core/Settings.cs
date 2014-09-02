@@ -28,6 +28,8 @@ namespace FigLeaf.Core
 		[DataMember]
 		public PasswordRule PasswordRule { get; set; }
 		[DataMember]
+		public string CustomPasswordRule { get; set; }
+		[DataMember]
 		public ArchiveNameRule ArchiveNameRule { get; set; }
 
 		[DataMember]

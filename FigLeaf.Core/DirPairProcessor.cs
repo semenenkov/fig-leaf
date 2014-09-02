@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using FigLeaf.Core.PasswordRules;
 
 namespace FigLeaf.Core
 {
@@ -37,8 +38,10 @@ namespace FigLeaf.Core
 			{
 				_sourceDirPath = dirPair.Source;
 				_targetDirPath = dirPair.Target;
-				_zip = new Zip(settings.MasterPassword, settings.PasswordRule);
 				_archiveNameRule = settings.ArchiveNameRule;
+				
+				var passwordRuleParser = new PasswordGenerator(settings.PasswordRule, settings.CustomPasswordRule, settings.MasterPassword);
+				_zip = new Zip(passwordRuleParser);
 
 				if (settings.EnableThumbnails)
 					_thumbnail = new Thumbnail(settings, Console.WriteLine);

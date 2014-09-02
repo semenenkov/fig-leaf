@@ -11,6 +11,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <UI:OppositeBooleanValueConverter x:Key="OppositeBooleanValueConverter" />
         <UI:OppositeBooleanToVisibilityConverter x:Key="OppositeBooleanToVisibilityConverter" />
+        <UI:CustomRuleHeightConverter x:Key="CustomRuleHeightConverter" />
         <SolidColorBrush x:Key="BorderBrush" Color="#7CA512"/>
 
         <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
@@ -185,6 +186,7 @@
                     <Grid.RowDefinitions >
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition Height="{Binding SelectedValue, ElementName=cbPasswordRule, Converter={StaticResource CustomRuleHeightConverter}}"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -209,17 +211,23 @@
                         ItemsSource="{Binding Source={UI:Enumeration {x:Type Core:PasswordRule}}}"
                         DisplayMemberPath="Description" 
                         HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
-                        Grid.Column="1" Grid.Row="1">
+                        Grid.Column="1" Grid.Row="1"
+                        Name="cbPasswordRule">
                     </ComboBox>
 
-                    <Label Content="{x:Static CoreProperties:Resources.Ui_Security_ArchiveNameRule}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"/>
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Security_CustomPasswordRule}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"/>
+                    <TextBox Text="{Binding Path=Settings.CustomPasswordRule, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
+                        Grid.Column="1" Grid.Row="2"/>
+
+                    <Label Content="{x:Static CoreProperties:Resources.Ui_Security_ArchiveNameRule}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3"/>
                     <ComboBox
                         SelectedValue="{Binding Path=Settings.ArchiveNameRule, Mode=TwoWay}"
                         SelectedValuePath="Value"
                         ItemsSource="{Binding Source={UI:Enumeration {x:Type Core:ArchiveNameRule}}}"
                         DisplayMemberPath="Description" 
                         HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
-                        Grid.Column="1" Grid.Row="2">
+                        Grid.Column="1" Grid.Row="3">
                     </ComboBox>
                 </Grid>
             </GroupBox>

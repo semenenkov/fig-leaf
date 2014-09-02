@@ -320,4 +320,7 @@
   <data name="Core_PasswordRule_Custom" xml:space="preserve">
     <value>Задать свое правило</value>
   </data>
+  <data name="Ui_Security_CustomPasswordRule" xml:space="preserve">
+    <value>Правило (формула)</value>
+  </data>
 </root>

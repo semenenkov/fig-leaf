@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace FigLeaf.Core.UnitTest.PasswordRules
 {
 	[TestFixture]
-    public class ParserTests
+    public class PasswordGeneratorTests
     {
 		[Test]
 		[TestCase("FileName", "test123.jpg", "Pwd01", "test123.jpg")]
@@ -24,17 +24,17 @@ namespace FigLeaf.Core.UnitTest.PasswordRules
 		[TestCase("Right(FileName, 4)", "test123.jpg", "Pwd01", ".jpg")]
 		public void TestAllFunctions(string expression, string fileName, string password, string result)
 		{
-			var parser = new Parser(PasswordRule.Custom, expression);
-			Assert.AreEqual(result, parser.GetPasswordRule(fileName, password));
+			var parser = new PasswordGenerator(PasswordRule.Custom, expression, password);
+			Assert.AreEqual(result, parser.GetPassword(fileName));
 		}
 
 		[Test]
 		public void TestInstanceReuse()
 		{
 			const string expression = "Add(FileName,Password)";
-			var parser = new Parser(PasswordRule.Custom, expression);
-			Assert.AreEqual("ab", parser.GetPasswordRule("a", "b"));
-			Assert.AreEqual("cd", parser.GetPasswordRule("c", "d"));
+			var parser = new PasswordGenerator(PasswordRule.Custom, expression, "1");
+			Assert.AreEqual("a1", parser.GetPassword("a"));
+			Assert.AreEqual("b1", parser.GetPassword("b"));
 		}
 
 		[Test]
@@ -49,8 +49,8 @@ namespace FigLeaf.Core.UnitTest.PasswordRules
 		[TestCase(PasswordRule.FileNameNumbersPlusPassword, "test.mp4", "Pwd01", "Pwd01")]
 		public void PredefinedRules(PasswordRule passwordRule, string fileName, string password, string result)
 		{
-			var parser = new Parser(passwordRule, null);
-			Assert.AreEqual(result, parser.GetPasswordRule(fileName, password));
+			var parser = new PasswordGenerator(passwordRule, null, password);
+			Assert.AreEqual(result, parser.GetPassword(fileName));
 		}
     }
 }

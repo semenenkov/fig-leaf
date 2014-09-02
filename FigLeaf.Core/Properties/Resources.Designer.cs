@@ -591,6 +591,15 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rule formula.
+        /// </summary>
+        public static string Ui_Security_CustomPasswordRule {
+            get {
+                return ResourceManager.GetString("Ui_Security_CustomPasswordRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Archive.
         /// </summary>
         public static string Ui_Security_Header {

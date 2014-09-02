@@ -78,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomRuleHeightConverter.cs" />
     <Compile Include="QuestionTip.xaml.cs">
       <DependentUpon>QuestionTip.xaml</DependentUpon>
     </Compile>
