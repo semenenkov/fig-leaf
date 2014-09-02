@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.5 D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g 2014-09-01 18:43:25
+// $ANTLR 3.5 D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g 2014-09-02 17:26:51
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -93,7 +93,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_baseArgument() {}
 	// $ANTLR start "baseArgument"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:18:1: baseArgument[string parseFileName, string parsePassword] returns [string value] : ( password | fileName );
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:34:1: baseArgument[string parseFileName, string parsePassword] returns [string value] : ( password | fileName );
 	[GrammarRule("baseArgument")]
 	private string baseArgument(string parseFileName, string parsePassword)
 	{
@@ -104,10 +104,10 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 
 
 		try { DebugEnterRule(GrammarFileName, "baseArgument");
-		DebugLocation(18, 1);
+		DebugLocation(34, 1);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:19:2: ( password | fileName )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:35:2: ( password | fileName )
 			int alt1=2;
 			try { DebugEnterDecision(1, decisionCanBacktrack[1]);
 			int LA1_1 = input.LA(1);
@@ -131,14 +131,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:19:4: password
+				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:35:4: password
 				{
-				DebugLocation(19, 4);
-				PushFollow(Follow._password_in_baseArgument51);
+				DebugLocation(35, 4);
+				PushFollow(Follow._password_in_baseArgument67);
 				password();
 				PopFollow();
 
-				DebugLocation(20, 2);
+				DebugLocation(36, 2);
 
 						value = parsePassword;
 					
@@ -147,14 +147,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:23:4: fileName
+				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:39:4: fileName
 				{
-				DebugLocation(23, 4);
-				PushFollow(Follow._fileName_in_baseArgument59);
+				DebugLocation(39, 4);
+				PushFollow(Follow._fileName_in_baseArgument75);
 				fileName();
 				PopFollow();
 
-				DebugLocation(24, 2);
+				DebugLocation(40, 2);
 
 						value = parseFileName;
 					
@@ -164,18 +164,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 
 			}
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("baseArgument", 1);
 			LeaveRule("baseArgument", 1);
 			LeaveRule_baseArgument();
 	    }
-	 	DebugLocation(27, 1);
+	 	DebugLocation(43, 1);
 		} finally { DebugExitRule(GrammarFileName, "baseArgument"); }
 		return value;
 
@@ -188,7 +189,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_functionArgument() {}
 	// $ANTLR start "functionArgument"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:29:8: public functionArgument[string parseFileName, string parsePassword] returns [string value] : (ba= baseArgument[parseFileName, parsePassword] |n= number |f= function[parseFileName, parsePassword] );
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:45:8: public functionArgument[string parseFileName, string parsePassword] returns [string value] : (ba= baseArgument[parseFileName, parsePassword] |n= number |f= function[parseFileName, parsePassword] );
 	[GrammarRule("functionArgument")]
 	public string functionArgument(string parseFileName, string parsePassword)
 	{
@@ -203,10 +204,10 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	    string f = default(string);
 
 		try { DebugEnterRule(GrammarFileName, "functionArgument");
-		DebugLocation(29, 1);
+		DebugLocation(45, 1);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:30:2: (ba= baseArgument[parseFileName, parsePassword] |n= number |f= function[parseFileName, parsePassword] )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:46:2: (ba= baseArgument[parseFileName, parsePassword] |n= number |f= function[parseFileName, parsePassword] )
 			int alt2=3;
 			try { DebugEnterDecision(2, decisionCanBacktrack[2]);
 			switch (input.LA(1))
@@ -249,14 +250,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:30:4: ba= baseArgument[parseFileName, parsePassword]
+				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:46:4: ba= baseArgument[parseFileName, parsePassword]
 				{
-				DebugLocation(30, 7);
-				PushFollow(Follow._baseArgument_in_functionArgument83);
+				DebugLocation(46, 7);
+				PushFollow(Follow._baseArgument_in_functionArgument99);
 				ba=baseArgument(parseFileName, parsePassword);
 				PopFollow();
 
-				DebugLocation(31, 2);
+				DebugLocation(47, 2);
 
 						value = ba;
 					
@@ -265,14 +266,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:34:4: n= number
+				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:50:4: n= number
 				{
-				DebugLocation(34, 6);
-				PushFollow(Follow._number_in_functionArgument96);
+				DebugLocation(50, 6);
+				PushFollow(Follow._number_in_functionArgument112);
 				n=number();
 				PopFollow();
 
-				DebugLocation(35, 2);
+				DebugLocation(51, 2);
 
 						value = (n!=null?input.ToString(n.Start,n.Stop):default(string));
 					
@@ -281,14 +282,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:38:4: f= function[parseFileName, parsePassword]
+				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:54:4: f= function[parseFileName, parsePassword]
 				{
-				DebugLocation(38, 6);
-				PushFollow(Follow._function_in_functionArgument108);
+				DebugLocation(54, 6);
+				PushFollow(Follow._function_in_functionArgument124);
 				f=function(parseFileName, parsePassword);
 				PopFollow();
 
-				DebugLocation(39, 2);
+				DebugLocation(55, 2);
 
 						value = f;
 					
@@ -298,18 +299,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 
 			}
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("functionArgument", 2);
 			LeaveRule("functionArgument", 2);
 			LeaveRule_functionArgument();
 	    }
-	 	DebugLocation(42, 1);
+	 	DebugLocation(58, 1);
 		} finally { DebugExitRule(GrammarFileName, "functionArgument"); }
 		return value;
 
@@ -322,7 +324,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_function() {}
 	// $ANTLR start "function"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:44:1: function[string parseFileName, string parsePassword] returns [string value] : (uf= unaryFunction[parseFileName, parsePassword] |bf= binaryFunction[parseFileName, parsePassword] );
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:60:1: function[string parseFileName, string parsePassword] returns [string value] : (uf= unaryFunction[parseFileName, parsePassword] |bf= binaryFunction[parseFileName, parsePassword] );
 	[GrammarRule("function")]
 	private string function(string parseFileName, string parsePassword)
 	{
@@ -336,10 +338,10 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	    string bf = default(string);
 
 		try { DebugEnterRule(GrammarFileName, "function");
-		DebugLocation(44, 1);
+		DebugLocation(60, 1);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:45:2: (uf= unaryFunction[parseFileName, parsePassword] |bf= binaryFunction[parseFileName, parsePassword] )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:61:2: (uf= unaryFunction[parseFileName, parsePassword] |bf= binaryFunction[parseFileName, parsePassword] )
 			int alt3=2;
 			try { DebugEnterDecision(3, decisionCanBacktrack[3]);
 			int LA3_1 = input.LA(1);
@@ -363,14 +365,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:45:4: uf= unaryFunction[parseFileName, parsePassword]
+				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:61:4: uf= unaryFunction[parseFileName, parsePassword]
 				{
-				DebugLocation(45, 7);
-				PushFollow(Follow._unaryFunction_in_function131);
+				DebugLocation(61, 7);
+				PushFollow(Follow._unaryFunction_in_function147);
 				uf=unaryFunction(parseFileName, parsePassword);
 				PopFollow();
 
-				DebugLocation(46, 2);
+				DebugLocation(62, 2);
 
 						value = uf;
 					
@@ -379,14 +381,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:49:4: bf= binaryFunction[parseFileName, parsePassword]
+				// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:65:4: bf= binaryFunction[parseFileName, parsePassword]
 				{
-				DebugLocation(49, 7);
-				PushFollow(Follow._binaryFunction_in_function144);
+				DebugLocation(65, 7);
+				PushFollow(Follow._binaryFunction_in_function160);
 				bf=binaryFunction(parseFileName, parsePassword);
 				PopFollow();
 
-				DebugLocation(50, 2);
+				DebugLocation(66, 2);
 
 						value = bf;
 					
@@ -396,18 +398,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 
 			}
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("function", 3);
 			LeaveRule("function", 3);
 			LeaveRule_function();
 	    }
-	 	DebugLocation(53, 1);
+	 	DebugLocation(69, 1);
 		} finally { DebugExitRule(GrammarFileName, "function"); }
 		return value;
 
@@ -420,7 +423,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_binaryFunction() {}
 	// $ANTLR start "binaryFunction"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:55:1: binaryFunction[string parseFileName, string parsePassword] returns [string value] : func= binaryFunctionName OPENBRACKET arg1= functionArgument[parseFileName, parsePassword] COMMA ( SPACE )* arg2= functionArgument[parseFileName, parsePassword] CLOSEBRACKET ;
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:71:1: binaryFunction[string parseFileName, string parsePassword] returns [string value] : func= binaryFunctionName OPENBRACKET arg1= functionArgument[parseFileName, parsePassword] COMMA ( SPACE )* arg2= functionArgument[parseFileName, parsePassword] CLOSEBRACKET ;
 	[GrammarRule("binaryFunction")]
 	private string binaryFunction(string parseFileName, string parsePassword)
 	{
@@ -435,29 +438,29 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	    string arg2 = default(string);
 
 		try { DebugEnterRule(GrammarFileName, "binaryFunction");
-		DebugLocation(55, 1);
+		DebugLocation(71, 1);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:56:2: (func= binaryFunctionName OPENBRACKET arg1= functionArgument[parseFileName, parsePassword] COMMA ( SPACE )* arg2= functionArgument[parseFileName, parsePassword] CLOSEBRACKET )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:72:2: (func= binaryFunctionName OPENBRACKET arg1= functionArgument[parseFileName, parsePassword] COMMA ( SPACE )* arg2= functionArgument[parseFileName, parsePassword] CLOSEBRACKET )
 			DebugEnterAlt(1);
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:56:4: func= binaryFunctionName OPENBRACKET arg1= functionArgument[parseFileName, parsePassword] COMMA ( SPACE )* arg2= functionArgument[parseFileName, parsePassword] CLOSEBRACKET
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:72:4: func= binaryFunctionName OPENBRACKET arg1= functionArgument[parseFileName, parsePassword] COMMA ( SPACE )* arg2= functionArgument[parseFileName, parsePassword] CLOSEBRACKET
 			{
-			DebugLocation(56, 9);
-			PushFollow(Follow._binaryFunctionName_in_binaryFunction167);
+			DebugLocation(72, 9);
+			PushFollow(Follow._binaryFunctionName_in_binaryFunction183);
 			func=binaryFunctionName();
 			PopFollow();
 
-			DebugLocation(56, 30);
-			Match(input,OPENBRACKET,Follow._OPENBRACKET_in_binaryFunction169); 
-			DebugLocation(56, 47);
-			PushFollow(Follow._functionArgument_in_binaryFunction175);
+			DebugLocation(72, 30);
+			Match(input,OPENBRACKET,Follow._OPENBRACKET_in_binaryFunction185); 
+			DebugLocation(72, 47);
+			PushFollow(Follow._functionArgument_in_binaryFunction191);
 			arg1=functionArgument(parseFileName, parsePassword);
 			PopFollow();
 
-			DebugLocation(56, 96);
-			Match(input,COMMA,Follow._COMMA_in_binaryFunction178); 
-			DebugLocation(56, 102);
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:56:102: ( SPACE )*
+			DebugLocation(72, 96);
+			Match(input,COMMA,Follow._COMMA_in_binaryFunction194); 
+			DebugLocation(72, 102);
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:72:102: ( SPACE )*
 			try { DebugEnterSubRule(4);
 			while (true)
 			{
@@ -476,10 +479,10 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:56:102: SPACE
+					// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:72:102: SPACE
 					{
-					DebugLocation(56, 102);
-					Match(input,SPACE,Follow._SPACE_in_binaryFunction180); 
+					DebugLocation(72, 102);
+					Match(input,SPACE,Follow._SPACE_in_binaryFunction196); 
 
 					}
 					break;
@@ -494,14 +497,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 
 			} finally { DebugExitSubRule(4); }
 
-			DebugLocation(56, 114);
-			PushFollow(Follow._functionArgument_in_binaryFunction187);
+			DebugLocation(72, 114);
+			PushFollow(Follow._functionArgument_in_binaryFunction203);
 			arg2=functionArgument(parseFileName, parsePassword);
 			PopFollow();
 
-			DebugLocation(56, 163);
-			Match(input,CLOSEBRACKET,Follow._CLOSEBRACKET_in_binaryFunction190); 
-			DebugLocation(57, 2);
+			DebugLocation(72, 163);
+			Match(input,CLOSEBRACKET,Follow._CLOSEBRACKET_in_binaryFunction206); 
+			DebugLocation(73, 2);
 
 					System.Func<string, string, string> function = Functions.GetBinaryFunction((func!=null?input.ToString(func.Start,func.Stop):default(string)));
 					value = function(arg1, arg2);
@@ -510,18 +513,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			}
 
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("binaryFunction", 4);
 			LeaveRule("binaryFunction", 4);
 			LeaveRule_binaryFunction();
 	    }
-	 	DebugLocation(61, 1);
+	 	DebugLocation(77, 1);
 		} finally { DebugExitRule(GrammarFileName, "binaryFunction"); }
 		return value;
 
@@ -534,7 +538,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_unaryFunction() {}
 	// $ANTLR start "unaryFunction"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:63:1: unaryFunction[string parseFileName, string parsePassword] returns [string value] : func= unaryFunctionName OPENBRACKET arg= functionArgument[parseFileName, parsePassword] CLOSEBRACKET ;
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:79:1: unaryFunction[string parseFileName, string parsePassword] returns [string value] : func= unaryFunctionName OPENBRACKET arg= functionArgument[parseFileName, parsePassword] CLOSEBRACKET ;
 	[GrammarRule("unaryFunction")]
 	private string unaryFunction(string parseFileName, string parsePassword)
 	{
@@ -548,28 +552,28 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	    string arg = default(string);
 
 		try { DebugEnterRule(GrammarFileName, "unaryFunction");
-		DebugLocation(63, 1);
+		DebugLocation(79, 1);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:64:2: (func= unaryFunctionName OPENBRACKET arg= functionArgument[parseFileName, parsePassword] CLOSEBRACKET )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:80:2: (func= unaryFunctionName OPENBRACKET arg= functionArgument[parseFileName, parsePassword] CLOSEBRACKET )
 			DebugEnterAlt(1);
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:64:4: func= unaryFunctionName OPENBRACKET arg= functionArgument[parseFileName, parsePassword] CLOSEBRACKET
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:80:4: func= unaryFunctionName OPENBRACKET arg= functionArgument[parseFileName, parsePassword] CLOSEBRACKET
 			{
-			DebugLocation(64, 9);
-			PushFollow(Follow._unaryFunctionName_in_unaryFunction212);
+			DebugLocation(80, 9);
+			PushFollow(Follow._unaryFunctionName_in_unaryFunction228);
 			func=unaryFunctionName();
 			PopFollow();
 
-			DebugLocation(64, 29);
-			Match(input,OPENBRACKET,Follow._OPENBRACKET_in_unaryFunction214); 
-			DebugLocation(64, 45);
-			PushFollow(Follow._functionArgument_in_unaryFunction220);
+			DebugLocation(80, 29);
+			Match(input,OPENBRACKET,Follow._OPENBRACKET_in_unaryFunction230); 
+			DebugLocation(80, 45);
+			PushFollow(Follow._functionArgument_in_unaryFunction236);
 			arg=functionArgument(parseFileName, parsePassword);
 			PopFollow();
 
-			DebugLocation(64, 94);
-			Match(input,CLOSEBRACKET,Follow._CLOSEBRACKET_in_unaryFunction223); 
-			DebugLocation(65, 2);
+			DebugLocation(80, 94);
+			Match(input,CLOSEBRACKET,Follow._CLOSEBRACKET_in_unaryFunction239); 
+			DebugLocation(81, 2);
 
 					System.Func<string, string> function = Functions.GetUnaryFunction((func!=null?input.ToString(func.Start,func.Stop):default(string)));
 					value = function(arg);
@@ -578,18 +582,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			}
 
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("unaryFunction", 5);
 			LeaveRule("unaryFunction", 5);
 			LeaveRule_unaryFunction();
 	    }
-	 	DebugLocation(69, 1);
+	 	DebugLocation(85, 1);
 		} finally { DebugExitRule(GrammarFileName, "unaryFunction"); }
 		return value;
 
@@ -602,7 +607,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_unaryFunctionName() {}
 	// $ANTLR start "unaryFunctionName"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:71:1: unaryFunctionName : ( 'Reverse' | 'Upper' | 'Lower' | 'Digits' | 'RemoveFileExtension' | 'FileExtension' | 'Len' );
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:87:1: unaryFunctionName : ( 'Reverse' | 'Upper' | 'Lower' | 'Digits' | 'RemoveFileExtension' | 'FileExtension' | 'Len' );
 	[GrammarRule("unaryFunctionName")]
 	private ParserRuleReturnScope<IToken> unaryFunctionName()
 	{
@@ -613,14 +618,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	    retval.Start = (IToken)input.LT(1);
 
 		try { DebugEnterRule(GrammarFileName, "unaryFunctionName");
-		DebugLocation(71, 8);
+		DebugLocation(87, 8);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:72:2: ( 'Reverse' | 'Upper' | 'Lower' | 'Digits' | 'RemoveFileExtension' | 'FileExtension' | 'Len' )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:88:2: ( 'Reverse' | 'Upper' | 'Lower' | 'Digits' | 'RemoveFileExtension' | 'FileExtension' | 'Len' )
 			DebugEnterAlt(1);
 			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:
 			{
-			DebugLocation(72, 2);
+			DebugLocation(88, 2);
 			if ((input.LA(1)>=10 && input.LA(1)<=11)||(input.LA(1)>=14 && input.LA(1)<=15)||(input.LA(1)>=17 && input.LA(1)<=18)||input.LA(1)==20)
 			{
 				input.Consume();
@@ -639,18 +644,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			retval.Stop = (IToken)input.LT(-1);
 
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("unaryFunctionName", 6);
 			LeaveRule("unaryFunctionName", 6);
 			LeaveRule_unaryFunctionName();
 	    }
-	 	DebugLocation(78, 8);
+	 	DebugLocation(94, 8);
 		} finally { DebugExitRule(GrammarFileName, "unaryFunctionName"); }
 		return retval;
 
@@ -663,7 +669,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_binaryFunctionName() {}
 	// $ANTLR start "binaryFunctionName"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:80:1: binaryFunctionName : ( 'Add' | 'Left' | 'Right' );
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:96:1: binaryFunctionName : ( 'Add' | 'Left' | 'Right' );
 	[GrammarRule("binaryFunctionName")]
 	private ParserRuleReturnScope<IToken> binaryFunctionName()
 	{
@@ -674,14 +680,14 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	    retval.Start = (IToken)input.LT(1);
 
 		try { DebugEnterRule(GrammarFileName, "binaryFunctionName");
-		DebugLocation(80, 10);
+		DebugLocation(96, 10);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:81:2: ( 'Add' | 'Left' | 'Right' )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:97:2: ( 'Add' | 'Left' | 'Right' )
 			DebugEnterAlt(1);
 			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:
 			{
-			DebugLocation(81, 2);
+			DebugLocation(97, 2);
 			if (input.LA(1)==9||input.LA(1)==13||input.LA(1)==19)
 			{
 				input.Consume();
@@ -700,18 +706,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			retval.Stop = (IToken)input.LT(-1);
 
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("binaryFunctionName", 7);
 			LeaveRule("binaryFunctionName", 7);
 			LeaveRule_binaryFunctionName();
 	    }
-	 	DebugLocation(83, 10);
+	 	DebugLocation(99, 10);
 		} finally { DebugExitRule(GrammarFileName, "binaryFunctionName"); }
 		return retval;
 
@@ -724,7 +731,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_number() {}
 	// $ANTLR start "number"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:85:1: number : ( DIGIT )+ ;
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:101:1: number : ( DIGIT )+ ;
 	[GrammarRule("number")]
 	private ParserRuleReturnScope<IToken> number()
 	{
@@ -735,15 +742,15 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	    retval.Start = (IToken)input.LT(1);
 
 		try { DebugEnterRule(GrammarFileName, "number");
-		DebugLocation(85, 11);
+		DebugLocation(101, 11);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:86:2: ( ( DIGIT )+ )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:102:2: ( ( DIGIT )+ )
 			DebugEnterAlt(1);
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:86:4: ( DIGIT )+
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:102:4: ( DIGIT )+
 			{
-			DebugLocation(86, 4);
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:86:4: ( DIGIT )+
+			DebugLocation(102, 4);
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:102:4: ( DIGIT )+
 			int cnt5=0;
 			try { DebugEnterSubRule(5);
 			while (true)
@@ -763,10 +770,10 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:86:5: DIGIT
+					// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:102:5: DIGIT
 					{
-					DebugLocation(86, 5);
-					Match(input,DIGIT,Follow._DIGIT_in_number299); 
+					DebugLocation(102, 5);
+					Match(input,DIGIT,Follow._DIGIT_in_number315); 
 
 					}
 					break;
@@ -792,18 +799,19 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 			retval.Stop = (IToken)input.LT(-1);
 
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("number", 8);
 			LeaveRule("number", 8);
 			LeaveRule_number();
 	    }
-	 	DebugLocation(86, 11);
+	 	DebugLocation(102, 11);
 		} finally { DebugExitRule(GrammarFileName, "number"); }
 		return retval;
 
@@ -816,7 +824,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_fileName() {}
 	// $ANTLR start "fileName"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:88:1: fileName : 'FileName' ;
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:104:1: fileName : 'FileName' ;
 	[GrammarRule("fileName")]
 	private void fileName()
 	{
@@ -824,31 +832,32 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 		EnterRule("fileName", 9);
 		TraceIn("fileName", 9);
 		try { DebugEnterRule(GrammarFileName, "fileName");
-		DebugLocation(88, 13);
+		DebugLocation(104, 13);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:89:2: ( 'FileName' )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:105:2: ( 'FileName' )
 			DebugEnterAlt(1);
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:89:4: 'FileName'
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:105:4: 'FileName'
 			{
-			DebugLocation(89, 4);
-			Match(input,12,Follow._12_in_fileName310); 
+			DebugLocation(105, 4);
+			Match(input,12,Follow._12_in_fileName326); 
 
 			}
 
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("fileName", 9);
 			LeaveRule("fileName", 9);
 			LeaveRule_fileName();
 	    }
-	 	DebugLocation(89, 13);
+	 	DebugLocation(105, 13);
 		} finally { DebugExitRule(GrammarFileName, "fileName"); }
 		return;
 
@@ -861,7 +870,7 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	[Conditional("ANTLR_TRACE")]
 	protected virtual void LeaveRule_password() {}
 	// $ANTLR start "password"
-	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:91:1: password : 'Password' ;
+	// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:107:1: password : 'Password' ;
 	[GrammarRule("password")]
 	private void password()
 	{
@@ -869,31 +878,32 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 		EnterRule("password", 10);
 		TraceIn("password", 10);
 		try { DebugEnterRule(GrammarFileName, "password");
-		DebugLocation(91, 13);
+		DebugLocation(107, 13);
 		try
 		{
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:92:2: ( 'Password' )
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:108:2: ( 'Password' )
 			DebugEnterAlt(1);
-			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:92:4: 'Password'
+			// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:108:4: 'Password'
 			{
-			DebugLocation(92, 4);
-			Match(input,16,Follow._16_in_password319); 
+			DebugLocation(108, 4);
+			Match(input,16,Follow._16_in_password335); 
 
 			}
 
 		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
+
+			catch (RecognitionException e)
+			{
+				throw;
+			}
+
 		finally
 		{
 			TraceOut("password", 10);
 			LeaveRule("password", 10);
 			LeaveRule_password();
 	    }
-	 	DebugLocation(92, 13);
+	 	DebugLocation(108, 13);
 		} finally { DebugExitRule(GrammarFileName, "password"); }
 		return;
 
@@ -905,27 +915,27 @@ public partial class FigLeafPasswordRuleParser : Antlr.Runtime.Parser
 	#region Follow sets
 	private static class Follow
 	{
-		public static readonly BitSet _password_in_baseArgument51 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _fileName_in_baseArgument59 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _baseArgument_in_functionArgument83 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _number_in_functionArgument96 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _function_in_functionArgument108 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _unaryFunction_in_function131 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _binaryFunction_in_function144 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _binaryFunctionName_in_binaryFunction167 = new BitSet(new ulong[]{0x0000000000000080UL});
-		public static readonly BitSet _OPENBRACKET_in_binaryFunction169 = new BitSet(new ulong[]{0x00000000001FFE40UL});
-		public static readonly BitSet _functionArgument_in_binaryFunction175 = new BitSet(new ulong[]{0x0000000000000020UL});
-		public static readonly BitSet _COMMA_in_binaryFunction178 = new BitSet(new ulong[]{0x00000000001FFF40UL});
-		public static readonly BitSet _SPACE_in_binaryFunction180 = new BitSet(new ulong[]{0x00000000001FFF40UL});
-		public static readonly BitSet _functionArgument_in_binaryFunction187 = new BitSet(new ulong[]{0x0000000000000010UL});
-		public static readonly BitSet _CLOSEBRACKET_in_binaryFunction190 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _unaryFunctionName_in_unaryFunction212 = new BitSet(new ulong[]{0x0000000000000080UL});
-		public static readonly BitSet _OPENBRACKET_in_unaryFunction214 = new BitSet(new ulong[]{0x00000000001FFE40UL});
-		public static readonly BitSet _functionArgument_in_unaryFunction220 = new BitSet(new ulong[]{0x0000000000000010UL});
-		public static readonly BitSet _CLOSEBRACKET_in_unaryFunction223 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _DIGIT_in_number299 = new BitSet(new ulong[]{0x0000000000000042UL});
-		public static readonly BitSet _12_in_fileName310 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _16_in_password319 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _password_in_baseArgument67 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _fileName_in_baseArgument75 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _baseArgument_in_functionArgument99 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _number_in_functionArgument112 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _function_in_functionArgument124 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _unaryFunction_in_function147 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _binaryFunction_in_function160 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _binaryFunctionName_in_binaryFunction183 = new BitSet(new ulong[]{0x0000000000000080UL});
+		public static readonly BitSet _OPENBRACKET_in_binaryFunction185 = new BitSet(new ulong[]{0x00000000001FFE40UL});
+		public static readonly BitSet _functionArgument_in_binaryFunction191 = new BitSet(new ulong[]{0x0000000000000020UL});
+		public static readonly BitSet _COMMA_in_binaryFunction194 = new BitSet(new ulong[]{0x00000000001FFF40UL});
+		public static readonly BitSet _SPACE_in_binaryFunction196 = new BitSet(new ulong[]{0x00000000001FFF40UL});
+		public static readonly BitSet _functionArgument_in_binaryFunction203 = new BitSet(new ulong[]{0x0000000000000010UL});
+		public static readonly BitSet _CLOSEBRACKET_in_binaryFunction206 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _unaryFunctionName_in_unaryFunction228 = new BitSet(new ulong[]{0x0000000000000080UL});
+		public static readonly BitSet _OPENBRACKET_in_unaryFunction230 = new BitSet(new ulong[]{0x00000000001FFE40UL});
+		public static readonly BitSet _functionArgument_in_unaryFunction236 = new BitSet(new ulong[]{0x0000000000000010UL});
+		public static readonly BitSet _CLOSEBRACKET_in_unaryFunction239 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _DIGIT_in_number315 = new BitSet(new ulong[]{0x0000000000000042UL});
+		public static readonly BitSet _12_in_fileName326 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _16_in_password335 = new BitSet(new ulong[]{0x0000000000000002UL});
 	}
 	#endregion Follow sets
 }

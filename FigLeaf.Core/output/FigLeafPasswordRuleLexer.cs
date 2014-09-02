@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.5 D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g 2014-09-01 18:43:25
+// $ANTLR 3.5 D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g 2014-09-02 17:26:51
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -47,6 +47,12 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
 	public const int DIGIT=6;
 	public const int OPENBRACKET=7;
 	public const int SPACE=8;
+
+		public override void EmitErrorMessage(string s)
+		{
+			throw new RecognitionException(s, input);
+		}
+
 
     // delegates
     // delegators
@@ -94,11 +100,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__9;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:9:6: ( 'Add' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:15:6: ( 'Add' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:9:8: 'Add'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:15:8: 'Add'
     		{
-    		DebugLocation(9, 8);
+    		DebugLocation(15, 8);
     		Match("Add"); 
 
 
@@ -132,11 +138,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__10;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:10:7: ( 'Digits' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:16:7: ( 'Digits' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:10:9: 'Digits'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:16:9: 'Digits'
     		{
-    		DebugLocation(10, 9);
+    		DebugLocation(16, 9);
     		Match("Digits"); 
 
 
@@ -170,11 +176,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__11;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:11:7: ( 'FileExtension' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:17:7: ( 'FileExtension' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:11:9: 'FileExtension'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:17:9: 'FileExtension'
     		{
-    		DebugLocation(11, 9);
+    		DebugLocation(17, 9);
     		Match("FileExtension"); 
 
 
@@ -208,11 +214,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__12;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:12:7: ( 'FileName' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:18:7: ( 'FileName' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:12:9: 'FileName'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:18:9: 'FileName'
     		{
-    		DebugLocation(12, 9);
+    		DebugLocation(18, 9);
     		Match("FileName"); 
 
 
@@ -246,11 +252,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__13;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:13:7: ( 'Left' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:19:7: ( 'Left' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:13:9: 'Left'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:19:9: 'Left'
     		{
-    		DebugLocation(13, 9);
+    		DebugLocation(19, 9);
     		Match("Left"); 
 
 
@@ -284,11 +290,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__14;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:14:7: ( 'Len' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:20:7: ( 'Len' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:14:9: 'Len'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:20:9: 'Len'
     		{
-    		DebugLocation(14, 9);
+    		DebugLocation(20, 9);
     		Match("Len"); 
 
 
@@ -322,11 +328,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__15;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:15:7: ( 'Lower' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:21:7: ( 'Lower' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:15:9: 'Lower'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:21:9: 'Lower'
     		{
-    		DebugLocation(15, 9);
+    		DebugLocation(21, 9);
     		Match("Lower"); 
 
 
@@ -360,11 +366,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__16;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:16:7: ( 'Password' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:22:7: ( 'Password' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:16:9: 'Password'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:22:9: 'Password'
     		{
-    		DebugLocation(16, 9);
+    		DebugLocation(22, 9);
     		Match("Password"); 
 
 
@@ -398,11 +404,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__17;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:17:7: ( 'RemoveFileExtension' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:23:7: ( 'RemoveFileExtension' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:17:9: 'RemoveFileExtension'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:23:9: 'RemoveFileExtension'
     		{
-    		DebugLocation(17, 9);
+    		DebugLocation(23, 9);
     		Match("RemoveFileExtension"); 
 
 
@@ -436,11 +442,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__18;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:18:7: ( 'Reverse' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:24:7: ( 'Reverse' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:18:9: 'Reverse'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:24:9: 'Reverse'
     		{
-    		DebugLocation(18, 9);
+    		DebugLocation(24, 9);
     		Match("Reverse"); 
 
 
@@ -474,11 +480,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__19;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:19:7: ( 'Right' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:25:7: ( 'Right' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:19:9: 'Right'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:25:9: 'Right'
     		{
-    		DebugLocation(19, 9);
+    		DebugLocation(25, 9);
     		Match("Right"); 
 
 
@@ -512,11 +518,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = T__20;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:20:7: ( 'Upper' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:26:7: ( 'Upper' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:20:9: 'Upper'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:26:9: 'Upper'
     		{
-    		DebugLocation(20, 9);
+    		DebugLocation(26, 9);
     		Match("Upper"); 
 
 
@@ -550,11 +556,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = DIGIT;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:95:2: ( '0' .. '9' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:111:2: ( '0' .. '9' )
     		DebugEnterAlt(1);
     		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:
     		{
-    		DebugLocation(95, 2);
+    		DebugLocation(111, 2);
     		if ((input.LA(1)>='0' && input.LA(1)<='9'))
     		{
     			input.Consume();
@@ -598,11 +604,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = SPACE;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:98:2: ( ' ' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:114:2: ( ' ' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:98:4: ' '
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:114:4: ' '
     		{
-    		DebugLocation(98, 4);
+    		DebugLocation(114, 4);
     		Match(' '); 
 
     		}
@@ -635,11 +641,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = COMMA;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:101:2: ( ',' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:117:2: ( ',' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:101:4: ','
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:117:4: ','
     		{
-    		DebugLocation(101, 4);
+    		DebugLocation(117, 4);
     		Match(','); 
 
     		}
@@ -672,11 +678,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = OPENBRACKET;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:104:2: ( '(' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:120:2: ( '(' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:104:4: '('
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:120:4: '('
     		{
-    		DebugLocation(104, 4);
+    		DebugLocation(120, 4);
     		Match('('); 
 
     		}
@@ -709,11 +715,11 @@ public partial class FigLeafPasswordRuleLexer : Antlr.Runtime.Lexer
     		{
     		int _type = CLOSEBRACKET;
     		int _channel = DefaultTokenChannel;
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:107:2: ( ')' )
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:123:2: ( ')' )
     		DebugEnterAlt(1);
-    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:107:4: ')'
+    		// D:\\Patrick\\FigLeaf\\fig-leaf\\FigLeaf.Core\\FigLeafPasswordRule.g:123:4: ')'
     		{
-    		DebugLocation(107, 4);
+    		DebugLocation(123, 4);
     		Match(')'); 
 
     		}

@@ -14,6 +14,22 @@ options
 	using FigLeaf.Core;
 	using FigLeaf.Core.PasswordRules;
 }
+
+@lexer::members 
+{
+	public override void EmitErrorMessage(string s)
+	{
+		throw new RecognitionException(s, input);
+	}
+}
+
+@rulecatch
+{
+	catch (RecognitionException e)
+	{
+		throw;
+	}
+}
 	
 baseArgument[string parseFileName, string parsePassword] returns[string value]
 	: password
