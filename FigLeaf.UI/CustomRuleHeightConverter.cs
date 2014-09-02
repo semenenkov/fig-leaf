@@ -9,7 +9,6 @@ namespace FigLeaf.UI
 	{
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			PasswordRule rule;
 			if ((value != null) && ((PasswordRule)value) == PasswordRule.Custom)
 				return new GridLength(1, GridUnitType.Star);
 
