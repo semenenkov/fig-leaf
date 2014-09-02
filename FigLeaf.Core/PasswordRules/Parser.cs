@@ -6,11 +6,6 @@ namespace FigLeaf.Core.PasswordRules
 	{
 		private readonly ParserStream _expressionStream;
 
-		public Parser(string expression)
-		{
-			_expressionStream = new ParserStream(expression);
-		}
-
 		public Parser(PasswordRule passwordRule, string customRuleExpression)
 		{
 			string expression = null;
@@ -27,6 +22,7 @@ namespace FigLeaf.Core.PasswordRules
 					break;
 				default:
 					expression = customRuleExpression;
+					break;
 			}
 
 			_expressionStream = new ParserStream(expression);
