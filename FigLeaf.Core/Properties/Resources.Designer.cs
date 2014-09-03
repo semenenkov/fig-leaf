@@ -645,6 +645,22 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can build your own password rules using formulas. The following variables and functions allowed:
+        ///- FileName - name of the file being processed, with extension and without full path
+        ///- Password - master password
+        ///- Reverse(string) - reverse string, Reverse(IMG_0123.jpg) = gpj.3210_GMI
+        ///- Upper(string) - uppercase string, Upper(IMG_0123.jpg) = IMG_0123.JPG
+        ///- Lower(string) - lowercase string, Lower(IMG_0123.jpg) = img_0123.jpg
+        ///- Digits(string) - extract digits from string, Digits(IMG_0123.jpg) = 1234
+        ///- [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Ui_Security_PasswordRule_Tip {
+            get {
+                return ResourceManager.GetString("Ui_Security_PasswordRule_Tip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show password.
         /// </summary>
         public static string Ui_Security_ShowPassword {

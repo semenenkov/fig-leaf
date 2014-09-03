@@ -329,4 +329,23 @@
   <data name="Ui_Security_CustomPasswordRule" xml:space="preserve">
     <value>Правило (формула)</value>
   </data>
+  <data name="Ui_Security_PasswordRule_Tip" xml:space="preserve">
+    <value>Вы можете настраивать свои правила используя формулы. Поддерживаются следующие переменные и функции:
+- FileName - имя обрабатываемого файла, с расширением, без полного пути
+- Password - базовый пароль
+- Reverse(string) - получить строку в обратном порядке, Reverse(IMG_0123.jpg) = gpj.3210_GMI
+- Upper(string) - привести строку к верхнему регистру, Upper(IMG_0123.jpg) = IMG_0123.JPG
+- Lower(string) - привести строку к нижнему регистру, Lower(IMG_0123.jpg) = img_0123.jpg
+- Digits(string) - извлечь числа из строки, Digits(IMG_0123.jpg) = 1234
+- RemoveFileExtension(string) - убрать расширение из имени файла, RemoveFileExtension(IMG_0123.jpg) = IMG_0123
+- FileExtension(string) - извлечь расширение файла, FileExtension(IMG_0123.jpg) = jpg
+- Len(string) - длина строки, Len(IMG_0123.jpg) = 12
+- Add(string, string) - сложить две строки, Add(test, IMG_0123.jpg) = testIMG_0123.jpg
+- Left(string, N) - взять первые N символов из строки, Left(IMG_0123.jpg, 3) = IMG
+- Right(string, N) - взять последние N символов из строки, Right(IMG_0123.jpg, 3) = jpg
+
+Например, правило 'Цифры из имени файла + базовый пароль' определено с помощью следующей формулы:
+
+Add(Digits(RemoveFileExtension(FileName)), Password)</value>
+  </data>
 </root>

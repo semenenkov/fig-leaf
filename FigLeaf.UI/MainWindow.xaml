@@ -204,7 +204,10 @@
                          HorizontalContentAlignment="Center" HorizontalAlignment="Right" 
                          FontSize="8" Width="25" Grid.Column="1" Grid.Row="0" Panel.ZIndex="3" />
 
-                    <Label Content="{x:Static CoreProperties:Resources.Ui_Security_PasswordRule}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1">
+                        <UI:QuestionTip VerticalAlignment="Center" Text="{x:Static CoreProperties:Resources.Ui_Security_PasswordRule_Tip}"/>
+                        <Label Content="{x:Static CoreProperties:Resources.Ui_Security_PasswordRule}" />
+                    </StackPanel>
                     <ComboBox
                         SelectedValue="{Binding Path=Settings.PasswordRule, Mode=TwoWay}"
                         SelectedValuePath="Value"

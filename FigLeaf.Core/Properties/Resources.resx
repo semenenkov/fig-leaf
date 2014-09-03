@@ -329,4 +329,23 @@ Enable this option to prevent unintended deletion that can be made by mistake.
   <data name="Ui_Security_CustomPasswordRule" xml:space="preserve">
     <value>Rule formula</value>
   </data>
+  <data name="Ui_Security_PasswordRule_Tip" xml:space="preserve">
+    <value>You can build your own password rules using formulas. The following variables and functions allowed:
+- FileName - name of the file being processed, with extension and without full path
+- Password - master password
+- Reverse(string) - reverse string, Reverse(IMG_0123.jpg) = gpj.3210_GMI
+- Upper(string) - uppercase string, Upper(IMG_0123.jpg) = IMG_0123.JPG
+- Lower(string) - lowercase string, Lower(IMG_0123.jpg) = img_0123.jpg
+- Digits(string) - extract digits from string, Digits(IMG_0123.jpg) = 1234
+- RemoveFileExtension(string) - remove extension part from file name, RemoveFileExtension(IMG_0123.jpg) = IMG_0123
+- FileExtension(string) - extract extension from file name, FileExtension(IMG_0123.jpg) = jpg
+- Len(string) - string length, Len(IMG_0123.jpg) = 12
+- Add(string, string) - concatenate two strings, Add(test, IMG_0123.jpg) = testIMG_0123.jpg
+- Left(string, N) - take first N characters from string, Left(IMG_0123.jpg, 3) = IMG
+- Right(string, N) - take last N characters from string, Right(IMG_0123.jpg, 3) = jpg
+
+For example, the rule 'File name numbers followed by master password' is defined using the following expression:
+
+Add(Digits(RemoveFileExtension(FileName)), Password)</value>
+  </data>
 </root>
