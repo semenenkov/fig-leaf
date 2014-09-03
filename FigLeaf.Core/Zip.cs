@@ -36,7 +36,7 @@ namespace FigLeaf.Core
 
 						using (Stream zipStream = zipFile.GetInputStream(zipEntry))
 						using (FileStream extractStream = File.Create(targetFile.FullName))
-							CopyStream(zipStream, extractStream);
+							zipStream.CopyTo(extractStream);
 
 						// expect to have one file per zip, target file is unique
 						break;
@@ -49,14 +49,6 @@ namespace FigLeaf.Core
 				// most likely it is a thumbnail, not a zip
 				return false;
 			}
-		}
-
-		public static void CopyStream(Stream sourceStream, Stream targetStream)
-		{
-			var buffer = new byte[0x10000];
-			int n;
-			while ((n = sourceStream.Read(buffer, 0, buffer.Length)) != 0)
-				targetStream.Write(buffer, 0, n);
 		}
 	}
 }
