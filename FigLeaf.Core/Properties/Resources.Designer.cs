@@ -351,6 +351,24 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to evaluate password rule.
+        /// </summary>
+        public static string Core_PasswordRule_BadFormula {
+            get {
+                return ResourceManager.GetString("Core_PasswordRule_BadFormula", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to evaluate password rule for file.
+        /// </summary>
+        public static string Core_PasswordRule_BadFormulaFormat {
+            get {
+                return ResourceManager.GetString("Core_PasswordRule_BadFormulaFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom rule.
         /// </summary>
         public static string Core_PasswordRule_Custom {

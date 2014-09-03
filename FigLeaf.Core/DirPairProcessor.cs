@@ -30,35 +30,25 @@ namespace FigLeaf.Core
 		private int _removedTargetWithoutSourceDirCount;
 		private string _excludeFolder;
 
-		public DirPairProcessor(DirPair dirPair, Settings settings, ILogger logger)
+		public DirPairProcessor(DirPair dirPair, ArchiveNameRule archiveNameRule, bool excludeFigLeafDir, Zip zip, Thumbnail thumbnail, ILogger logger)
 		{
 			_logger = logger;
 
-			try
-			{
-				_sourceDirPath = dirPair.Source;
-				_targetDirPath = dirPair.Target;
-				_archiveNameRule = settings.ArchiveNameRule;
+			_sourceDirPath = dirPair.Source;
+			_targetDirPath = dirPair.Target;
+			_archiveNameRule = archiveNameRule;
 				
-				var passwordRuleParser = new PasswordGenerator(settings.PasswordRule, settings.CustomPasswordRule, settings.MasterPassword);
-				_zip = new Zip(passwordRuleParser);
+			_zip = zip;
+			_thumbnail = thumbnail;
 
-				if (settings.EnableThumbnails)
-					_thumbnail = new Thumbnail(settings, Console.WriteLine);
-
-				if (settings.ExcludeFigLeafDir)
-				{
-					string exePath = NormalizePath(Path.GetDirectoryName(Application.ExecutablePath));
-					string normalizedSourcePath = NormalizePath(_sourceDirPath);
-					if (exePath.StartsWith(normalizedSourcePath)) // is subfolder
-					{
-						_excludeFolder = exePath;
-					}
-				}
-			}
-			catch (Exception e)
+			if (excludeFigLeafDir)
 			{
-				_logger.Log(false, string.Format(Properties.Resources.Common_ErrorFormat, e.Message));
+				string exePath = NormalizePath(Path.GetDirectoryName(Application.ExecutablePath));
+				string normalizedSourcePath = NormalizePath(_sourceDirPath);
+				if (exePath.StartsWith(normalizedSourcePath)) // is subfolder
+				{
+					_excludeFolder = exePath;
+				}
 			}
 		}
 
@@ -66,54 +56,40 @@ namespace FigLeaf.Core
 		{
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_StartPackFormat, _sourceDirPath, _targetDirPath));
 
-			try
+			var sourceDir = new DirectoryInfo(_sourceDirPath);
+			var targetDir = new DirectoryInfo(_targetDirPath);
+
+			if (!sourceDir.Exists)
+				throw new ApplicationException(Properties.Resources.Core_FileProcessor_NoSourceDirError);
+
+			if (!targetDir.Exists)
 			{
-				var sourceDir = new DirectoryInfo(_sourceDirPath);
-				var targetDir = new DirectoryInfo(_targetDirPath);
-
-				if (!sourceDir.Exists)
-					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NoSourceDirError);
-
-				if (!targetDir.Exists)
-				{
-					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreateDirFormat, _targetDirPath));
-					targetDir.Create();
-					_createdDirCount++;
-				}
-
-				ProcessDir(sourceDir, targetDir, cleanTargetConfirm, PackFile, cancellationToken);
-				LogSummary(true);
+				_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreateDirFormat, _targetDirPath));
+				targetDir.Create();
+				_createdDirCount++;
 			}
-			catch (Exception e)
-			{
-				_logger.Log(false, string.Format(Properties.Resources.Common_ErrorFormat, e.Message));
-			}
+
+			ProcessDir(sourceDir, targetDir, cleanTargetConfirm, PackFile, cancellationToken);
+			LogSummary(true);
 		}
 
 		public void Unpack(string targetPath, CancellationToken cancellationToken)
 		{
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_StartUnpackFormat, _targetDirPath, targetPath));
 
-			try
-			{
-				var sourceDir = new DirectoryInfo(_targetDirPath);
-				var targetDir = new DirectoryInfo(targetPath);
+			var sourceDir = new DirectoryInfo(_targetDirPath);
+			var targetDir = new DirectoryInfo(targetPath);
 
-				if (!sourceDir.Exists)
-					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NoSourceDirError);
+			if (!sourceDir.Exists)
+				throw new ApplicationException(Properties.Resources.Core_FileProcessor_NoSourceDirError);
 
-				if (!targetDir.Exists)
-					targetDir.Create();
-				else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
-					throw new ApplicationException(Properties.Resources.Core_FileProcessor_NonEmptyTargetDirError);
+			if (!targetDir.Exists)
+				targetDir.Create();
+			else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
+				throw new ApplicationException(Properties.Resources.Core_FileProcessor_NonEmptyTargetDirError);
 
-				ProcessDir(sourceDir, targetDir, null, UnpackFile, cancellationToken);
-				LogSummary(false);
-			}
-			catch (Exception e)
-			{
-				_logger.Log(false, string.Format(Properties.Resources.Common_ErrorFormat, e.Message));
-			}
+			ProcessDir(sourceDir, targetDir, null, UnpackFile, cancellationToken);
+			LogSummary(false);
 		}
 
 		private void LogSummary(bool isPack)

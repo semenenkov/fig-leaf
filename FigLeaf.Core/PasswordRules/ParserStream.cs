@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Antlr.Runtime;
+﻿using Antlr.Runtime;
 
 namespace FigLeaf.Core.PasswordRules
 {
@@ -10,7 +6,7 @@ namespace FigLeaf.Core.PasswordRules
 	{
 		public ParserStream(string input)
 		{
-			// TODO process l10n
+			// TODO process formula l10n if needed (not required yet)
 			data = input.ToCharArray();
 			n = data.Length;
 		}

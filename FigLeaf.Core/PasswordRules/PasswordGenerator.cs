@@ -1,4 +1,5 @@
-﻿using Antlr.Runtime;
+﻿using System;
+using Antlr.Runtime;
 
 namespace FigLeaf.Core.PasswordRules
 {
@@ -11,7 +12,7 @@ namespace FigLeaf.Core.PasswordRules
 		{
 			_masterPassword = masterPassword;
 
-			string expression = null;
+			string expression;
 			switch (passwordRule)
 			{
 				case PasswordRule.FileNameNumbersPlusPassword:
@@ -29,15 +30,28 @@ namespace FigLeaf.Core.PasswordRules
 			}
 
 			_expressionStream = new ParserStream(expression);
+
+			// test expression syntax
+			GetPassword("test123.jpg", true);
 		}
 
-		public string GetPassword(string fileName)
+		public string GetPassword(string fileName, bool isWarmup = false)
 		{
-			_expressionStream.Reset();
-			var lexer = new FigLeafPasswordRuleLexer(_expressionStream);
-			var tokenStream = new CommonTokenStream(lexer);
-			var parser = new FigLeafPasswordRuleParser(tokenStream);
-			return parser.functionArgument(fileName, _masterPassword);
+			try
+			{
+				_expressionStream.Reset();
+				var lexer = new FigLeafPasswordRuleLexer(_expressionStream);
+				var tokenStream = new CommonTokenStream(lexer);
+				var parser = new FigLeafPasswordRuleParser(tokenStream);
+				return parser.functionArgument(fileName, _masterPassword);
+			}
+			catch (RecognitionException)
+			{
+				string message = isWarmup
+					? Properties.Resources.Core_PasswordRule_BadFormula
+					: string.Format(Properties.Resources.Core_PasswordRule_BadFormulaFormat, fileName);
+				throw new ApplicationException(message);
+			}
 		}
 	}
 }

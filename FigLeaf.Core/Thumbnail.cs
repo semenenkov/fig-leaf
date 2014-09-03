@@ -11,16 +11,14 @@ namespace FigLeaf.Core
 	{
 		private readonly int _size;
 		private readonly List<string> _videoExts;
-		private readonly Action<string> _logger;
 
-		public Thumbnail(Settings settings, Action<string> logger)
+		public Thumbnail(Settings settings)
 		{
 			if (!settings.EnableThumbnails)
 				throw new ApplicationException("Trying to create thumbnail generator for disabled thumbnails option");
 
 			_size = settings.ThumbnailSize;
 			_videoExts = settings.VideoExtensions;
-			_logger = logger;
 		}
 
 		public string GetThumbnailFileName(string source, out bool isVideo)
@@ -46,11 +44,9 @@ namespace FigLeaf.Core
 					thumb = image.GetThumbnailImage(w, h, () => false, IntPtr.Zero);
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
-				// TODO remove? (regular case for mp3, etc)
-				if (_logger != null)
-					_logger(string.Format(Properties.Resources.Core_ThumbErrorFormat, source, e.Message));
+				// may be thrown for any non-image file (mp3, etc)
 				thumb = new Bitmap(_size, _size);
 				Graphics graphics = Graphics.FromImage(thumb);
 				int fontSize = _size / 10;

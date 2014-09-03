@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-
+using FigLeaf.Core.PasswordRules;
 using Ookii.Dialogs.Wpf;
 
 using FigLeaf.Core;
@@ -102,7 +102,7 @@ namespace FigLeaf.UI
 			grDirs.ItemsSource = Settings.Dirs;
 		}
 
-		private void UpdateTarget(object sender, RoutedEventArgs e)
+		private void UpdateTarget(object sender, RoutedEventArgs ea)
 		{
 			LayoutRoot.IsEnabled = false;
 			_cancellationTokenSource = new CancellationTokenSource();
@@ -113,12 +113,27 @@ namespace FigLeaf.UI
 						IEnumerable<DirPair> dirPairs = Settings.HasMultipleDirs
 							? Settings.Dirs
 							: Settings.Dirs.Take(1);
+
+						var passwordRuleParser = new PasswordGenerator(Settings.PasswordRule, Settings.CustomPasswordRule, Settings.MasterPassword);
+						var zip = new Zip(passwordRuleParser);
+						var thumbnail = Settings.EnableThumbnails
+							? new Thumbnail(Settings)
+							: null;
+
 						foreach (DirPair dirPair in dirPairs)
 						{
-							var fileProcessor = new DirPairProcessor(dirPair, Settings, _logger);
-							fileProcessor.Pack(_cancellationTokenSource.Token, GetCleanTargetConfirm(Settings.ConfirmDelete));
-							if (_cancellationTokenSource.IsCancellationRequested)
-								break;
+							try
+							{
+								var fileProcessor = new DirPairProcessor(
+									dirPair, Settings.ArchiveNameRule, Settings.ExcludeFigLeafDir, zip, thumbnail, _logger);
+								fileProcessor.Pack(_cancellationTokenSource.Token, GetCleanTargetConfirm(Settings.ConfirmDelete));
+								if (_cancellationTokenSource.IsCancellationRequested)
+									break;
+							}
+							catch (Exception e)
+							{
+								_logger.Log(false, string.Format(Core.Properties.Resources.Common_ErrorFormat, e.Message));
+							}
 						}
 					}, 
 					_cancellationTokenSource.Token
@@ -175,7 +190,9 @@ namespace FigLeaf.UI
 			Task.Factory
 				.StartNew(() =>
 					{
-						var fileProcessor = new DirPairProcessor(dirPair, Settings, _logger);
+						var passwordRuleParser = new PasswordGenerator(Settings.PasswordRule, Settings.CustomPasswordRule, Settings.MasterPassword);
+						var zip = new Zip(passwordRuleParser);
+						var fileProcessor = new DirPairProcessor(dirPair, Settings.ArchiveNameRule, false, zip, null, _logger);
 						fileProcessor.Unpack(targetPath, _cancellationTokenSource.Token);
 					}
 					, _cancellationTokenSource.Token
@@ -186,7 +203,18 @@ namespace FigLeaf.UI
 
 		private void LogErrorIfAny(Task o)
 		{
-			Dispatcher.Invoke(new Action(() => { if (o.Exception != null) _logger.Log(false, o.Exception.ToString()); }));
+			Dispatcher.Invoke(new Action(() =>
+			{
+				if (o.Exception == null) return;
+
+				string message = o.Exception.InnerExceptions != null 
+					? string.Join(Environment.NewLine, o.Exception.InnerExceptions.Select(e => e.Message))
+					: o.Exception.InnerException != null
+						? o.Exception.InnerException.Message
+						: o.Exception.Message;
+
+				_logger.Log(false, message);
+			}));
 		}
 
 		private void CancelAction(object sender, RoutedEventArgs e)
