@@ -263,6 +263,9 @@ namespace FigLeaf.Core
 			bool isVideo;
 			skipExisting = false;
 			string thumbnailFileName = _thumbnail.GetThumbnailFileName(sourceFile.FullName, out isVideo);
+			if (string.IsNullOrEmpty(thumbnailFileName))
+				return;
+
 			string thumbnailFilePath = Path.Combine(targetDir.FullName, thumbnailFileName);
 			if (File.Exists(thumbnailFilePath))
 			{
