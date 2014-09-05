@@ -122,19 +122,8 @@ namespace FigLeaf.Core
 			Action<FileInfo, DirectoryInfo, ConcurrentBag<string>, CancellationToken> processFile,
 			CancellationToken cancellationToken)
 		{
-			if (cancellationToken.IsCancellationRequested)
+			if (cancellationToken.IsCancellationRequested || IsExcludeDir(sourceDir))
 				return;
-
-			if (!string.IsNullOrEmpty(_excludeFolder))
-			{
-				if (_excludeFolder == NormalizePath(sourceDir.FullName))
-				{
-					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_SkipFigLeafDirFormat, _excludeFolder));
-					// clear this path to skip this check for other folders
-					_excludeFolder = null;
-					return;
-				}
-			}
 
 			_processedDirCount++;
 
@@ -171,6 +160,9 @@ namespace FigLeaf.Core
 			IEnumerable<DirectoryInfo> subDirs = sourceDir.GetDirectories();
 			foreach (var sourceSubDir in subDirs)
 			{
+				if (IsExcludeDir(sourceSubDir))
+					continue;
+
 				var targetSubDir = new DirectoryInfo(Path.Combine(targetDir.FullName, sourceSubDir.Name));
 				if (!targetSubDir.Exists)
 				{
@@ -206,6 +198,21 @@ namespace FigLeaf.Core
 					}
 				}
 			}
+		}
+
+		private bool IsExcludeDir(DirectoryInfo sourceDir)
+		{
+			if (!string.IsNullOrEmpty(_excludeFolder))
+			{
+				if (_excludeFolder == NormalizePath(sourceDir.FullName))
+				{
+					_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_SkipFigLeafDirFormat, _excludeFolder));
+					// clear this path to skip this check for other folders
+					_excludeFolder = null;
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private void PackFile(
