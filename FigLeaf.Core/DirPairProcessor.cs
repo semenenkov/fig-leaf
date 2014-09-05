@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using FigLeaf.Core.PasswordRules;
 
 namespace FigLeaf.Core
 {
@@ -29,9 +29,12 @@ namespace FigLeaf.Core
 		private int _removedTargetWithoutSourceFileCount;
 		private int _removedTargetWithoutSourceDirCount;
 		private string _excludeFolder;
+		private Stopwatch _stopwatch;
 
 		public DirPairProcessor(DirPair dirPair, ArchiveNameRule archiveNameRule, bool excludeFigLeafDir, Zip zip, Thumbnail thumbnail, ILogger logger)
 		{
+			_stopwatch = Stopwatch.StartNew();
+
 			_logger = logger;
 
 			_sourceDirPath = dirPair.Source;
@@ -94,6 +97,8 @@ namespace FigLeaf.Core
 
 		private void LogSummary(bool isPack)
 		{
+			_stopwatch.Stop();
+			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_DoneInFormat, _stopwatch.Elapsed, _stopwatch.ElapsedMilliseconds));
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_ProcessedSourceDirsFormat, _processedDirCount));
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_ProcessedSourceFilesFormat, _processedFileCount));
 			_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetDirsFormat, _createdDirCount));

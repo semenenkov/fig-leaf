@@ -234,6 +234,15 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Done in {0} ({1} ms.).
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_DoneInFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_DoneInFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processed source folders: {0}.
         /// </summary>
         public static string Core_FileProcessor_LogSum_ProcessedSourceDirsFormat {

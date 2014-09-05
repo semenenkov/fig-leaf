@@ -348,4 +348,7 @@
 
 Add(Digits(RemoveFileExtension(FileName)), Password)</value>
   </data>
+  <data name="Core_FileProcessor_LogSum_DoneInFormat" xml:space="preserve">
+    <value>Выполнено за {0} ({1} мс.)</value>
+  </data>
 </root>
