@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -29,7 +30,7 @@ namespace FigLeaf.Core
 		private int _removedTargetWithoutSourceFileCount;
 		private int _removedTargetWithoutSourceDirCount;
 		private string _excludeFolder;
-		private Stopwatch _stopwatch;
+		private readonly Stopwatch _stopwatch;
 
 		public DirPairProcessor(DirPair dirPair, ArchiveNameRule archiveNameRule, bool excludeFigLeafDir, Zip zip, Thumbnail thumbnail, ILogger logger)
 		{
@@ -118,7 +119,7 @@ namespace FigLeaf.Core
 			DirectoryInfo sourceDir, 
 			DirectoryInfo targetDir, 
 			Func<string, bool> cleanTargetConfirm,
-			Action<FileInfo, DirectoryInfo, HashSet<string>, CancellationToken> processFile,
+			Action<FileInfo, DirectoryInfo, ConcurrentBag<string>, CancellationToken> processFile,
 			CancellationToken cancellationToken)
 		{
 			if (cancellationToken.IsCancellationRequested)
@@ -139,12 +140,12 @@ namespace FigLeaf.Core
 
 			// 1. process own files
 			IEnumerable<FileInfo> sourceFiles = sourceDir.GetFiles();
-			var targetValidFileNames = new HashSet<string>();
-			foreach (var file in sourceFiles)
+			var targetValidFileNames = new ConcurrentBag<string>();
+			sourceFiles.AsParallel().ForAll(file =>
 			{
-				_processedFileCount++;
+				Interlocked.Increment(ref _processedFileCount);
 				processFile(file, targetDir, targetValidFileNames, cancellationToken);
-			}
+			});
 
 			// 2. remove unexisting target files
 			if (cleanTargetConfirm != null)
@@ -210,7 +211,7 @@ namespace FigLeaf.Core
 		private void PackFile(
 			FileInfo sourceFile, 
 			DirectoryInfo targetDir, 
-			HashSet<string> targetValidFileNames,
+			ConcurrentBag<string> targetValidFileNames,
 			CancellationToken cancellationToken)
 		{
 			if (cancellationToken.IsCancellationRequested)
@@ -295,7 +296,7 @@ namespace FigLeaf.Core
 		private void UnpackFile(
 			FileInfo sourceFile, 
 			DirectoryInfo targetDir, 
-			HashSet<string> targetValidFileNames,
+			ConcurrentBag<string> targetValidFileNames,
 			CancellationToken cancellationToken)
 		{
 			if (cancellationToken.IsCancellationRequested)

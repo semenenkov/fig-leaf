@@ -5,31 +5,28 @@ namespace FigLeaf.Core.PasswordRules
 {
 	public class PasswordGenerator
 	{
-		private readonly ParserStream _expressionStream;
 		private readonly string _masterPassword;
+		private readonly string _expression;
 
 		public PasswordGenerator(PasswordRule passwordRule, string customRuleExpression, string masterPassword)
 		{
 			_masterPassword = masterPassword;
 
-			string expression;
 			switch (passwordRule)
 			{
 				case PasswordRule.FileNameNumbersPlusPassword:
-					expression = "Add(Digits(RemoveFileExtension(FileName)), Password)";
+					_expression = "Add(Digits(RemoveFileExtension(FileName)), Password)";
 					break;
 				case PasswordRule.Password:
-					expression = "Password";
+					_expression = "Password";
 					break;
 				case PasswordRule.PasswordPlusFileNameNumbers:
-					expression = "Add(Password, Digits(RemoveFileExtension(FileName)))";
+					_expression = "Add(Password, Digits(RemoveFileExtension(FileName)))";
 					break;
 				default:
-					expression = customRuleExpression;
+					_expression = customRuleExpression;
 					break;
 			}
-
-			_expressionStream = new ParserStream(expression);
 
 			// test expression syntax
 			GetPassword("test123.jpg", true);
@@ -39,8 +36,8 @@ namespace FigLeaf.Core.PasswordRules
 		{
 			try
 			{
-				_expressionStream.Reset();
-				var lexer = new FigLeafPasswordRuleLexer(_expressionStream);
+				var expressionStream = new ParserStream(_expression);
+				var lexer = new FigLeafPasswordRuleLexer(expressionStream);
 				var tokenStream = new CommonTokenStream(lexer);
 				var parser = new FigLeafPasswordRuleParser(tokenStream);
 				return parser.functionArgument(fileName, _masterPassword);

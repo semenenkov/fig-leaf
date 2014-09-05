@@ -132,7 +132,7 @@ namespace FigLeaf.UI
 							}
 							catch (Exception e)
 							{
-								_logger.Log(false, string.Format(Core.Properties.Resources.Common_ErrorFormat, e.Message));
+								LogException(e);
 							}
 						}
 					}, 
@@ -203,18 +203,26 @@ namespace FigLeaf.UI
 
 		private void LogErrorIfAny(Task o)
 		{
-			Dispatcher.Invoke(new Action(() =>
+			Dispatcher.Invoke(new Action(() => LogException(o.Exception)));
+		}
+
+		private void LogException(Exception e)
+		{
+			string message;
+			var aggregate = e as AggregateException;
+			if (aggregate == null)
 			{
-				if (o.Exception == null) return;
-
-				string message = o.Exception.InnerExceptions != null 
-					? string.Join(Environment.NewLine, o.Exception.InnerExceptions.Select(e => e.Message))
-					: o.Exception.InnerException != null
-						? o.Exception.InnerException.Message
-						: o.Exception.Message;
-
-				_logger.Log(false, message);
-			}));
+				message = e.Message;
+			}
+			else
+			{
+				message = aggregate.InnerExceptions != null 
+					? string.Join(Environment.NewLine, aggregate.InnerExceptions.Select(ie => ie.Message).Distinct())
+					: aggregate.InnerException != null
+						? aggregate.InnerException.Message
+						: aggregate.Message;
+			}
+			_logger.Log(false, string.Format(Core.Properties.Resources.Common_ErrorFormat, message));
 		}
 
 		private void CancelAction(object sender, RoutedEventArgs e)

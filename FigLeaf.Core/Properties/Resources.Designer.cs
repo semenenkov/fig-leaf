@@ -234,7 +234,7 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Done in {0} ({1} ms.).
+        ///   Looks up a localized string similar to Done in {0:hh\:mm\:ss} ({1} ms.).
         /// </summary>
         public static string Core_FileProcessor_LogSum_DoneInFormat {
             get {
