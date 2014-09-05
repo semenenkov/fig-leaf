@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Shell;
 using FigLeaf.Core.PasswordRules;
 using Ookii.Dialogs.Wpf;
 
@@ -40,9 +41,12 @@ namespace FigLeaf.UI
 		}
 
 		#region ILogger
-		public void Reset()
+		public void Start()
 		{
+			LayoutRoot.IsEnabled = false;
 			txtLog.Text = null;
+			TaskbarItemInfo.ProgressValue = 0;
+			TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
 		}
 
 		public void Log(bool isDetail, string message)
@@ -75,6 +79,21 @@ namespace FigLeaf.UI
 				txtLog.ScrollToEnd();
 			}));
 		}
+
+		public void Stop()
+		{
+			LayoutRoot.IsEnabled = true;
+			TaskbarItemInfo.ProgressValue = 1;
+			TaskbarItemInfo.ProgressState = !IsActive 
+				? TaskbarItemProgressState.Normal 
+				: TaskbarItemProgressState.None;
+		}
+
+		public bool IsRunning
+		{
+			get { return !LayoutRoot.IsEnabled; }
+		}
+
 		#endregion
 
 		private void WindowClosing(object sender, CancelEventArgs e)
@@ -104,9 +123,8 @@ namespace FigLeaf.UI
 
 		private void UpdateTarget(object sender, RoutedEventArgs ea)
 		{
-			LayoutRoot.IsEnabled = false;
 			_cancellationTokenSource = new CancellationTokenSource();
-			_logger.Reset();
+			_logger.Start();
 			Task.Factory
 				.StartNew(() =>
 					{
@@ -139,7 +157,7 @@ namespace FigLeaf.UI
 					_cancellationTokenSource.Token
 				)
 				.ContinueWith(LogErrorIfAny, TaskContinuationOptions.OnlyOnFaulted)
-				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
+				.ContinueWith(o => Dispatcher.Invoke(new Action(() => _logger.Stop())));
 		}
 
 		private static Func<string, bool> GetCleanTargetConfirm(bool confirmDelete)
@@ -184,9 +202,8 @@ namespace FigLeaf.UI
 
 			string targetPath = dlg.SelectedPath;
 
-			LayoutRoot.IsEnabled = false;
 			_cancellationTokenSource = new CancellationTokenSource();
-			_logger.Reset();
+			_logger.Start();
 			Task.Factory
 				.StartNew(() =>
 					{
@@ -198,7 +215,7 @@ namespace FigLeaf.UI
 					, _cancellationTokenSource.Token
 				)
 				.ContinueWith(LogErrorIfAny, TaskContinuationOptions.OnlyOnFaulted)
-				.ContinueWith(o => Dispatcher.Invoke(new Action(() => { LayoutRoot.IsEnabled = true; })));
+				.ContinueWith(o => Dispatcher.Invoke(new Action(() => _logger.Stop())));
 		}
 
 		private void LogErrorIfAny(Task o)
@@ -277,6 +294,13 @@ namespace FigLeaf.UI
 			}
 
 			return true;
+		}
+
+		private void WindowActivated(object sender, EventArgs e)
+		{
+			// reset task bar button state
+			if (!_logger.IsRunning)
+				TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
 		}
 	}
 }

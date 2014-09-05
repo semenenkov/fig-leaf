@@ -12,7 +12,7 @@ namespace FigLeaf.Console
 			_isDetail = isDetail;
 		}
 
-		public void Reset()
+		public void Start()
 		{
 			_newLineOnLog = false;
 		}
@@ -38,6 +38,19 @@ namespace FigLeaf.Console
 
 			System.Console.Write('.');
 			_newLineOnLog = true;
+		}
+
+		public void Stop()
+		{
+		}
+
+		public bool IsRunning 
+		{ 
+			get 
+			{
+				// not relevant for console
+				return false;
+			}
 		}
 	}
 }

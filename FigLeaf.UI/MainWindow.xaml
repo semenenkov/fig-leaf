@@ -5,7 +5,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Core="clr-namespace:FigLeaf.Core;assembly=FigLeaf.Core" 
         xmlns:CoreProperties="clr-namespace:FigLeaf.Core.Properties;assembly=FigLeaf.Core" 
-        Title="{x:Static CoreProperties:Resources.Common_AppTitle}" Height="600" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen">
+        Title="{x:Static CoreProperties:Resources.Common_AppTitle}" Height="600" Width="800" Icon="FigLeaf.ico" Closing="WindowClosing" WindowStartupLocation="CenterScreen" Activated="WindowActivated">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -67,6 +67,10 @@
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
     </Window.Resources>
+    
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo/>
+    </Window.TaskbarItemInfo>
 
     <DockPanel LastChildFill="True" Name="LayoutRoot">
         <DockPanel.Background>

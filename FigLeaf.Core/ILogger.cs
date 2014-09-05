@@ -2,8 +2,10 @@
 {
 	public interface ILogger
 	{
-		void Reset();
+		void Start();
 		void Log(bool isDetail, string message);
 		void LogProgress();
+		void Stop();
+		bool IsRunning { get; }
 	}
 }
