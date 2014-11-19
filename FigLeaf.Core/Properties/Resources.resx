@@ -351,4 +351,10 @@ Add(Digits(RemoveFileExtension(FileName)), Password)</value>
   <data name="Core_FileProcessor_LogSum_DoneInFormat" xml:space="preserve">
     <value>Done in {0:hh\:mm\:ss} ({1} ms.)</value>
   </data>
+  <data name="Core_FileProcessor_LogSum_FailedTargetThumbsFormat" xml:space="preserve">
+    <value>Failed to create target thumbnails: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_ThumbFailureFormat" xml:space="preserve">
+    <value>Failed to create thumbnail for file {0} ({1} bytes), possibly it is corrupted</value>
+  </data>
 </root>

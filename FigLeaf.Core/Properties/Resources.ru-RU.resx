@@ -351,4 +351,10 @@ Add(Digits(RemoveFileExtension(FileName)), Password)</value>
   <data name="Core_FileProcessor_LogSum_DoneInFormat" xml:space="preserve">
     <value>Выполнено за {0:hh\:mm\:ss} ({1} мс.)</value>
   </data>
+  <data name="Core_FileProcessor_LogSum_FailedTargetThumbsFormat" xml:space="preserve">
+    <value>Ошибок создания эскизов: {0}</value>
+  </data>
+  <data name="Core_FileProcessor_ThumbFailureFormat" xml:space="preserve">
+    <value>Ошибка создания эскиза для файла {0} ({1} байт), возможно файл поврежден</value>
+  </data>
 </root>

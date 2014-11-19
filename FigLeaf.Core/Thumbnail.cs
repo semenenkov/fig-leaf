@@ -34,7 +34,7 @@ namespace FigLeaf.Core
 			return string.Format("{0}.jpg", Path.GetFileName(source));
 		}
 
-		public void MakeForPhoto(string source, string target)
+		public bool MakeForPhoto(string source, string target)
 		{
 			try
 			{
@@ -44,27 +44,24 @@ namespace FigLeaf.Core
 					int h = image.Height > image.Width ? _size : _size * image.Height / image.Width;
 					using (Image thumb = image.GetThumbnailImage(w, h, () => false, IntPtr.Zero))
 						thumb.Save(target, ImageFormat.Jpeg);
+					return true;
 				}
 			}
 			catch
 			{
-				// may be thrown for any non-image file (mp3, etc)
-				// don't do anything
-				//thumb = new Bitmap(_size, _size);
-				//Graphics graphics = Graphics.FromImage(thumb);
-				//int fontSize = _size / 10;
-				//if (fontSize < 5) fontSize = 5;
-				//graphics.DrawString(Path.GetExtension(source), new Font(FontFamily.GenericSansSerif, fontSize), Brushes.GreenYellow, fontSize / 2, fontSize / 2);
+				// may be thrown for bad image or not supported format
+				return false;
 			}
 		}
 
-		public void MakeForVideo(string source, string target)
+		public bool MakeForVideo(string source, string target)
 		{
 			var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
 			string tmpFile = target + ".tmp";
 			ffMpeg.GetVideoThumbnail(source, tmpFile);
-			MakeForPhoto(tmpFile, target);
+			bool result = MakeForPhoto(tmpFile, target);
 			File.Delete(tmpFile);
+			return result;
 		}
 
 		private bool IsSupportedPhotoFormat(string ext)

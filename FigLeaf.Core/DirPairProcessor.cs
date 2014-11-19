@@ -25,6 +25,7 @@ namespace FigLeaf.Core
 		private int _createdDirCount;
 		private int _createdFileCount;
 		private int _createdThumbnailCount;
+		private int _failedThumbnailCount;
 		private int _removedObsoleteFileCount;
 		private int _removedObsoleteThumbnailCount;
 		private int _removedTargetWithoutSourceFileCount;
@@ -108,6 +109,7 @@ namespace FigLeaf.Core
 			if (isPack)
 			{
 				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_CreatedTargetThumbsFormat, _createdThumbnailCount));
+				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_FailedTargetThumbsFormat, _failedThumbnailCount));
 				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetFilesFormat, _removedObsoleteFileCount));
 				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedObsoleteTargetThumbsFormat, _removedObsoleteThumbnailCount));
 				_logger.Log(false, string.Format(Properties.Resources.Core_FileProcessor_LogSum_RemovedTargetFilesWoSourceFormat, _removedTargetWithoutSourceFileCount));
@@ -289,18 +291,30 @@ namespace FigLeaf.Core
 				}
 			}
 
-			if (!skipExisting)
+			if (skipExisting)
+			{
+				targetValidFileNames.Add(Path.GetFileName(thumbnailFilePath));
+			}
+			else 
 			{
 				_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_CreatingThumbFormat, thumbnailFilePath));
-				if (isVideo)
-					_thumbnail.MakeForVideo(sourceFile.FullName, thumbnailFilePath);
-				else
-					_thumbnail.MakeForPhoto(sourceFile.FullName, thumbnailFilePath);
-				File.SetLastWriteTime(thumbnailFilePath, sourceFileTime);
-				_createdThumbnailCount++;
-			}
+				bool thumbCreated = isVideo
+					? _thumbnail.MakeForVideo(sourceFile.FullName, thumbnailFilePath)
+					: _thumbnail.MakeForPhoto(sourceFile.FullName, thumbnailFilePath);
 
-			targetValidFileNames.Add(Path.GetFileName(thumbnailFilePath));
+				if (thumbCreated)
+				{
+					File.SetLastWriteTime(thumbnailFilePath, sourceFileTime);
+					_createdThumbnailCount++;
+					targetValidFileNames.Add(Path.GetFileName(thumbnailFilePath));
+				}
+				else
+				{
+					_logger.Log(false,
+						string.Format(Properties.Resources.Core_FileProcessor_ThumbFailureFormat, sourceFile.FullName, sourceFile.Length));
+					_failedThumbnailCount++;
+				}
+			}
 		}
 
 		private void UnpackFile(

@@ -243,6 +243,15 @@ namespace FigLeaf.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to create target thumbnails: {0}.
+        /// </summary>
+        public static string Core_FileProcessor_LogSum_FailedTargetThumbsFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_LogSum_FailedTargetThumbsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processed source folders: {0}.
         /// </summary>
         public static string Core_FileProcessor_LogSum_ProcessedSourceDirsFormat {
@@ -347,6 +356,15 @@ namespace FigLeaf.Core.Properties {
         public static string Core_FileProcessor_StartUnpackFormat {
             get {
                 return ResourceManager.GetString("Core_FileProcessor_StartUnpackFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create thumbnail for file {0} ({1} bytes), possibly it is corrupted.
+        /// </summary>
+        public static string Core_FileProcessor_ThumbFailureFormat {
+            get {
+                return ResourceManager.GetString("Core_FileProcessor_ThumbFailureFormat", resourceCulture);
             }
         }
         
