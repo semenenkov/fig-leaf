@@ -58,10 +58,18 @@ namespace FigLeaf.Core
 		{
 			var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
 			string tmpFile = target + ".tmp";
-			ffMpeg.GetVideoThumbnail(source, tmpFile);
-			bool result = MakeForPhoto(tmpFile, target);
-			File.Delete(tmpFile);
-			return result;
+			try
+			{
+				ffMpeg.GetVideoThumbnail(source, tmpFile);
+				bool result = MakeForPhoto(tmpFile, target);
+				File.Delete(tmpFile);
+				return result;
+			}
+			catch
+			{
+				// may be thrown for bad image or not supported format
+				return false;
+			}
 		}
 
 		private bool IsSupportedPhotoFormat(string ext)
