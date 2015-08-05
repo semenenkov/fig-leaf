@@ -74,7 +74,7 @@ namespace FigLeaf.Core
 				_createdDirCount++;
 			}
 
-			ProcessDir(sourceDir, targetDir, cleanTargetConfirm, PackFile, cancellationToken);
+			ProcessDir(sourceDir, targetDir, cleanTargetConfirm, null, PackFile, cancellationToken);
 			LogSummary(true);
 		}
 
@@ -93,7 +93,7 @@ namespace FigLeaf.Core
 			else if (targetDir.GetFiles().Length > 0 || targetDir.GetDirectories().Length > 0)
 				throw new ApplicationException(Properties.Resources.Core_FileProcessor_NonEmptyTargetDirError);
 
-			ProcessDir(sourceDir, targetDir, null, UnpackFile, cancellationToken);
+			ProcessDir(sourceDir, targetDir, null, null, UnpackFile, cancellationToken);
 			LogSummary(false);
 		}
 
@@ -121,6 +121,7 @@ namespace FigLeaf.Core
 			DirectoryInfo sourceDir, 
 			DirectoryInfo targetDir, 
 			Func<string, bool> cleanTargetConfirm,
+			bool? cleanTargetConfirmResult,
 			Action<FileInfo, DirectoryInfo, ConcurrentBag<string>, CancellationToken> processFile,
 			CancellationToken cancellationToken)
 		{
@@ -145,7 +146,10 @@ namespace FigLeaf.Core
 				{
 					if (!targetValidFileNames.Contains(targetFile.Name))
 					{
-						if (!cleanTargetConfirm(targetFile.FullName))
+						if (!cleanTargetConfirmResult.HasValue)
+							cleanTargetConfirmResult = cleanTargetConfirm(targetFile.FullName);
+
+						if (!cleanTargetConfirmResult.Value)
 							throw new ApplicationException(Properties.Resources.Core_FileProcessor_Cancel);
 
 						_logger.Log(true, string.Format(Properties.Resources.Core_FileProcessor_DeletingTargetFileWoSourceFormat, targetFile.Name));
@@ -173,7 +177,7 @@ namespace FigLeaf.Core
 					_createdDirCount++;
 				}
 
-				ProcessDir(sourceSubDir, targetSubDir, cleanTargetConfirm, processFile, cancellationToken);
+				ProcessDir(sourceSubDir, targetSubDir, cleanTargetConfirm, cleanTargetConfirmResult, processFile, cancellationToken);
 			}
 
 			if (cancellationToken.IsCancellationRequested)
@@ -186,7 +190,10 @@ namespace FigLeaf.Core
 				{
 					if (subDirs.All(d => d.Name != targetSubDir.Name))
 					{
-						if (!cleanTargetConfirm(targetSubDir.FullName))
+						if (!cleanTargetConfirmResult.HasValue)
+							cleanTargetConfirmResult = cleanTargetConfirm(targetSubDir.FullName);
+
+						if (!cleanTargetConfirmResult.Value)
 							throw new ApplicationException(Properties.Resources.Core_FileProcessor_Cancel);
 
 						int filesToRemove = targetSubDir.GetFiles(".", SearchOption.AllDirectories).Length;
